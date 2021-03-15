@@ -1,25 +1,45 @@
-import logo from './logo.svg';
+import React, { useEffect, useState,useCallback} from 'react';
+import Button from '@material-ui/core/Button'
+import  {useHistory} from "react-router-dom"
+
 import './App.css';
 
-function App() {
+const App = () => {
+
+  const [response,setResponse] = useState("")
+
+  useEffect( () => {
+    const callApi = async () => {
+      const response = await fetch('/home');
+      const body = await response.json();
+      if (response.status !== 200) throw Error(body.message);
+      return body;
+    };
+    const test = async () => {
+      try {
+        let res = await callApi()
+        console.log(res)
+        await setResponse(res.message)
+      }
+      catch (e) {
+        console.log(e)
+      }
+    }
+    test()
+  },[setResponse]);
+
+  const history = useHistory();
+  const handleOnClick = useCallback(() => history.push('/jeu'), [history]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="App">
+        <p>{response}</p>
+        <Button variant="contained" color="primary" onClick={handleOnClick}>
+          Hello World
+        </Button>
+      </div>
   );
+
 }
 
 export default App;
