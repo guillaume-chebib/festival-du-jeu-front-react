@@ -29,7 +29,7 @@ const App = () => {
   },[setResponse]);
 
   const history = useHistory();
-  const handleOnClick = useCallback(() => history.push('/jeu'), [history]);
+  const handleOnClick = useCallback(() => history.push('/festival'), [history]);
 
   return (
       <div className="App">
