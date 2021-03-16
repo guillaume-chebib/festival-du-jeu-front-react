@@ -5,6 +5,7 @@ import React from "react";
 import Jeu from "./jeu"
 import Festival from "./festival"
 import Contact from "./contact"
+import Organisateur from "./organisateur"
 
 
 const Routes = () => (
@@ -13,6 +14,7 @@ const Routes = () => (
         <Route exact path="/festival" component={Festival}/>
         <Route exact path="/contact" component={Contact}/>
         <Route exact path="/jeu" component={Jeu}/>
+        <Route exact path="/organisateur" component={Organisateur}/>
     </Switch>
 )
 
