@@ -10,7 +10,7 @@ const Contact = () => {
             // 2. Use a template string to set the URL:
             const response = await fetch(`/contact`);
             const body = await response.json();
-            setFestivals(body.message)
+            setContacts(body.message)
 
         },[setContacts]);
     return (

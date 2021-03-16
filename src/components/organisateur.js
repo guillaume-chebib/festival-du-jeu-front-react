@@ -10,7 +10,7 @@ const Organisateur = () => {
             // 2. Use a template string to set the URL:
             const response = await fetch(`/organisateur`);
             const body = await response.json();
-            setFestivals(body.message)
+            setOrganisateurs(body.message)
 
         },[setOrganisateurs]);
     return (
