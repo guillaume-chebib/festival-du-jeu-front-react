@@ -3,7 +3,9 @@ import {TextField} from '@material-ui/core';
 import {Button} from "@material-ui/core";
 import { DataGrid } from '@material-ui/data-grid';
 
-import '../App.css';
+
+import '../styles/App.scss';
+
 
 const Festival = () => {
 
@@ -33,7 +35,8 @@ const Festival = () => {
     };
 
     return(
-        <div style={{paddingTop: '2em'}}>
+        <div>
+            <h1>Test</h1>
             <form noValidate autoComplete="off" onSubmit={handleSubmit} >
                 <TextField required id="outlined-required" isRequired="true" label="Nom du festival" variant="outlined" onChange={e => setNom(e.target.value )}/>
                 <TextField
