@@ -7,6 +7,7 @@ import Festival from "./festival"
 import Contact from "./contact"
 import Connexion from "./connexion";
 import Organisateur from "./organisateur"
+import Zone from "./zone"
 
 
 const Routes = () => (
@@ -17,6 +18,7 @@ const Routes = () => (
         <Route exact path="/jeu" component={Jeu}/>
         <Route exact path="/login" component={Connexion}/>
         <Route exact path="/organisateur" component={Organisateur}/>
+        <Route exact path="/festival/:id/zone" component={Zone}/>
     </Switch>
 )
 
