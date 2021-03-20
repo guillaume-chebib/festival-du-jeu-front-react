@@ -1,8 +1,10 @@
 import React, { useEffect, useState} from 'react';
-
+import Button from "@material-ui/core/Button";
+import  {useHistory} from "react-router-dom"
 
 const Organisateur = () => {
 
+    const history = useHistory();
     const [organisateurs,setOrganisateurs] = useState([])
 
     useEffect(
@@ -14,11 +16,16 @@ const Organisateur = () => {
 
         },[setOrganisateurs]);
     return (
-        <ul>
-            {organisateurs.map(o => (
-              <OneOrganisateur organisateur={o}/>
-            ))}
-        </ul>
+        <div>
+            <Button variant="contained" color="primary" onClick={() => history.push('/organisateur/ajout')}>
+                Ajouter un organisateur
+            </Button>
+            <ul>
+                {organisateurs.map(o => (
+                    <OneOrganisateur organisateur={o}/>
+                ))}
+            </ul>
+        </div>
     )
 }
 

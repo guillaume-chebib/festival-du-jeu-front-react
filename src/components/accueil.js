@@ -39,6 +39,9 @@ const Accueil = () => {
             <Button variant="contained" color="primary" onClick={() => history.push('/privateRoute')}>
                 Page protegée
             </Button>
+            <Button variant="contained" color="primary" onClick={() => history.push('/organisateur')}>
+                Gérer les organisateurs
+            </Button>
         </div>
     );
 
