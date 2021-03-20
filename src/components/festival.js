@@ -5,7 +5,10 @@ import { DataGrid, ColDef, ValueGetterParams, CellParams, GridApi } from '@mater
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import useStylesTableValueColor from "./table/styles";
-
+import Fab from '@material-ui/core/Fab';
+import NavigationIcon from '@material-ui/icons/Navigation';
+import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
+import Grid from '@material-ui/core/Grid';
 
 
 
@@ -43,7 +46,7 @@ const Festival = () => {
     return(
         <div>
             <h1>Test</h1>
-            <form noValidate autoComplete="off" onSubmit={handleSubmit} >
+            <form noValidate autoComplete="on" onSubmit={handleSubmit} >
                 <TextField required id="outlined-required" isrequired="true" label="Nom du festival" variant="outlined" onChange={e => setNom(e.target.value )}/>
                 <TextField
                     id="outlined-number"
@@ -139,7 +142,9 @@ const Festivals = ({body}) => {
                     setValue(thisRow["id"])
                 };
 
-                return <Button onClick={onClick}>Rendre actif</Button>;
+                return  <Button variant="outlined" size="small" onClick={onClick} color="primary">
+                    Rendre actif
+                </Button>
             }
         },
         { field: 'id', headerName: 'ID', hide: true },

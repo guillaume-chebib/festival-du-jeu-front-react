@@ -34,7 +34,10 @@ const Accueil = () => {
         <div className="App">
             <p>{response}</p>
             <Button variant="contained" color="primary" onClick={handleOnClick}>
-                Hello World
+                Les festivals
+            </Button>
+            <Button variant="contained" color="primary" onClick={() => history.push('/privateRoute')}>
+                Page protegée
             </Button>
         </div>
     );

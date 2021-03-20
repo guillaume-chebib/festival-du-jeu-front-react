@@ -16,6 +16,8 @@ import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
+import Alert from '@material-ui/lab/Alert';
+
 
 
 const Connexion = () => {
@@ -47,23 +49,21 @@ const Connexion = () => {
             if(body.token !== undefined) {
                 //console.log(body.token)
                 var decode1 = await jwt(body.token)
-                if (await signIn({
-                    token: body.token,
-                    expiresIn: 60,
-                    tokenType: "Bearer"
+                if (signIn({
+                    token: body.token, //Just a random token
+                    tokenType: 'Bearer',    // Token type set as Bearer
+                    authState: { uid: decode1.id.toString() , superuser: decode1.superuser.toString() },   // Dummy auth user state
+                    expiresIn: 1  // Token Expriration time, in minutes
                 })) {
+                    setLogged(<Redirect to="/" /> )
 
-                    console.log("oui")
-                    console.log(isAuthenticated())
-                    console.log(auth.user)
-                    console.log(authHeader())
-                    setLogged()
                 } else {
-                    console.log("non")
+                    // Else, there must be some error. So, throw an error
+                    setLogged(<Alert severity="error">Une erreur est survenue, veuillez reesayer</Alert>)
                 }
             }
             else{
-                console.log(body.message)
+                setLogged(<Alert severity="error">Combinaison identifant/mot de passe non reconnue, veuillez reesayer</Alert>)
             }
         }
 
@@ -71,7 +71,7 @@ const Connexion = () => {
 
     return (
         <div>
-            {logged}
+
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
                 <div className={classes.paper}>
@@ -115,6 +115,7 @@ const Connexion = () => {
                         >
                             Se connecter
                         </Button>
+                        {logged}
                     </form>
                 </div>
             </Container>
