@@ -9,29 +9,13 @@ import MenuIcon from '@material-ui/icons/Menu';
 import {Link} from "react-router-dom";
 import "../styles/App.scss"
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormGroup from '@material-ui/core/FormGroup';
-import Switch from '@material-ui/core/Switch';
-
+import {useIsAuthenticated} from 'react-auth-kit';
+import { useSignOut } from 'react-auth-kit'
 
 const Navbar = () => {
 
-    const [auth, setAuth] = React.useState(true);
-    const [anchorEl, setAnchorEl] = React.useState(null);
-    const open = Boolean(anchorEl);
-
-    const handleChange = (event) => {
-        setAuth(event.target.checked);
-    };
-
-    const handleMenu = (event) => {
-        setAnchorEl(event.currentTarget);
-    };
-
-    const handleClose = () => {
-        setAnchorEl(null);
-    };
-
+    const isAuthenticated = useIsAuthenticated()
+    const signOut = useSignOut()
 
     const theme = createMuiTheme({
         typography: {
@@ -43,12 +27,7 @@ const Navbar = () => {
     const classes = useStyles();
     return(
         <div className={classes.root}>
-            <FormGroup>
-                <FormControlLabel
-                    control={<Switch checked={auth} onChange={handleChange} aria-label="login switch" />}
-                    label={auth ? 'Logout' : 'Login'}
-                />
-            </FormGroup>
+
             <AppBar position="static" className={classes.header}>
                 <Toolbar>
                     <img src="../images/logo_seul_festival.png" alt="logo" className={classes.logo} />
@@ -58,8 +37,8 @@ const Navbar = () => {
                     </Typography>
                     </ThemeProvider>
                     <Button component={ Link } color="inherit" to="/">Accueil</Button>
-                    {auth ? (
-                        <Button ccomponent={ Link } color="inherit" to="/">Mon Compte</Button>
+                    {isAuthenticated() ? (
+                        <Button component={ Link } color="inherit" to="/" onClick={signOut}>Deconnexion</Button>
                     ) : (
                         <Button component={ Link } color="inherit" to="/login">Se connecter</Button>
                     )}

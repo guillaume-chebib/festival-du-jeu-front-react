@@ -7,6 +7,7 @@ import Festival from "./festival"
 import Contact from "./contact"
 import Connexion from "./connexion";
 import Organisateur from "./organisateur"
+import { PrivateRoute } from 'react-auth-kit'
 import Zone from "./zone"
 
 
@@ -18,6 +19,8 @@ const Routes = () => (
         <Route exact path="/jeu" component={Jeu}/>
         <Route exact path="/login" component={Connexion}/>
         <Route exact path="/organisateur" component={Organisateur}/>
+        <PrivateRoute component={Festival} path={'/privateRoute'} loginPath={'/login'} exact/>
+
         <Route exact path="/festival/:id/zone" component={Zone}/>
     </Switch>
 )
