@@ -1,11 +1,30 @@
 import React, { useEffect, useState} from 'react';
 import { useParams } from "react-router-dom";
-import { Accordion, AccordionSummary, AccordionDetails, Typography } from '@material-ui/core';
+import { Accordion, AccordionSummary, AccordionDetails, Typography, Paper, Grid } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import { DataGrid } from '@material-ui/data-grid';
-
-
+import { makeStyles } from '@material-ui/core/styles';
+import JeuxReserves from './jeux_reserve'
 import '../styles/App.scss';
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        flexGrow: 1,
+    },
+    paper: {
+        padding: theme.spacing(2),
+        textAlign: 'center',
+        color: theme.palette.text.secondary,
+    },
+    heading: {
+        fontSize: theme.typography.pxToRem(15),
+        flexBasis: '90%',
+        flexShrink: 0,
+    },
+    secondaryHeading: {
+        fontSize: theme.typography.pxToRem(15),
+        color: theme.palette.text.secondary,
+    },
+}));
 
 
 const Zone = () => {
@@ -21,6 +40,7 @@ const Zone = () => {
 }
 
 const Zones = ({id}) => {
+    const classes = useStyles();
 
     const [zones,setZones] = useState([]) //contient tous les festivals
     const handleChange = (panel) => (event, isExpanded) => {
@@ -42,32 +62,29 @@ const Zones = ({id}) => {
     return (
         <div style={{paddingTop: '2em'}}>
             <div style={{ height: 400, width: '100%' }}>
-                {zones.map(zone => {
+                <div className={classes.root}>
+                    <Grid container spacing={2}>
+                    {zones.map(zone => {
                     const {id_zone, nom_zone} = zone.zone
+                        console.log("Avant " + zone.jeux)
                     return (
-                        <Accordion expanded={expanded === id_zone} onChange={handleChange(id_zone)}>
-                            <AccordionSummary
-                                expandIcon={<ExpandMoreIcon/>}
-                                aria-controls="panel1a-content"
-                                id="panel1a-header"
-                            >
-                                <Typography>{nom_zone}</Typography>
-                            </AccordionSummary>
-                            {zone.jeux.map(jeu => {
-                                const {titre_jeu} = jeu
-
-                                return (
-                                    <AccordionDetails>
-                                        <Typography>
-                                            {titre_jeu}
-                                        </Typography>
-                                    </AccordionDetails>
-                                )
-                                })
-                            }
-                        </Accordion>
-                    )
-                })}
+                         <Grid item xs={12} sm={6}>
+                             <Accordion expanded={expanded === id_zone} onChange={handleChange(id_zone)}>
+                                    <AccordionSummary
+                                        expandIcon={<ExpandMoreIcon/>}
+                                        aria-controls="panel1a-content"
+                                        id="panel1a-header"
+                                    >
+                                        <Typography className={classes.heading}>{nom_zone}</Typography>
+                                        <Typography className={classes.secondaryHeading}>{zone.jeux.length} jeu(x)</Typography>
+                                    </AccordionSummary>
+                                    <JeuxReserves jeux={zone.jeux}></JeuxReserves>
+                                </Accordion>
+                            </Grid>
+                            )
+                         })}
+                    </Grid>
+                </div>
             </div>
         </div>
     )

@@ -11,6 +11,7 @@ import AjoutOrganisateur from "./Organisateur/ajoutOrganisateur"
 import { PrivateRoute } from 'react-auth-kit'
 import Zone from "./zone"
 import PrivateComponent from "./privateComponent";
+import Societe from "./societes/societe";
 
 
 const Routes = () => (
@@ -24,6 +25,7 @@ const Routes = () => (
         <Route exact path="/organisateur/ajout" component={AjoutOrganisateur}/>
         <PrivateRoute component={PrivateComponent} path={'/privateRoute'} loginPath={'/login'} exact/>
         <Route exact path="/festival/:id/zone" component={Zone}/>
+        <Route exact path="/societe" component={Societe}/>
     </Switch>
 )
 
