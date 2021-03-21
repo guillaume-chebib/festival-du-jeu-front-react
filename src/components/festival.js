@@ -6,10 +6,6 @@ import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import useStylesTableValueColor from "./table/styles";
 
-
-
-
-
 import '../styles/App.scss';
 
 
@@ -186,34 +182,6 @@ const Festivals = ({body}) => {
         },[body]);
 
     useEffect(() => { console.log(value) }, [value])
-
-
-
-    async function setActif(id) {
-        // console.log(id)
-        // let change;
-        // festivals.map((festival) => {
-        //     //console.log(festival.id,id)
-        //     if(festival.id === parseInt(id[id.length-1])){
-        //         change = festival
-        //         change.est_courant_festival = true
-        //     }
-        // })
-        // //console.log(change,id)
-        // const response = await fetch(`/festival/${id}`, {
-        //     method: 'PUT',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        //     body: JSON.stringify(change),
-        // });
-        // const body = await response.json()
-        // if (response.status !== 200) {
-        //     console.log("erreur serveur")
-        // }
-        // console.log(body.message)
-
-    }
 
 
 

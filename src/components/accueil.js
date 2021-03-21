@@ -42,6 +42,9 @@ const Accueil = () => {
             <Button variant="contained" color="primary" onClick={() => history.push('/organisateur')}>
                 Gérer les organisateurs
             </Button>
+            <Button variant="contained" color="primary" onClick={() => history.push('/jeu')}>
+                Jeux
+            </Button>
         </div>
     );
 
