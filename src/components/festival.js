@@ -71,7 +71,7 @@ const Festivals = ({body}) => {
             field: "",
             headerName: "",
             sortable: false,
-            width: 150,
+            flex:0.5,
             disableClickEventBubbling: true,
             renderCell: (params: CellParams) => {
                 const onClick = async () => {
@@ -141,15 +141,15 @@ const Festivals = ({body}) => {
             }
         },
         { field: 'id', headerName: 'ID', hide: true },
-        { field: 'Actif ?', headerName: 'Actif ?', width: 100,valueGetter: (params) =>
+        { field: 'Actif ?', headerName: 'Actif ?',flex:0.5,valueGetter: (params) =>
                 `${params.getValue('est_courant_festival')?"Actif" : "Non actif"}`,
             cellClassName: (params) =>
                 clsx('super-app', {
                     neutral: params.getValue('est_courant_festival') === false,
                     positive: params.getValue('est_courant_festival') === true,
                 }),},
-        { field: 'nom_festival', headerName: 'Nom du festival', width: 400 },
-        { field: 'annee_festival', headerName: 'Annee du festival',type: 'date', width: 200 },
+        { field: 'nom_festival', headerName: 'Nom du festival', flex:2 },
+        { field: 'annee_festival', headerName: 'Annee du festival',type: 'date', flex:0.5 },
     ];
 
 
