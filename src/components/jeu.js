@@ -15,10 +15,6 @@ import Button from "@material-ui/core/Button";
 import useStylesTableValueColor from "./table/styles";
 import AlertDialogDelete from "./modals/alert_dialog_delete"
 
-const handleDeleteJeu = () => {
-    console.log("oui")
-};
-
 
 
 
@@ -55,14 +51,28 @@ const Jeu = () => {
             renderCell:(params) =>
             {
                 const handleClickOpen = () => {
+                    console.log(params.row.id)
+                    console.log("fqsdsfqfdqdfqdffqddfq")
                     setOpen(true);
                 };
 
                 const handleClose = () => {
                     setOpen(false);
                 };
-                const handleDelete = () => {
-                    console.log("delete")
+                const handleDelete = async () => {
+                    params.row.titre="test"
+                    const response = await fetch(`/jeu/${params.row.id}`, {
+                        method: 'PUT',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(params.row),
+                    });
+                    const body = await response.json()
+                    if (response.status !== 200) {
+                        console.log("erreur serveur")
+                    }
+
                     setOpen(false);
                 };
 
@@ -71,7 +81,7 @@ const Jeu = () => {
                         <IconButton aria-label="delete" onClick={handleClickOpen}>
                             <DeleteIcon />
                         </IconButton>,
-                        <AlertDialogDelete message={"Truc"} onClose={handleClose} onDelete={handleDelete} open={open}/>
+                       <AlertDialogDelete titre={"Supprimer jeu"} message={"Etes vous sur de vouloir supprimer : "+params.row.id} onClose={handleClose} onDelete={handleDelete} open={open}/>
                     </div>
 
                 )

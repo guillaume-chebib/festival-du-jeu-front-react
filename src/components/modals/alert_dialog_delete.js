@@ -8,7 +8,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 
-export default function AlertDialogDelete({open,message,onDelete,onClose}) {
+export default function AlertDialogDelete({open,titre,message,onDelete,onClose}) {
     return (
         <div>
 
@@ -18,7 +18,7 @@ export default function AlertDialogDelete({open,message,onDelete,onClose}) {
                 aria-labelledby="alert-dialog-title"
                 aria-describedby="alert-dialog-description"
             >
-                <DialogTitle id="alert-dialog-title">{"Use Google's location service?"}</DialogTitle>
+                <DialogTitle id="alert-dialog-title">{titre}</DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
                         {message}
