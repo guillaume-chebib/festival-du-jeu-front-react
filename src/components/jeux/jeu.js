@@ -14,7 +14,8 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from "@material-ui/core/Button";
 
 import useStylesTableValueColor from "../table/styles";
-import AlertDialogDelete from "../modals/alert_dialog_delete"
+import renameKey from "../../utils/utils_functions"
+import AlertDialogDelete from "../modals/alert_dialog_delete";
 
 
 
@@ -25,7 +26,6 @@ const Jeu = () => {
 
     const history = useHistory();
     const [jeux,setJeux] = useState([])
-    const [open, setOpen] = React.useState(false);
 
 
     const columns = [
@@ -49,64 +49,14 @@ const Jeu = () => {
         { field : '', headerName: '', flex: 1,
             renderCell:(params) =>
             {
+                console.log(params)
 
-                const handleClickOpen = () => {
-                    console.log(params.row.id)
-                    setOpen(true);
-                };
-
-                const handleClose = () => {
-                    setOpen(false);
-                    console.log(params.row.id)
-                };
-                const handleDelete = async () => {
-                    console.log(params.row.id)
-                    // const response = await fetch(`/jeu/${params.row.id}`, {
-                    //     method: 'PUT',
-                    //     headers: {
-                    //         'Content-Type': 'application/json',
-                    //     },
-                    //     body: JSON.stringify(params.row),
-                    // });
-                    //
-                    // const body = await response.json()
-                    // if (response.status !== 200) {
-                    //     console.log("erreur serveur")
-                    // }
-
-                    setOpen(false);
-                };
-
-                return (
-                    <div>
-                        <div>
-                            <IconButton aria-label="delete" onClick={handleClickOpen}>
-                                <DeleteIcon />
-                            </IconButton>
-                        </div>
-
-
-                       <AlertDialogDelete titre="Supprimer jeu" message={"Etes vous sur de vouloir supprimer : "+params.row.id} onClose={handleClose} onDelete={handleDelete} open={open}/>
-
-                       <div>
-                           <IconButton aria-label="delete" onClick={handleClickOpen}>
-                               <EditIcon/>
-                           </IconButton>
-                       </div>
-
-
-                    </div>
-
-                )
+                return <DeleteJeu row = {params.row}/>
             }
         },
 
     ]
 
-    function renameKey ( obj, oldKey, newKey ) { //permet de renommer les colonnes
-        obj[newKey] = obj[oldKey];
-        delete obj[oldKey];
-    }
 
     useEffect(() => {
         async function fetchData() {
@@ -153,6 +103,51 @@ const Jeu = () => {
         </div>
 
     )
+}
+const DeleteJeu = ({row}) => {
+
+    const [open, setOpen] = useState(false);
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
+
+    const handleDelete = async () => {
+        row.min_joueur = 0
+        console.log(row)
+        const response = await fetch(`/jeu/${row.id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(row),
+        });
+
+        const body = await response.json()
+        if (response.status !== 200) {
+            console.log("erreur serveur")
+        }
+        console.log(body.message)
+
+        setOpen(false);
+    };
+
+    return (
+        <div>
+            <IconButton aria-label="delete" onClick={handleClickOpen}>
+                <DeleteIcon />
+            </IconButton>,
+
+            <AlertDialogDelete titre="Supprimer jeu" message={"Etes vous sur de vouloir supprimer : "+row.id} onClose={handleClose} onDelete={handleDelete} open={open}/>
+        </div>
+
+    )
+
+
 }
 
 export default Jeu
