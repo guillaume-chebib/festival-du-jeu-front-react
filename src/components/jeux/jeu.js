@@ -4,6 +4,7 @@ import {useHistory} from "react-router-dom";
 import {CellParams, DataGrid} from '@material-ui/data-grid';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
+import EditIcon from '@material-ui/icons/Edit';
 import Switch from '@material-ui/core/Switch';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -12,8 +13,8 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from "@material-ui/core/Button";
 
-import useStylesTableValueColor from "./table/styles";
-import AlertDialogDelete from "./modals/alert_dialog_delete"
+import useStylesTableValueColor from "../table/styles";
+import AlertDialogDelete from "../modals/alert_dialog_delete"
 
 
 
@@ -39,8 +40,6 @@ const Jeu = () => {
             {
                 return <Switch
                     checked={params.row.proto_jeu}
-                    disabled
-                    name="checkedA"
                     inputProps={{'aria-label': 'secondary checkbox'}}
                 />
 
@@ -50,38 +49,52 @@ const Jeu = () => {
         { field : '', headerName: '', flex: 1,
             renderCell:(params) =>
             {
+
                 const handleClickOpen = () => {
                     console.log(params.row.id)
-                    console.log("fqsdsfqfdqdfqdffqddfq")
                     setOpen(true);
                 };
 
                 const handleClose = () => {
                     setOpen(false);
+                    console.log(params.row.id)
                 };
                 const handleDelete = async () => {
-                    params.row.titre="test"
-                    const response = await fetch(`/jeu/${params.row.id}`, {
-                        method: 'PUT',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(params.row),
-                    });
-                    const body = await response.json()
-                    if (response.status !== 200) {
-                        console.log("erreur serveur")
-                    }
+                    console.log(params.row.id)
+                    // const response = await fetch(`/jeu/${params.row.id}`, {
+                    //     method: 'PUT',
+                    //     headers: {
+                    //         'Content-Type': 'application/json',
+                    //     },
+                    //     body: JSON.stringify(params.row),
+                    // });
+                    //
+                    // const body = await response.json()
+                    // if (response.status !== 200) {
+                    //     console.log("erreur serveur")
+                    // }
 
                     setOpen(false);
                 };
 
                 return (
                     <div>
-                        <IconButton aria-label="delete" onClick={handleClickOpen}>
-                            <DeleteIcon />
-                        </IconButton>,
-                       <AlertDialogDelete titre={"Supprimer jeu"} message={"Etes vous sur de vouloir supprimer : "+params.row.id} onClose={handleClose} onDelete={handleDelete} open={open}/>
+                        <div>
+                            <IconButton aria-label="delete" onClick={handleClickOpen}>
+                                <DeleteIcon />
+                            </IconButton>
+                        </div>
+
+
+                       <AlertDialogDelete titre="Supprimer jeu" message={"Etes vous sur de vouloir supprimer : "+params.row.id} onClose={handleClose} onDelete={handleDelete} open={open}/>
+
+                       <div>
+                           <IconButton aria-label="delete" onClick={handleClickOpen}>
+                               <EditIcon/>
+                           </IconButton>
+                       </div>
+
+
                     </div>
 
                 )
@@ -114,21 +127,31 @@ const Jeu = () => {
 
 
     return (
-        <div style={{paddingTop: '2em'}}>
-            <div style={{ height: 400, width: '100%' }}>
-                <DataGrid sortModel={[
-                    {
+        <div>
+            <div>
+                <h1>
+                    Liste des jeux
+                </h1>
 
-                        field: 'id',
-                        sort: 'desc',
+            </div>
 
-                    },
-                ]}
-                          className={classes.root}
-                          rows={jeux}
-                          {...jeux} columns={columns} pageSize={5} />
+            <div style={{paddingTop: '2em'}}>
+                <div style={{ height: 400, width: '100%' }}>
+                    <DataGrid sortModel={[
+                        {
+
+                            field: 'id',
+                            sort: 'desc',
+
+                        },
+                    ]}
+                              className={classes.root}
+                              rows={jeux}
+                              {...jeux} columns={columns} pageSize={5} />
+                </div>
             </div>
         </div>
+
     )
 }
 

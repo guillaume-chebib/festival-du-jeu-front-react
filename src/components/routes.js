@@ -2,7 +2,7 @@ import {Switch, Route} from "react-router-dom"
 
 import Accueil from "./accueil";
 import React from "react";
-import Jeu from "./jeu"
+import Jeu from "./jeux/jeu"
 import Festival from "./festival"
 import Contact from "./contact"
 import Connexion from "./connexion";
