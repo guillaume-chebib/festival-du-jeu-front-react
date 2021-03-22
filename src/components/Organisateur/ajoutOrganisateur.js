@@ -31,7 +31,7 @@ const AjoutOrganisateur = () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({prenom: prenom, nom: nom, email: mail, mot_de_passe: motdepasse}),
+            body: JSON.stringify({prenom_organisateur: prenom, nom_organisateur: nom, email_organisateur: mail, mot_de_passe_organisateur: motdepasse}),
         });
         const body = await response.json()
         if (response.status !== 200) {

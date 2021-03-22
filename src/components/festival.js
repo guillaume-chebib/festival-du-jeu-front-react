@@ -24,7 +24,7 @@ const Festival = () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({ nom: nom, annee: annee }),
+            body: JSON.stringify({ nom_festival: nom, annee_festival: annee }),
         });
         const body = await response.json()
         if (response.status !== 200) {
