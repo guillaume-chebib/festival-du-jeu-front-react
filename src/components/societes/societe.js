@@ -69,15 +69,15 @@ export default function Societe() {
             </AppBar>
             <TabPanel value={value} index={0}>
                 Item One
-                <Exposant></Exposant>
+                <Exposant/>
             </TabPanel>
             <TabPanel value={value} index={1}>
                 Item Two
-                <Editeur></Editeur>
+                <Editeur/>
             </TabPanel>
             <TabPanel value={value} index={2}>
                 Item Three
-                <EditeurExposant></EditeurExposant>
+                <EditeurExposant/>
             </TabPanel>
         </div>
     );
