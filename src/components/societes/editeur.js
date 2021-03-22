@@ -5,6 +5,7 @@ import {CellParams, DataGrid} from '@material-ui/data-grid';
 
 import useStylesTableValueColor from "../table/styles";
 import {CheckBox} from "@material-ui/icons";
+import Switch from "@material-ui/core/Switch";
 
 function getFullAdresse(params: ValueGetterParams) {
     return `${params.getValue('numero_rue_editeur')+', ' || ''} ${
@@ -36,13 +37,16 @@ const Editeur = () => {
         {
             field: 'est_inactif_societe',
             headerName: 'Inactif ?',
-            renderCell: (params: GridCellParams) => {
-                console.log(params.getValue('est_inactif_societe'))
-                return (<CheckBox
-                    aria-checked={params.getValue('est_inactif_societe')}
-                    checked={params.getValue('est_inactif_societe')}
-                ></CheckBox>)
-            },
+            renderCell: (params) =>
+            {
+                return <Switch
+                    checked={params.row.est_inactif_societe}
+                    disabled
+                    name="checkedA"
+                    inputProps={{'aria-label': 'secondary checkbox'}}
+                />
+
+            }
         },
     ]
 
