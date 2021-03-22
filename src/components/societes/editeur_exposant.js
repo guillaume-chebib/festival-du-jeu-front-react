@@ -45,12 +45,15 @@ const EditeurExposant = () => {
         {
             field: 'est_inactif_societe',
             headerName: 'Inactif ?',
-            renderCell: (params: GridCellParams) => {
-                console.log(params.getValue('est_inactif_societe'))
-                return (<CheckBox
-                    aria-checked={params.getValue('est_inactif_societe')}
-                    checked={params.getValue('est_inactif_societe')}
-                ></CheckBox>)
+            renderCell: (params) =>
+            {
+                return <Switch
+                    checked={params.row.est_inactif_societe}
+                    disabled
+                    name="checkedA"
+                    inputProps={{'aria-label': 'secondary checkbox'}}
+                />
+
             },
         },
     ]
