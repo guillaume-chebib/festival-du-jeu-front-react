@@ -44,20 +44,15 @@ const UpdateDeleteJeu = ({row,setTrig}) => {
 
     const handleEdit = async () => {
 
-        // const response = await fetch(`/jeu/${row.id}`, {
-        //     method: 'DELETE',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //     },
-        // });
-        //
-        // const body = await response.json()
-        // if (response.status !== 200) {
-        //     console.log("erreur serveur")
-        // }
-        // console.log(body.message)
+        const response = await requestToBack('PUT',jeu,`/jeu/${row.id}`,authHeader())
+        const body = await response[0]
+        if (response[1] !== 200) {
+            console.log("erreur serveur")
+        }
+        console.log(body.message)
+        setTrig(row)
 
-        setOpenDelete(false);
+        setOpenEdit(false);
     };
 
     return (

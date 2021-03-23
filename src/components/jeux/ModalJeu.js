@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Dialog from "@material-ui/core/Dialog";
@@ -10,17 +10,33 @@ import Button from "@material-ui/core/Button";
 import TextField from '@material-ui/core/TextField';
 import Grid from "@material-ui/core/Grid";
 import Switch from "@material-ui/core/Switch";
+import {requestToBack} from "../../utils/utils_functions";
 
 export default function ModalJeu({open,est_create,titre,row,setRow,message,onUpdate,onClose}) {
 
     const [state, setState] = React.useState({
-        est_proto: row.proto_jeu
+
+        proto_jeu: row.proto_jeu
     });
 
     const handleChange = (event) => {
-        setState({ ...state, [event.target.name]: event.target.checked });
-    };
+        {console.log(row.proto_jeu)}
 
+        setState({ ...state, [event.target.name]: event.target.checked });
+        setRow(prevState => ({
+            ...prevState,
+            proto_jeu: state
+        }))
+        // console.log(row)
+
+
+    };
+    useEffect(() => {
+        console.log(state.proto_jeu)
+        console.log(row.proto_jeu)
+
+
+    },[]);
     return (
         <div>
 
@@ -35,6 +51,7 @@ export default function ModalJeu({open,est_create,titre,row,setRow,message,onUpd
                     <DialogContentText id="alert-dialog-description">
                     </DialogContentText>
                     <Grid container spacing={2}>
+
                         <Grid item xs={12} >
                             <TextField
                                 autoComplete="nom du jeu"
@@ -131,12 +148,13 @@ export default function ModalJeu({open,est_create,titre,row,setRow,message,onUpd
                         </Grid>
                         <Grid item xs={12} sm={3}>
                             <Switch
-                                checked={state.est_proto}
+                                checked={state.proto_jeu}
                                 onChange={handleChange}
-                                name="est_proto"
+                                name="proto_jeu"
                                 inputProps={{ 'aria-label': 'secondary checkbox' }}
                             />
                         </Grid>
+
                     </Grid>
                 </DialogContent>
                 <DialogActions>
