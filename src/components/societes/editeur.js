@@ -1,11 +1,12 @@
 import React, { useEffect, useState} from 'react';
 import {useHistory} from "react-router-dom";
-
+import {useAuthHeader} from 'react-auth-kit';
 import {CellParams, DataGrid} from '@material-ui/data-grid';
 
 import useStylesTableValueColor from "../table/styles";
 import {CheckBox} from "@material-ui/icons";
 import Switch from "@material-ui/core/Switch";
+import {UpdateDeleteSociete} from "./updateDeleteSociete";
 
 function getFullAdresse(params: ValueGetterParams) {
     return `${params.getValue('numero_rue_editeur')+', ' || ''} ${
@@ -16,10 +17,10 @@ function getFullAdresse(params: ValueGetterParams) {
 const Editeur = () => {
 
     const classes = useStylesTableValueColor();
-
+    const authHeader = useAuthHeader()
     const history = useHistory();
     const [editeurs,setEditeurs] = useState([])
-    const [open, setOpen] = React.useState(false);
+    const [trig,setTrig] = useState([])
 
 
     const columns = [
@@ -48,6 +49,17 @@ const Editeur = () => {
 
             }
         },
+        {
+            field: "",
+            headerName: "",
+            sortable: false,
+            flex:1,
+            disableClickEventBubbling: true,
+            renderCell: (params: CellParams) => {
+
+                return <UpdateDeleteSociete row={params.row} setTrig={setTrig}/>
+            }
+        },
     ]
 
     function renameKey ( obj, oldKey, newKey ) { //permet de renommer les colonnes
@@ -57,20 +69,24 @@ const Editeur = () => {
 
     useEffect(() => {
         async function fetchData() {
-            const response = await fetch(`/societe/editeur`);
-            const body = await response.json();
+            const response = await requestToBack('GET',null,`/societe/editeur`,null)
 
+            const body = await response[0]
             const editeurs = body.message
-            console.log(editeurs)
+            if (response[1] !== 200) {
+                setEditeurs("Impossible de fetch")
+            }
+            else {
+                editeurs.forEach(obj => renameKey(obj, 'id_societe', 'id'));
+                setEditeurs(editeurs)
+            }
 
-            editeurs.forEach(obj => renameKey(obj, 'id_societe', 'id'));
-            setEditeurs(editeurs)
 
         }
 
         fetchData();
 
-    },[]);
+    },[trig]);
 
 
 

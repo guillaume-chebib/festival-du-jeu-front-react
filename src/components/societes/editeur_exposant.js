@@ -1,6 +1,6 @@
 import React, { useEffect, useState} from 'react';
 import {useHistory} from "react-router-dom";
-
+import {useAuthHeader} from 'react-auth-kit';
 import {CellParams, DataGrid} from '@material-ui/data-grid';
 import IconButton from '@material-ui/core/IconButton';
 import DeleteIcon from '@material-ui/icons/Delete';
@@ -14,6 +14,7 @@ import Button from "@material-ui/core/Button";
 
 import useStylesTableValueColor from "../table/styles";
 import {CheckBox} from "@material-ui/icons";
+import {UpdateDeleteSociete} from "./updateDeleteSociete";
 
 
 function getFullAdresse(params: ValueGetterParams) {
@@ -24,10 +25,10 @@ function getFullAdresse(params: ValueGetterParams) {
 const EditeurExposant = () => {
 
     const classes = useStylesTableValueColor();
-
+    const authHeader = useAuthHeader()
     const history = useHistory();
     const [exposants,setExposants] = useState([])
-    const [open, setOpen] = React.useState(false);
+    const [trig,setTrig] = useState([])
 
 
     const columns = [
@@ -56,6 +57,17 @@ const EditeurExposant = () => {
 
             },
         },
+        {
+            field: "",
+            headerName: "",
+            sortable: false,
+            flex:1,
+            disableClickEventBubbling: true,
+            renderCell: (params: CellParams) => {
+
+                return <UpdateDeleteSociete row={params.row} setTrig={setTrig}/>
+            }
+        },
     ]
 
     function renameKey ( obj, oldKey, newKey ) { //permet de renommer les colonnes
@@ -65,20 +77,23 @@ const EditeurExposant = () => {
 
     useEffect(() => {
         async function fetchData() {
-            const response = await fetch(`/societe/editeurExposant`);
-            const body = await response.json();
+            const response = await requestToBack('GET',null,`/societe/editeurExposant`,null)
 
+            const body = await response[0]
             const exposants = body.message
-            console.log(exposants)
-
-            exposants.forEach(obj => renameKey(obj, 'id_societe', 'id'));
-            setExposants(exposants)
+            if (response[1] !== 200) {
+                setExposants("Impossible de fetch")
+            }
+            else {
+                exposants.forEach(obj => renameKey(obj, 'id_societe', 'id'));
+                setExposants(exposants)
+            }
 
         }
 
         fetchData();
 
-    },[]);
+    },[trig]);
 
 
 

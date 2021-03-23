@@ -46,13 +46,15 @@ const Zones = ({id}) => {
 
     useEffect(
         async () => {
-            const response = await fetch(`/festival/${id}/zone`);
-            const body = await response.json();
-            const zones = body.message
+            const response = await requestToBack('GET',null,`/festival/${id}/zone`,null) //exemple avec GET
 
-            zones.map((z) => console.log(z))
-
-            setZones(body.message)
+            const body = await response[0]
+            if (response[1] !== 200) {
+                setZones("Impossible de fetch")
+            }
+            else {
+                setZones(body.message)
+            }
 
         },[id]);
     return (
