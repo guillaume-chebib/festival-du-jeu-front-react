@@ -14,9 +14,10 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from "@material-ui/core/Button";
 
 import useStylesTableValueColor from "../table/styles";
-import {renameKey} from "../../utils/utils_functions"
-import DeleteJeu from "./DeleteJeu";
-import UpdateJeu from "./UpdateJeu";
+import {renameKey, requestToBack} from "../../utils/utils_functions"
+import UpdateDeleteJeu from "./UpdateDeleteJeu";
+import {useAuthHeader} from 'react-auth-kit'
+
 
 
 
@@ -27,6 +28,9 @@ const Jeu = () => {
 
     const history = useHistory();
     const [jeux,setJeux] = useState([])
+    const [trig,setTrig] = useState([])
+    const authHeader = useAuthHeader()
+
 
 
     const columns = [
@@ -51,7 +55,7 @@ const Jeu = () => {
             renderCell:(params) =>
             {
 
-                return <DeleteJeu row = {params.row}/>
+                return <UpdateDeleteJeu row = {params.row} setTrig={setTrig}/>
             }
         },
 
@@ -60,21 +64,31 @@ const Jeu = () => {
 
     useEffect(() => {
         async function fetchData() {
-            const response = await fetch(`/jeu`);
-            const body = await response.json();
 
+            const response = await requestToBack('GET',null,`/jeu`,authHeader())
+            const body = await response[0]
             const jeux = body.message
-
-            jeux.forEach(obj => renameKey(obj, 'id_jeu', 'id'));
-            setJeux(jeux)
+            if (response[1] !== 200) {
+                console.log(response[1])
+            }
+            else {
+                jeux.forEach(obj => renameKey(obj, 'id_jeu', 'id'));
+                const updatedJson = JSON.stringify(jeux);
+                console.log(updatedJson);
+                setJeux(jeux)
+            }
 
         }
 
         fetchData();
 
-    },[]);
+    },[trig]);
 
 
+    const handleCreateJeu = async e => {
+       //creation jeux modal
+
+    };
 
     return (
         <div>
@@ -82,7 +96,7 @@ const Jeu = () => {
                 <h1>
                     Liste des jeux
                 </h1>
-
+                <Button onClick={handleCreateJeu} variant="contained" color="primary">Ajouter un jeu </Button>
             </div>
 
             <div style={{paddingTop: '2em'}}>
