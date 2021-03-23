@@ -43,7 +43,7 @@ const Connexion = () => {
                     authState: { uid: decode1.id.toString() , superuser: decode1.superuser.toString() },
                     expiresIn: 60  // Token Expriration time, in minutes
                 })) {
-                    setLogged(<Redirect to="/" /> )
+                    setLogged(<Redirect to="/dashboard" /> )
 
                 } else {
                     // Else, there must be some error. So, throw an error
