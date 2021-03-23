@@ -1,50 +1,35 @@
 import React, { useEffect, useState,useCallback} from 'react';
 import Button from '@material-ui/core/Button'
 import  {useHistory} from "react-router-dom"
+import {requestToBack} from "../utils/utils_functions";
+import Alert from "@material-ui/lab/Alert";
 
 
 const Accueil = () => {
 
     const [response,setResponse] = useState("")
 
-    useEffect( () => {
-        const callApi = async () => {
-            const response = await fetch('/home');
-            const body = await response.json();
-            if (response.status !== 200) throw Error(body.message);
-            return body;
-        };
-        const test = async () => {
-            try {
-                let res = await callApi()
-                console.log(res)
-                await setResponse(res.message)
+    useEffect(() => {
+        async function fetchData() {
+            const response = await requestToBack('GET',null,`/home`,null)
+
+            const body = await response[0]
+            if (response[1] !== 200) {
+                setResponse("Impossible de fetch")
             }
-            catch (e) {
-                console.log(e)
+            else {
+                setResponse(body.message)
             }
         }
-        test()
-    },[setResponse]);
+        fetchData()
+
+    },[]);
 
     const history = useHistory();
-    const handleOnClick = useCallback(() => history.push('/festival'), [history]);
 
     return (
         <div className="App">
             <p>{response}</p>
-            <Button variant="contained" color="primary" onClick={handleOnClick}>
-                Les festivals
-            </Button>
-            <Button variant="contained" color="primary" onClick={() => history.push('/privateRoute')}>
-                Page protegée
-            </Button>
-            <Button variant="contained" color="primary" onClick={() => history.push('/organisateur')}>
-                Gérer les organisateurs
-            </Button>
-            <Button variant="contained" color="primary" onClick={() => history.push('/jeu')}>
-                Jeux
-            </Button>
         </div>
     );
 
