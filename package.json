@@ -48,7 +48,7 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "http://localhost:5000/",
+  "proxy": "https://festival-du-jeu-api.herokuapp.com/",
   "devDependencies": {
     "react-material-ui-form-validator": "^2.1.4"
   }
