@@ -51,12 +51,7 @@ const Jeu = () => {
             renderCell:(params) =>
             {
 
-                return (
-                    <div>
-                        <DeleteJeu row = {params.row}/>
-                        <UpdateJeu row = {params.row}/>
-                    </div>
-                )
+                return <DeleteJeu row = {params.row}/>
             }
         },
 

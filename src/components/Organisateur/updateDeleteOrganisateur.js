@@ -6,7 +6,8 @@ import {ThemeProvider} from "@material-ui/core/styles";
 import {themeFestival} from "../styles/themes";
 import Fab from "@material-ui/core/Fab";
 import EditIcon from "@material-ui/icons/Edit";
-import {DeleteOrganisateurModal} from "./deleteOrganisateurModal";
+import {UpdateDeleteButtons} from "../modals/UpdateDeleteButtons";
+import AlertDialogDelete from "../modals/AlertDialogDelete";
 
 
 
@@ -76,17 +77,11 @@ export const UpdateDeleteOrganisateur = ({row,setTrig}) => {
 
     return (
         <div>
-            <ThemeProvider theme={themeFestival}>
-                <Fab size="small" color="primary" aria-label="edit" onClick={onClickOpenEdit}>
-                    <EditIcon/>
-                </Fab>
-                <Fab size="small" color="secondary" aria-label="delete" onClick={onClickOpenDelete}>
-                    <DeleteIcon />
-                </Fab>
-            </ThemeProvider>
+
+            <UpdateDeleteButtons onClickOpenEdit={onClickOpenEdit} onClickOpenDelete={onClickOpenDelete}/>
 
             <UpdateOrganisateurModal titre="Editer organisateur" row={organisateur} setRow={setOrganisateur} onClose={handleCloseEdit} onUpdate={handleUpdate} open={openEdit}/>
-            <DeleteOrganisateurModal open={openDelete} onClose={handleCloseDelete} onDelete={handleDelete} message={"Etes vous sur de vouloir supprimer : "+row.nom_organisateur + " " + row.prenom_organisateur} titre="Supprimer organisateur"/>
+            <AlertDialogDelete open={openDelete} onClose={handleCloseDelete} onDelete={handleDelete} message={"Etes vous sur de vouloir supprimer : "+row.nom_organisateur + " " + row.prenom_organisateur} titre="Supprimer organisateur"/>
         </div>
 
     )

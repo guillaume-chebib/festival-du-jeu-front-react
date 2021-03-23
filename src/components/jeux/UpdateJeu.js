@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import IconButton from "@material-ui/core/IconButton";
 import EditIcon from "@material-ui/icons/Edit";
-import AlertDialogDelete from "../modals/alert_dialog_delete";
+import AlertDialogDelete from "../modals/AlertDialogDelete";
 import ModalJeu from "./modal_jeu";
 
 const DeleteJeu = ({row}) => {
