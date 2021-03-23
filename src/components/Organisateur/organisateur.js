@@ -2,13 +2,10 @@ import React, { useEffect, useState} from 'react';
 import Button from "@material-ui/core/Button";
 import  {useHistory} from "react-router-dom"
 import {CellParams, DataGrid, GridApi} from '@material-ui/data-grid';
-import Fab from '@material-ui/core/Fab';
-import EditIcon from '@material-ui/icons/Edit';
-import Modal from '@material-ui/core/Modal';
-import { ThemeProvider} from '@material-ui/core/styles';
-import DeleteIcon from '@material-ui/icons/Delete';
+import {useAuthHeader} from 'react-auth-kit'
 import {useStylesThemeFestival,themeFestival} from "../styles/themes";
 import {UpdateDeleteOrganisateur} from "./updateDeleteOrganisateur";
+import {requestToBack} from "../../utils/utils_functions";
 
 const Organisateur = () => {
 
@@ -16,6 +13,8 @@ const Organisateur = () => {
     const [organisateurs,setOrganisateurs] = useState([])
     const [trig,setTrig] = useState([])
     const styles = useStylesThemeFestival()
+    const authHeader = useAuthHeader()
+
 
     const columns = [
         { field: 'id', headerName: 'ID', hide: true},
@@ -43,13 +42,20 @@ const Organisateur = () => {
 
     useEffect(() => {
         async function fetchData() {
-            const response = await fetch(`/organisateur`);
-            const body = await response.json();
 
-            const organisateur = body.message
-            organisateur.forEach(obj => renameKey(obj, 'id_organisateur', 'id'));
-            setOrganisateurs(organisateur)
-            console.log(organisateur)
+            const response = await requestToBack('GET',null,`/organisateur`,authHeader())
+            if(response[1] !== 200){
+
+            }
+            else {
+                const body = response[0]
+                const organisateur = body.message
+                if (organisateur !== undefined) {
+                    organisateur.forEach(obj => renameKey(obj, 'id_organisateur', 'id'));
+                    setOrganisateurs(organisateur)
+                }
+
+            }
         }
 
         fetchData();
@@ -82,17 +88,5 @@ const Organisateur = () => {
     )
 }
 
-
-const EditModal = () =>{
-
-    return (
-        <div>
-            <h2 id="simple-modal-title">Text in a modal</h2>
-            <p id="simple-modal-description">
-                Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-            </p>
-        </div>
-    )
-}
 
 export default Organisateur

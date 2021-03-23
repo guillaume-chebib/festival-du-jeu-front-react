@@ -2,10 +2,8 @@ import React, {useState} from "react";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import UpdateOrganisateurModal from "./updateOrganisateurModal";
-import {ThemeProvider} from "@material-ui/core/styles";
-import {themeFestival} from "../styles/themes";
-import Fab from "@material-ui/core/Fab";
-import EditIcon from "@material-ui/icons/Edit";
+import {useAuthHeader} from 'react-auth-kit'
+import {requestToBack} from "../../utils/utils_functions";
 import {UpdateDeleteButtons} from "../modals/UpdateDeleteButtons";
 import AlertDialogDelete from "../modals/AlertDialogDelete";
 
@@ -16,6 +14,8 @@ export const UpdateDeleteOrganisateur = ({row,setTrig}) => {
     const [openEdit, setOpenEdit] = useState(false);
     const [openDelete, setOpenDelete] = useState(false);
     const [organisateur,setOrganisateur] = useState(row)
+    const authHeader = useAuthHeader()
+
 
     const onClickOpenEdit = () => {
         setOrganisateur(prevState => ({
@@ -39,16 +39,11 @@ export const UpdateDeleteOrganisateur = ({row,setTrig}) => {
 
     const handleUpdate = async () => {
         console.log(organisateur)
-        const response = await fetch(`/organisateur/${row.id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(organisateur),
-        });
+        const response = await requestToBack('PUT',organisateur,`/organisateur/${row.id}`,authHeader())
 
-        const body = await response.json()
-        if (response.status !== 200) {
+
+        const body = await response[0]
+        if (response[1] !== 200) {
             console.log("erreur serveur")
         }
         console.log(body.message)
@@ -59,18 +54,14 @@ export const UpdateDeleteOrganisateur = ({row,setTrig}) => {
 
     const handleDelete = async () => {
         console.log(row)
-        const response = await fetch(`/organisateur/${row.id}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(row),
-        });
+        const response = await requestToBack('DELETE',row,`/organisateur/${row.id}`,authHeader())
 
-        const body = await response.json()
-        if (response.status !== 200) {
+
+        const body = await response[0]
+        if (response[1] !== 200) {
             console.log("erreur serveur")
         }
+
         console.log(body.message)
         setTrig(row)
     };

@@ -4,8 +4,7 @@ import {themeFestival} from "../styles/themes";
 import Fab from "@material-ui/core/Fab";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
-import UpdateOrganisateurModal from "../Organisateur/updateOrganisateurModal";
-import AlertDialogDelete from "./AlertDialogDelete";
+
 
 export const UpdateDeleteButtons = ({onClickOpenEdit,onClickOpenDelete}) => {
 

@@ -5,8 +5,10 @@ import { DataGrid, ColDef, ValueGetterParams, CellParams, GridApi } from '@mater
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import useStylesTableValueColor from "./table/styles";
+import {useAuthHeader} from 'react-auth-kit'
 
 import '../styles/App.scss';
+import {requestToBack} from "../utils/utils_functions";
 
 
 const Festival = () => {
@@ -16,18 +18,15 @@ const Festival = () => {
     const [annee,setAnnee] = useState(year) // contient le contenu à ajouter
     const [nom,setNom] = useState("") // contient le contenu à ajouter
     const [reponse,setReponse] = useState("") //reponse depuis le back
+    const authHeader = useAuthHeader()
+
 
     const handleSubmit = async e => {
         e.preventDefault();
-        const response = await fetch('/festival', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ nom_festival: nom, annee_festival: annee }),
-        });
-        const body = await response.json()
-        if (response.status !== 200) {
+        const response = await requestToBack('POST',{ nom_festival: nom, annee_festival: annee },`/festival`,authHeader())
+
+        const body = await response[0]
+        if (response[1] !== 200) {
 
         }
         else {
@@ -64,7 +63,7 @@ const Festivals = ({body}) => {
 
     const [festivals,setFestivals] = useState([]) //contient tous les festivals
     const [value, setValue] = useState(""); //contient le festival courant actif
-
+    const authHeader = useAuthHeader()
 
     const columns = [ //structure du tableau des festivals
         {
@@ -104,31 +103,22 @@ const Festivals = ({body}) => {
 
                     console.log(thisRow)
 
+                    const [response, response1] = await Promise.all([
+                     await requestToBack('PUT',festivalPlusActif,`/festival/${festivalPlusActif.id}`,authHeader()),
+                     await requestToBack('PUT',festivalActif,`/festival/${festivalActif.id}`,authHeader())
+                    ]);
 
-                    const response = await fetch(`/festival/${festivalPlusActif.id}`, {
-                        method: 'PUT',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(festivalPlusActif),
-                    });
-                    const body = await response.json()
-                    if (response.status !== 200) {
+
+                    const body = await response[0]
+                    if (response[1] !== 200) {
                         console.log("erreur serveur")
                     }
                     console.log(body.message)
                     setValue("")
 
 
-                    const response1 = await fetch(`/festival/${festivalActif.id}`, {
-                        method: 'PUT',
-                        headers: {
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(festivalActif),
-                    });
-                    const body1 = await response1.json()
-                    if (response1.status !== 200) {
+                    const body1 = await response1[0]
+                    if (response1[1] !== 200) {
                         console.log("erreur serveur")
                     }
                     console.log(body1.message)
@@ -161,8 +151,8 @@ const Festivals = ({body}) => {
 
     useEffect(() => {
         async function fetchData() {
-            const response = await fetch(`/festival`);
-            const body = await response.json();
+            const response = await requestToBack('GET',null,`/festival`,authHeader())
+            const body = await response[0]
             const festivals = body.message
 
             festivals.forEach(obj => renameKey(obj, 'id_festival', 'id'));

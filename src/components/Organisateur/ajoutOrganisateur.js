@@ -4,15 +4,13 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
+import {useAuthHeader} from 'react-auth-kit'
+
 import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';import Container from '@material-ui/core/Container';
 import Alert from "@material-ui/lab/Alert";
 import {useHistory} from "react-router-dom";
+import {requestToBack} from "../../utils/utils_functions";
 
 
 const AjoutOrganisateur = () => {
@@ -23,18 +21,15 @@ const AjoutOrganisateur = () => {
     const [mail,setMail] = useState("")
     const [motdepasse,setMotdepasse] = useState("")
     const history = useHistory();
+    const authHeader = useAuthHeader()
+
 
     const handleSubmit = async e => {
         e.preventDefault();
-        const response = await fetch('/organisateur', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({prenom_organisateur: prenom, nom_organisateur: nom, email_organisateur: mail, mot_de_passe_organisateur: motdepasse}),
-        });
-        const body = await response.json()
-        if (response.status !== 200) {
+        const response = await requestToBack('POST',{prenom_organisateur: prenom, nom_organisateur: nom, email_organisateur: mail, mot_de_passe_organisateur: motdepasse},`/organisateur`,authHeader())
+
+        const body = await response[0]
+        if (response[1] !== 200) {
             setReponse(<Alert severity="error">{body.message}</Alert>)
         }
         else {

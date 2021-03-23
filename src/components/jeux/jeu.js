@@ -14,7 +14,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from "@material-ui/core/Button";
 
 import useStylesTableValueColor from "../table/styles";
-import renameKey from "../../utils/utils_functions"
+import {renameKey} from "../../utils/utils_functions"
 import DeleteJeu from "./DeleteJeu";
 import UpdateJeu from "./UpdateJeu";
 

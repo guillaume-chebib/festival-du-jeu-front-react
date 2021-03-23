@@ -8,52 +8,40 @@ import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import Link from '@material-ui/core/Link';
-import Grid from '@material-ui/core/Grid';
-import Box from '@material-ui/core/Box';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Alert from '@material-ui/lab/Alert';
+import {requestToBack} from "../utils/utils_functions";
 
 
 
 const Connexion = () => {
 
     const signIn = useSignIn()
-    const auth = useAuthUser()
-    const authHeader = useAuthHeader()
-    const isAuthenticated = useIsAuthenticated()
 
     const classes = useStyles();
     const [logged,setLogged] = useState()
-    const [formData, setFormData] = React.useState({mail: '', password: ''})
+    const [formData, setFormData] = useState({mail: '', password: ''})
 
     const onSubmit = async (e) => {
         e.preventDefault();
-        const response = await fetch('/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData),
-        });
-        const body = await response.json()
-        if (response.status !== 200) {
-            console.log("erreur serveur")
+
+        const response = await requestToBack('POST',formData,`/login`,null)
+
+        const body = await response[0]
+        if (response[1] !== 200) {
+            setLogged(<Alert severity="error">Combinaison identifant/mot de passe non reconnue, veuillez reesayer</Alert>)
         }
         else {
             console.log(body)
             if(body.token !== undefined) {
-                //console.log(body.token)
                 var decode1 = await jwt(body.token)
                 if (signIn({
-                    token: body.token, //Just a random token
+                    token: body.token,
                     tokenType: 'Bearer',    // Token type set as Bearer
-                    authState: { uid: decode1.id.toString() , superuser: decode1.superuser.toString() },   // Dummy auth user state
-                    expiresIn: 1  // Token Expriration time, in minutes
+                    authState: { uid: decode1.id.toString() , superuser: decode1.superuser.toString() },
+                    expiresIn: 60  // Token Expriration time, in minutes
                 })) {
                     setLogged(<Redirect to="/" /> )
 
