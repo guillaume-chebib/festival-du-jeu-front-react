@@ -8,11 +8,13 @@ import Modal from '@material-ui/core/Modal';
 import { ThemeProvider} from '@material-ui/core/styles';
 import DeleteIcon from '@material-ui/icons/Delete';
 import {useStylesThemeFestival,themeFestival} from "../styles/themes";
+import {UpdateDeleteOrganisateur} from "./updateOrganisateur";
 
 const Organisateur = () => {
 
     const history = useHistory();
     const [organisateurs,setOrganisateurs] = useState([])
+    const [trig,setTrig] = useState([])
     const styles = useStylesThemeFestival()
 
     const columns = [
@@ -27,51 +29,8 @@ const Organisateur = () => {
             flex:1,
             disableClickEventBubbling: true,
             renderCell: (params: CellParams) => {
-                const onClickEdit = async () => {
-                    const api: GridApi = params.api;
-                    const fields = api
-                        .getAllColumns()
-                        .map((c) => c.field)
-                        .filter((c) => c !== "__check__" && !!c);
-                    const thisRow = {};
 
-                    fields.forEach((f) => {
-                        thisRow[f] = params.getValue(f);
-                    });
-
-                    console.log(thisRow)
-
-
-                }
-
-                const onClickDelete = async () => {
-                    const api: GridApi = params.api;
-                    const fields = api
-                        .getAllColumns()
-                        .map((c) => c.field)
-                        .filter((c) => c !== "__check__" && !!c);
-                    const thisRow = {};
-
-                    fields.forEach((f) => {
-                        thisRow[f] = params.getValue(f);
-                    });
-
-                    console.log(thisRow)
-
-
-                }
-
-                return<div>
-                    <ThemeProvider theme={themeFestival}>
-                        <Fab size="small" color="primary" aria-label="edit" onClick={onClickEdit}>
-                            <EditIcon/>
-                        </Fab>
-                        <Fab size="small" color="secondary" aria-label="delete" onClick={onClickDelete}>
-                            <DeleteIcon />
-                        </Fab>
-                    </ThemeProvider>
-
-                </div>
+                return <UpdateDeleteOrganisateur row={params.row} setTrig={setTrig}/>
             }
         }
     ]
@@ -95,7 +54,7 @@ const Organisateur = () => {
 
         fetchData();
 
-    },[]);
+    },[trig]);
 
 
     return (
