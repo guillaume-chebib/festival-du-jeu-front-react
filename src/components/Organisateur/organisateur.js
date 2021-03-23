@@ -8,7 +8,7 @@ import Modal from '@material-ui/core/Modal';
 import { ThemeProvider} from '@material-ui/core/styles';
 import DeleteIcon from '@material-ui/icons/Delete';
 import {useStylesThemeFestival,themeFestival} from "../styles/themes";
-import {UpdateDeleteOrganisateur} from "./updateOrganisateur";
+import {UpdateDeleteOrganisateur} from "./updateDeleteOrganisateur";
 
 const Organisateur = () => {
 
