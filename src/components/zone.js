@@ -42,11 +42,7 @@ const Zone = () => {
 const Zones = ({id}) => {
     const classes = useStyles();
 
-    const [zones,setZones] = useState([]) //contient tous les festivals
-    const handleChange = (panel) => (event, isExpanded) => {
-        setExpanded(isExpanded ? panel : false);
-    };
-    const [expanded, setExpanded] = React.useState(false);
+    const [zones,setZones] = useState([])
 
     useEffect(
         async () => {
@@ -69,7 +65,7 @@ const Zones = ({id}) => {
                         console.log("Avant " + zone.jeux)
                     return (
                          <Grid item xs={12} sm={6}>
-                             <Accordion expanded={expanded === id_zone} onChange={handleChange(id_zone)}>
+                             <Accordion>
                                     <AccordionSummary
                                         expandIcon={<ExpandMoreIcon/>}
                                         aria-controls="panel1a-content"
