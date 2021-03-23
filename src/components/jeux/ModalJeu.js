@@ -131,7 +131,7 @@ export default function ModalJeu({open,est_create,titre,row,setRow,message,onUpd
                                 }))}
                             />
                         </Grid>
-                        <Grid item xs={12} sm={9}>
+                        <Grid item xs={12} sm={6}>
                             <TextField
                                 variant="outlined"
                                 defaultValue={row.url_consignes_jeu}
@@ -152,6 +152,21 @@ export default function ModalJeu({open,est_create,titre,row,setRow,message,onUpd
                                 onChange={handleChange}
                                 name="proto_jeu"
                                 inputProps={{ 'aria-label': 'secondary checkbox' }}
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={3}>
+                            <TextField
+                                variant="outlined"
+                                defaultValue={row.id_editeur_jeu}
+                                fullWidth
+                                id="id_editeur_jeu"
+                                label="Editeur"
+                                name="id_editeur_jeu"
+                                autoComplete="id_editeur_jeu"
+                                onChange={e =>  setRow(prevState => ({
+                                    ...prevState,
+                                    id_editeur_jeu: e.target.value
+                                }))}
                             />
                         </Grid>
 

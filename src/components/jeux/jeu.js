@@ -17,6 +17,8 @@ import useStylesTableValueColor from "../table/styles";
 import {renameKey, requestToBack} from "../../utils/utils_functions"
 import UpdateDeleteJeu from "./UpdateDeleteJeu";
 import {useAuthHeader} from 'react-auth-kit'
+import ModalJeu from "./ModalJeu";
+import CreateJeu from "./CreateJeu";
 
 
 
@@ -96,7 +98,8 @@ const Jeu = () => {
                 <h1>
                     Liste des jeux
                 </h1>
-                <Button onClick={handleCreateJeu} variant="contained" color="primary">Ajouter un jeu </Button>
+                <CreateJeu/>
+
             </div>
 
             <div style={{paddingTop: '2em'}}>
