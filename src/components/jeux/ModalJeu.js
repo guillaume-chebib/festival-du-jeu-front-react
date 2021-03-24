@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import IconButton from "@material-ui/core/IconButton";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Dialog from "@material-ui/core/Dialog";
@@ -10,30 +10,58 @@ import Button from "@material-ui/core/Button";
 import TextField from '@material-ui/core/TextField';
 import Grid from "@material-ui/core/Grid";
 import Switch from "@material-ui/core/Switch";
-import {requestToBack} from "../../utils/utils_functions";
+import {renameKey, requestToBack} from "../../utils/utils_functions";
+import {Checkbox, makeStyles, MenuItem, Select} from "@material-ui/core";
+import {useAuthHeader} from "react-auth-kit";
 
-export default function ModalJeu({open,est_create,titre,row,setRow,message,onUpdate,onClose}) {
+export default function ModalJeu({open,editeurs,est_create,titre,row,setRow,message,onUpdate,onClose}) {
 
-    const [state, setState] = React.useState({
+    const authHeader = useAuthHeader()
+    // const [editeurs,setEditeurs] = useState() // contient le contenu à ajouter
 
-        proto_jeu: row.proto_jeu
-    });
+    const [stateProto, setStateProto] = React.useState(row.proto_jeu);
 
-    const handleChange = (event) => {
-        {console.log(row.proto_jeu)}
+    const handleChange = () => {
 
-        setState({ ...state, [event.target.name]: event.target.checked });
+        setStateProto((prev) => !prev);
+
         setRow(prevState => ({
             ...prevState,
-            proto_jeu: state
+            proto_jeu: !stateProto //TODO Gros problème pk je dois donner l'inverse ?
         }))
-        // console.log(row)
+
+
 
 
     };
+    const useStyles = makeStyles((theme) => ({
+        formControl: {
+            margin: theme.spacing(1),
+            minWidth: 120,
+        },
+        selectEmpty: {
+            marginTop: theme.spacing(2),
+        },
+    }));
+
+    const classes = useStyles();
+    const [state, setState] = React.useState({
+        age: '',
+        name: 'hai',
+    });
+
+    const handleChangeEditeur = (event) => {
+        const name = event.target.name;
+        setState({
+            ...state,
+            [name]: event.target.value,
+        });
+    };
+
+
+
     useEffect(() => {
-        console.log(state.proto_jeu)
-        console.log(row.proto_jeu)
+        console.log(editeurs)
 
 
     },[]);
@@ -51,7 +79,14 @@ export default function ModalJeu({open,est_create,titre,row,setRow,message,onUpd
                     <DialogContentText id="alert-dialog-description">
                     </DialogContentText>
                     <Grid container spacing={2}>
-
+                        <Grid item xs={12} sm={3}>
+                            <Checkbox
+                                checked={stateProto}
+                                onChange={handleChange}
+                                name="proto_jeu"
+                                inputProps={{ 'aria-label': 'secondary checkbox' }}
+                            />
+                        </Grid>
                         <Grid item xs={12} >
                             <TextField
                                 autoComplete="nom du jeu"
@@ -146,14 +181,7 @@ export default function ModalJeu({open,est_create,titre,row,setRow,message,onUpd
                                 }))}
                             />
                         </Grid>
-                        <Grid item xs={12} sm={3}>
-                            <Switch
-                                checked={state.proto_jeu}
-                                onChange={handleChange}
-                                name="proto_jeu"
-                                inputProps={{ 'aria-label': 'secondary checkbox' }}
-                            />
-                        </Grid>
+
                         <Grid item xs={12} sm={3}>
                             <TextField
                                 variant="outlined"
@@ -168,6 +196,16 @@ export default function ModalJeu({open,est_create,titre,row,setRow,message,onUpd
                                     id_editeur_jeu: e.target.value
                                 }))}
                             />
+                            <Select
+                                labelId="demo-simple-select-filled-label"
+                                id="id_editeur_jeu"
+                                value={row.id_editeur_jeu}
+                                onChange={handleChangeEditeur}
+                            >
+                                <MenuItem value={10}>Ten</MenuItem>
+                                <MenuItem value={20}>Twenty</MenuItem>
+                                <MenuItem value={30}>Thirty</MenuItem>
+                            </Select>
                         </Grid>
 
                     </Grid>

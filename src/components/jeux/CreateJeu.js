@@ -7,7 +7,7 @@ import {useAuthHeader} from "react-auth-kit";
 import Alert from "@material-ui/lab/Alert";
 import Button from "@material-ui/core/Button";
 
-const CreateJeu = () => {
+const CreateJeu = ({setTrig,editeurs}) => {
 
     const [openCreate, setOpenCreate] = useState(false);
     const [reponse,setReponse] = useState()
@@ -41,7 +41,7 @@ const CreateJeu = () => {
         else {
             setReponse(<Alert severity="success">Jeu crée avec succes ! </Alert>)
         }
-        // setTrig(row)
+        setTrig(jeu)
         setOpenCreate(false);
     };
 
@@ -49,7 +49,7 @@ const CreateJeu = () => {
     return (
         <div>
             <Button onClick={handleClickOpenCreate} variant="contained" color="primary">Ajouter un jeu </Button>
-            <ModalJeu titre="Editer jeu" row={jeu} setRow={setJeu} onClose={handleCloseCreate} onUpdate={handleCreate} open={openCreate}/>
+            <ModalJeu titre="Editer jeu" editeurs = {editeurs} row={jeu} setRow={setJeu} onClose={handleCloseCreate} onUpdate={handleCreate} open={openCreate}/>
         </div>
 
     )
