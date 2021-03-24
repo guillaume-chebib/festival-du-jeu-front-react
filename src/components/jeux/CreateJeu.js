@@ -49,7 +49,7 @@ const CreateJeu = ({setTrig,editeurs}) => {
     return (
         <div>
             <Button onClick={handleClickOpenCreate} variant="contained" color="primary">Ajouter un jeu </Button>
-            <ModalJeu titre="Editer jeu" editeurs = {editeurs} row={jeu} setRow={setJeu} onClose={handleCloseCreate} onUpdate={handleCreate} open={openCreate}/>
+            <ModalJeu titre="Créer jeu" editeurs = {editeurs} row={jeu} setRow={setJeu} onClose={handleCloseCreate} onUpdate={handleCreate} open={openCreate}/>
         </div>
 
     )

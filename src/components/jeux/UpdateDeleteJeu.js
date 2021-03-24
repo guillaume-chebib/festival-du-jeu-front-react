@@ -30,14 +30,12 @@ const UpdateDeleteJeu = ({row,setTrig,editeurs}) => {
     };
 
     const handleDelete = async () => {
-        console.log(row.proto_jeu)
         const response = await requestToBack('DELETE',row,`/jeu/${row.id}`,authHeader())
         const body = await response[0]
         if (response[1] !== 200) {
             console.log("erreur serveur")
         }
 
-        console.log(body.message)
         setTrig(row)
         setOpenDelete(false);
     };
@@ -46,12 +44,10 @@ const UpdateDeleteJeu = ({row,setTrig,editeurs}) => {
 
         const response = await requestToBack('PUT',jeu,`/jeu/${row.id}`,authHeader())
         const body = await response[0]
-        console.log(row)
 
         if (response[1] !== 200) {
             console.log("erreur serveur")
         }
-        console.log(body.message)
         setTrig(row)
 
         setOpenEdit(false);

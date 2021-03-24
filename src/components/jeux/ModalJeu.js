@@ -18,19 +18,11 @@ export default function ModalJeu({open,editeurs,est_create,titre,row,setRow,mess
 
     const authHeader = useAuthHeader()
     // const [editeurs,setEditeurs] = useState() // contient le contenu à ajouter
-
-    const [stateProto, setStateProto] = React.useState(row.proto_jeu);
-
     const handleChange = () => {
-
-        setStateProto((prev) => !prev);
-
         setRow(prevState => ({
             ...prevState,
-            proto_jeu: !stateProto //TODO Gros problème pk je dois donner l'inverse ?
+            proto_jeu: !prevState.proto_jeu
         }))
-
-
 
 
     };
@@ -45,26 +37,24 @@ export default function ModalJeu({open,editeurs,est_create,titre,row,setRow,mess
     }));
 
     const classes = useStyles();
-    const [state, setState] = React.useState({
-        age: '',
-        name: 'hai',
-    });
+
 
     const handleChangeEditeur = (event) => {
-        const name = event.target.name;
-        setState({
-            ...state,
-            [name]: event.target.value,
-        });
+        setRow(prevState => ({
+            ...prevState,
+            id_editeur_jeu: event.target.value
+        }))
+
     };
 
 
 
     useEffect(() => {
-        console.log(editeurs)
 
 
     },[]);
+
+
     return (
         <div>
 
@@ -79,14 +69,6 @@ export default function ModalJeu({open,editeurs,est_create,titre,row,setRow,mess
                     <DialogContentText id="alert-dialog-description">
                     </DialogContentText>
                     <Grid container spacing={2}>
-                        <Grid item xs={12} sm={3}>
-                            <Checkbox
-                                checked={stateProto}
-                                onChange={handleChange}
-                                name="proto_jeu"
-                                inputProps={{ 'aria-label': 'secondary checkbox' }}
-                            />
-                        </Grid>
                         <Grid item xs={12} >
                             <TextField
                                 autoComplete="nom du jeu"
@@ -181,30 +163,29 @@ export default function ModalJeu({open,editeurs,est_create,titre,row,setRow,mess
                                 }))}
                             />
                         </Grid>
-
                         <Grid item xs={12} sm={3}>
-                            <TextField
-                                variant="outlined"
-                                defaultValue={row.id_editeur_jeu}
-                                fullWidth
-                                id="id_editeur_jeu"
-                                label="Editeur"
-                                name="id_editeur_jeu"
-                                autoComplete="id_editeur_jeu"
-                                onChange={e =>  setRow(prevState => ({
-                                    ...prevState,
-                                    id_editeur_jeu: e.target.value
-                                }))}
+                            <Checkbox
+                                checked={row.proto_jeu}
+                                onChange={handleChange}
+                                name="proto_jeu"
+                                inputProps={{ 'aria-label': 'secondary checkbox' }}
                             />
+                        </Grid>
+                        <Grid item xs={12} sm={3}>
+
                             <Select
                                 labelId="demo-simple-select-filled-label"
                                 id="id_editeur_jeu"
                                 value={row.id_editeur_jeu}
                                 onChange={handleChangeEditeur}
                             >
-                                <MenuItem value={10}>Ten</MenuItem>
-                                <MenuItem value={20}>Twenty</MenuItem>
-                                <MenuItem value={30}>Thirty</MenuItem>
+                                {/*{console.log(row.id_societe_jeu)}*/}
+
+                                {
+                                    editeurs.map(e => <MenuItem value={e.id_societe}>{e.id_societe}</MenuItem>
+
+                                    )
+                                }
                             </Select>
                         </Grid>
 

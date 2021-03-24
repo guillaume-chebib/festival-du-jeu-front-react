@@ -43,7 +43,8 @@ const Jeu = () => {
         { field : 'min_joueur_jeu', headerName: 'Joueur minimum', flex: 1, type: 'number'},
         { field : 'max_joueur_jeu', headerName: 'Joueur maximum', flex: 1, type: 'number'},
         { field : 'age_min_jeu', headerName: 'Age requis', flex: 1, type: 'number'},
-        { field : 'duree_jeu', headerName: 'Furée(en min)', flex: 1, type: 'number'},
+        { field : 'duree_jeu', headerName: 'Durée(en min)', flex: 1, type: 'number'},
+        { field : 'nom_societe', headerName: 'Editeur', flex: 1, type: 'string'},
         { field: 'Prototype', headerName: 'Prototype', flex: 1,
             renderCell: (params) =>
             {
@@ -82,33 +83,23 @@ const Jeu = () => {
             else {
                 jeux.forEach(obj => renameKey(obj, 'id_jeu', 'id'));
                 const updatedJson = JSON.stringify(jeux);
-                console.log(updatedJson);
                 setJeux(jeux)
             }
 
             const bodyEditeur = await reponseEditeur[0]
             const list_editeurs = bodyEditeur.message
-            console.log(list_editeurs)
             if (reponseEditeur[1] !== 200) {
                 console.log(reponseEditeur[1])
             }
             else {
                 setEditeurs(list_editeurs)
             }
-            console.log("================================================")
-            console.log(editeurs)
 
         }
 
         fetchData();
 
     },[trig]);
-
-
-    const handleCreateJeu = async e => {
-       //creation jeux modal
-
-    };
 
     return (
         <div>
