@@ -67,7 +67,7 @@ const Editeur = () => {
 
     useEffect(() => {
         async function fetchData() {
-            const response = await requestToBack('GET',null,`/societe/editeur`,null)
+            const response = await requestToBack('GET',null,`/societe/editeur`,authHeader())
 
             const body = await response[0]
             const editeurs = body.message

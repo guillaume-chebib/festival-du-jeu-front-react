@@ -19,7 +19,7 @@ import {CheckBox} from "@material-ui/icons";
 import {UpdateDeleteSociete} from "./updateDeleteSociete";
 
 
-function getFullAdresse(params: ValueGetterParams) {
+function getFullAdresse(params) {
     return `${params.getValue('numero_rue_editeur')+', ' || ''} ${
         params.getValue('rue_editeur') || ''} \n ${params.getValue('code_postal_editeur') || ''} ${params.getValue('ville_editeur') || ''}`;
 }
@@ -65,7 +65,7 @@ const EditeurExposant = () => {
             sortable: false,
             flex:1,
             disableClickEventBubbling: true,
-            renderCell: (params: CellParams) => {
+            renderCell: (params) => {
 
                 return <UpdateDeleteSociete row={params.row} setTrig={setTrig}/>
             }
@@ -75,7 +75,7 @@ const EditeurExposant = () => {
 
     useEffect(() => {
         async function fetchData() {
-            const response = await requestToBack('GET',null,`/societe/editeurExposant`,null)
+            const response = await requestToBack('GET',null,`/societe/editeurExposant`,authHeader())
 
             const body = await response[0]
             const exposants = body.message
@@ -83,6 +83,7 @@ const EditeurExposant = () => {
                 setExposants("Impossible de fetch")
             }
             else {
+                console.log("EXPO"+exposants)
                 exposants.forEach(obj => renameKey(obj, 'id_societe', 'id'));
                 setExposants(exposants)
             }
