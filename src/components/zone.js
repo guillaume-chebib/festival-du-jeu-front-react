@@ -5,6 +5,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { makeStyles } from '@material-ui/core/styles';
 import JeuxReserves from './jeux_reserve'
 import '../styles/App.scss';
+import {useAuthHeader} from 'react-auth-kit';
 
 import {renameKey, requestToBack} from "../utils/utils_functions"
 
@@ -43,12 +44,12 @@ const Zone = () => {
 
 const Zones = ({id}) => {
     const classes = useStyles();
-
+    const authHeader = useAuthHeader()
     const [zones,setZones] = useState([])
 
     useEffect(
         async () => {
-            const response = await requestToBack('GET',null,`/festival/${id}/zone`,null) //exemple avec GET
+            const response = await requestToBack('GET',null,`/festival/${id}/zone`,authHeader()) //exemple avec GET
 
             const body = await response[0]
             if (response[1] !== 200) {

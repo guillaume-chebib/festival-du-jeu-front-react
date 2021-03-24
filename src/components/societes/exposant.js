@@ -64,7 +64,7 @@ const Exposant = () => {
 
     useEffect(() => {
         async function fetchData() {
-            const response = await requestToBack('GET',null,`/societe/exposant`,null)
+            const response = await requestToBack('GET',null,`/societe/exposant`,authHeader())
 
             const body = await response[0]
             const exposants = body.message
