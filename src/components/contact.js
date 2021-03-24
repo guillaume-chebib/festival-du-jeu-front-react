@@ -1,5 +1,5 @@
 import React, { useEffect, useState} from 'react';
-
+import {renameKey, requestToBack} from "../utils/utils_functions"
 
 const Contact = () => {
 
@@ -7,10 +7,15 @@ const Contact = () => {
 
     useEffect(
         async () => {
-            // 2. Use a template string to set the URL:
-            const response = await fetch(`/contact`);
-            const body = await response.json();
-            setContacts(body.message)
+            const response = await requestToBack('GET',null,`/contact`,null) //exemple avec GET
+
+            const body = await response[0]
+            if (response[1] !== 200) {
+                setContacts("Impossible de fetch")
+            }
+            else {
+                setContacts(body.message)
+            }
 
         },[setContacts]);
     return (
