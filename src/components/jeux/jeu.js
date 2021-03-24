@@ -19,6 +19,7 @@ import UpdateDeleteJeu from "./UpdateDeleteJeu";
 import {useAuthHeader} from 'react-auth-kit'
 import ModalJeu from "./ModalJeu";
 import CreateJeu from "./CreateJeu";
+import {Checkbox} from "@material-ui/core";
 
 
 
@@ -30,6 +31,7 @@ const Jeu = () => {
 
     const history = useHistory();
     const [jeux,setJeux] = useState([])
+    const [editeurs,setEditeurs] = useState([])
     const [trig,setTrig] = useState([])
     const authHeader = useAuthHeader()
 
@@ -45,9 +47,9 @@ const Jeu = () => {
         { field: 'Prototype', headerName: 'Prototype', flex: 1,
             renderCell: (params) =>
             {
-                return <Switch
+                return <Checkbox
                     checked={params.row.proto_jeu}
-                    inputProps={{'aria-label': 'secondary checkbox'}}
+                    inputProps={{ 'aria-label': 'primary checkbox' }}
                 />
 
             }
@@ -57,7 +59,7 @@ const Jeu = () => {
             renderCell:(params) =>
             {
 
-                return <UpdateDeleteJeu row = {params.row} setTrig={setTrig}/>
+                return <UpdateDeleteJeu row = {params.row} setTrig={setTrig} editeurs = {editeurs}/>
             }
         },
 
@@ -65,13 +67,17 @@ const Jeu = () => {
 
 
     useEffect(() => {
-        async function fetchData() {
 
-            const response = await requestToBack('GET',null,`/jeu`,authHeader())
-            const body = await response[0]
-            const jeux = body.message
-            if (response[1] !== 200) {
-                console.log(response[1])
+        async function fetchData() {
+            const [responseJeu, reponseEditeur] = await Promise.all([
+                await requestToBack('GET',null,`/jeu`,authHeader()),
+                await requestToBack('GET',null,`/societe/editeurs/`,authHeader())
+            ]);
+            const bodyJeu = await responseJeu[0]
+            const jeux = bodyJeu.message
+
+            if (responseJeu[1] !== 200) {
+                console.log(responseJeu[1])
             }
             else {
                 jeux.forEach(obj => renameKey(obj, 'id_jeu', 'id'));
@@ -79,6 +85,18 @@ const Jeu = () => {
                 console.log(updatedJson);
                 setJeux(jeux)
             }
+
+            const bodyEditeur = await reponseEditeur[0]
+            const list_editeurs = bodyEditeur.message
+            console.log(list_editeurs)
+            if (reponseEditeur[1] !== 200) {
+                console.log(reponseEditeur[1])
+            }
+            else {
+                setEditeurs(list_editeurs)
+            }
+            console.log("================================================")
+            console.log(editeurs)
 
         }
 
@@ -98,7 +116,7 @@ const Jeu = () => {
                 <h1>
                     Liste des jeux
                 </h1>
-                <CreateJeu/>
+                <CreateJeu setTrig={setTrig} editeurs = {editeurs}/>
 
             </div>
 
