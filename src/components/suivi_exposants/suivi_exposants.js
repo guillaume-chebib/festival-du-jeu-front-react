@@ -16,9 +16,11 @@ import Button from "@material-ui/core/Button";
 import useStylesTableValueColor from "../table/styles";
 import {renameKey, requestToBack} from "../../utils/utils_functions"
 import {useAuthHeader} from 'react-auth-kit'
-import {Checkbox} from "@material-ui/core";
+import {Checkbox, MenuItem, Select} from "@material-ui/core";
 import ListeContact from "./ListeContact";
 
+import DateContact from "./DateContact";
+import Grid from "@material-ui/core/Grid";
 
 
 
@@ -31,6 +33,7 @@ const SuiviExposants = () => {
 
     const history = useHistory();
     const [editeurs,setEditeurs] = useState([])
+    const [statuts,setStatuts] = useState([])
     const [trig,setTrig] = useState([])
     const authHeader = useAuthHeader()
 
@@ -43,13 +46,49 @@ const SuiviExposants = () => {
         setOpenCreate(false);
     };
 
+
+
     const columns = [
         { field: 'id', headerName: 'ID', hide: false },
         { field : 'nom_societe', headerName: 'Nom de la société', flex: 1,type: 'string'},
-        { field : 'premier_prise_contact', headerName: 'Première prise de contact', flex: 1,type: 'date'},
-        { field : 'deuxieme_prise_contact', headerName: 'Deuxieme prise de contact', flex: 1,type: 'date'},
-        { field : 'troisieme_prise_contact', headerName: 'Troisième prise de contact', flex: 1,type: 'date'},
-        { field : 'statut_prise_contact', headerName: 'Statut prise de contact', flex: 1,type: 'string'},
+        { field : 'premier_prise_contact', headerName: 'Première prise de contact', flex: 1,type: 'date',
+            renderCell: (params) =>{
+                return <DateContact value={params.row.premier_prise_contact}/>
+            }
+        },
+        { field : 'deuxieme_prise_contact', headerName: 'Deuxieme prise de contact', flex: 1,type: 'date',
+            renderCell: (params) =>{
+                if(params.row.premier_prise_contact !== null){
+                    return <DateContact value={params.row.deuxieme_prise_contact}/>
+                }
+            }
+        },
+        { field : 'troisieme_prise_contact', headerName: 'Troisième prise de contact', flex: 1,type: 'date',
+            renderCell: (params) =>{
+                if(params.row.deuxieme_prise_contact !== null){
+                    return <DateContact value={params.row.troisieme_prise_contact}/>
+                }
+            }
+        },
+        { field : 'statut_prise_contact', headerName: 'Statut prise de contact', flex: 1,
+            renderCell: (params) =>{
+                return (
+                    <Select
+                        labelId="demo-simple-select-filled-label"
+                        id="id_editeur_jeu"
+                        value={params.row.statut_prise_contact}
+                        // onChange={handleChangeEditeur}
+                    >
+                        {
+                            statuts.map(s => <MenuItem value={s.unnest}>{s.unnest}</MenuItem>
+
+                            )
+                        }
+                    </Select>
+                )
+
+            }
+        },
         { field : 'Contacts', headerName: 'Contacts', flex: 1,
             renderCell: (params) =>{
                 return <ListeContact nom_societe={params.row.nom_societe} contacts={params.row.contacts}/>
@@ -64,9 +103,9 @@ const SuiviExposants = () => {
     useEffect(() => {
 
         async function fetchData() {
-            const [responseJeu, reponseEditeur] = await Promise.all([
+            const [responseJeu, reponseStatuts] = await Promise.all([
                 await requestToBack('GET',null,`/festival/${id}/prise_contact`,authHeader()),
-                await requestToBack('GET',null,`/societe/editeurs/`,authHeader())
+                await requestToBack('GET',null,`/priseContact/statutsPriseContact/`,authHeader())
             ]);
             const bodyEditeursNonInactif = await responseJeu[0]
             const editeursNonInactif = bodyEditeursNonInactif.message
@@ -80,20 +119,23 @@ const SuiviExposants = () => {
                 setEditeurs(editeursNonInactif)
             }
 
-            // const bodyEditeur = await reponseEditeur[0]
-            // const list_editeurs = bodyEditeur.message
-            // if (reponseEditeur[1] !== 200) {
-            //     console.log(reponseEditeur[1])
-            // }
-            // else {
-            //     setEditeurs(list_editeurs)
-            // }
+            const bodyStatuts = await reponseStatuts[0]
+            const list_statuts = bodyStatuts.message
+            console.log(list_statuts.rows)
+            if (reponseStatuts[1] !== 200) {
+                console.log(reponseStatuts[1])
+            }
+            else {
+                setStatuts(list_statuts.rows)
+
+            }
 
         }
 
         fetchData();
 
     },[trig]);
+
 
     return (
         <div>
