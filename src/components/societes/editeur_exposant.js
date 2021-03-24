@@ -11,7 +11,9 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from "@material-ui/core/Button";
+
 import {renameKey, requestToBack} from "../../utils/utils_functions"
+
 import useStylesTableValueColor from "../table/styles";
 import {CheckBox} from "@material-ui/icons";
 import {UpdateDeleteSociete} from "./updateDeleteSociete";

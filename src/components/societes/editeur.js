@@ -2,7 +2,9 @@ import React, { useEffect, useState} from 'react';
 import {useHistory} from "react-router-dom";
 import {useAuthHeader} from 'react-auth-kit';
 import {CellParams, DataGrid} from '@material-ui/data-grid';
+
 import {renameKey, requestToBack} from "../../utils/utils_functions"
+
 import useStylesTableValueColor from "../table/styles";
 import {CheckBox} from "@material-ui/icons";
 import Switch from "@material-ui/core/Switch";
