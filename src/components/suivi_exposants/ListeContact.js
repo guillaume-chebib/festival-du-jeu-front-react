@@ -37,7 +37,6 @@ const ListeContact = ({nom_societe,contacts}) => {
             <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={openListeContact}>
                 <DialogTitle id="simple-dialog-title">Contacts de {nom_societe}</DialogTitle>
                 <List>
-                    {console.log(contacts)                    }
                     {contacts.map((c) => (
                         <ListItem >
                             <ListItemAvatar>
