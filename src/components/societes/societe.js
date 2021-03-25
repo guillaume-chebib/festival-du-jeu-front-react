@@ -9,6 +9,8 @@ import Box from '@material-ui/core/Box';
 import Exposant from "./exposant";
 import Editeur from "./editeur";
 import EditeurExposant from "./editeur_exposant";
+import {TextField} from "@material-ui/core";
+import Grid from "@material-ui/core/Grid";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -55,6 +57,7 @@ export default function Societe() {
     const [value, setValue] = React.useState(0);
 
     const handleChange = (event, newValue) => {
+        event.preventDefault()
         setValue(newValue);
     };
 
@@ -76,7 +79,7 @@ export default function Societe() {
                 <Editeur/>
             </TabPanel>
             <TabPanel value={value} index={2}>
-                Item Three
+                Item Two
                 <EditeurExposant/>
             </TabPanel>
         </div>

@@ -1,93 +1,71 @@
 import React, {useState} from "react";
-import IconButton from "@material-ui/core/IconButton";
-import DeleteIcon from "@material-ui/icons/Delete";
-import {ThemeProvider} from "@material-ui/core/styles";
-import {themeFestival} from "../styles/themes";
-import Fab from "@material-ui/core/Fab";
-import EditIcon from "@material-ui/icons/Edit";
-import UpdateSocieteModal from "./updateSocieteModal";
-import {DeleteSocieteModal} from "./deleteSocieteModal";
+import AlertDialogDelete from "../modals/AlertDialogDelete";
+import {UpdateDeleteButtons} from "../modals/UpdateDeleteButtons";
+import {requestToBack} from "../../utils/utils_functions";
+import {useAuthHeader} from "react-auth-kit";
+import ModalSociete from "./modalSociete";
 
+const UpdateDeleteSociete = ({row,setTrig,societes}) => {
 
-
-export const UpdateDeleteSociete = ({row,setTrig}) => {
-
-    const [openEdit, setOpenEdit] = useState(false);
     const [openDelete, setOpenDelete] = useState(false);
-    const [societes,setSocietes] = useState(row)
+    const [openEdit, setOpenEdit] = useState(false);
+    const [societe,setSociete] = useState(row);
+    const authHeader = useAuthHeader()
 
-    const onClickOpenEdit = () => {
-        setOpenEdit(true);
-    };
 
-    const onClickOpenDelete = () => {
+    const handleClickOpenDelete = () => {
         setOpenDelete(true);
-    };
-
-    const handleCloseEdit = () => {
-        setOpenEdit(false);
     };
 
     const handleCloseDelete = () => {
         setOpenDelete(false);
     };
 
-    const handleUpdate = async () => {
-        console.log(societes)
-        const response = await fetch(`/societe/${row.id}`, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(societes),
-        });
+    const handleClickOpenEdit = () => {
+        setOpenEdit(true);
+    };
 
-        const body = await response.json()
-        if (response.status !== 200) {
-            console.log("erreur serveur")
-        }
-        console.log(body.message)
-        setOpenEdit(false)
-        setTrig(row)
-
+    const handleCloseEdit = () => {
+        setOpenEdit(false);
     };
 
     const handleDelete = async () => {
-        console.log(row)
-        const response = await fetch(`/societe/${row.id}`, {
-            method: 'DELETE',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(row),
-        });
+        const response = await requestToBack('DELETE',row,`/societe/${row.id}`,authHeader())
+        const body = await response[0]
+        if (response[1] !== 200) {
+            console.log("erreur serveur")
+        }
 
-        const body = await response.json()
-        if (response.status !== 200) {
+        console.log(body.message)
+        setTrig(row)
+        setOpenDelete(false);
+    };
+
+    const handleEdit = async () => {
+
+        const response = await requestToBack('PUT',societe,`/societe/${row.id}`,authHeader())
+        const body = await response[0]
+
+        if (response[1] !== 200) {
             console.log("erreur serveur")
         }
         console.log(body.message)
         setTrig(row)
+
+        setOpenEdit(false);
     };
 
     return (
         <div>
-            <ThemeProvider theme={themeFestival}>
-                <Fab size="small" color="primary" aria-label="edit" onClick={onClickOpenEdit}>
-                    <EditIcon/>
-                </Fab>
-                <Fab size="small" color="secondary" aria-label="delete" onClick={onClickOpenDelete}>
-                    <DeleteIcon />
-                </Fab>
-            </ThemeProvider>
 
-            <UpdateSocieteModal titre="Editer société" row={societes} setRow={setSocietes} onClose={handleCloseEdit} onUpdate={handleUpdate} open={openEdit}/>
-            <DeleteSocieteModal open={openDelete} onClose={handleCloseDelete} onDelete={handleDelete} message={"Etes vous sûr de vouloir supprimer : "+row.nom_societe + " ?"} titre="Supprimer société"/>
+            <UpdateDeleteButtons onClickOpenDelete={handleClickOpenDelete} onClickOpenEdit={handleClickOpenEdit} />
+
+            <ModalSociete titre="Editer société" editeurs = {societes} row={societe} setRow={setSociete} onClose={handleCloseEdit} onUpdate={handleEdit} open={openEdit}/>
+            <AlertDialogDelete titre="Supprimer société" message={"Etes vous sur de vouloir supprimer : "+row.id} onClose={handleCloseDelete} onDelete={handleDelete} open={openDelete}/>
         </div>
 
     )
 
 
 }
-
-
+export default UpdateDeleteSociete

@@ -8,9 +8,9 @@ import {renameKey, requestToBack} from "../../utils/utils_functions"
 import useStylesTableValueColor from "../table/styles";
 import {CheckBox} from "@material-ui/icons";
 import Switch from "@material-ui/core/Switch";
-import {UpdateDeleteSociete} from "./updateDeleteSociete";
+import UpdateDeleteSociete from "./updateDeleteSociete";
 
-function getFullAdresse(params: ValueGetterParams) {
+function getFullAdresse(params) {
     return `${params.getValue('numero_rue_editeur')+', ' || ''} ${
         params.getValue('rue_editeur') || ''} \n ${params.getValue('code_postal_editeur') || ''} ${params.getValue('ville_editeur') || ''}`;
 }
@@ -26,8 +26,8 @@ const Editeur = () => {
 
 
     const columns = [
-        { field: 'id', headerName: 'ID', hide: false },
-        { field : 'nom_societe', headerName: "Nom de l'editeur", flex: 1,type: 'string'},
+        { field: 'id', headerName: 'ID', type: 'number' },
+        { field : 'nom_societe', headerName: "Nom de l'editeur",type: 'string'},
         {field: 'numero_rue_editeur', headerName: 'NumeroRue', hide: true},
         {field: 'rue_editeur', headerName: 'Rue', hide: true},
         {field: 'code_postal_editeur', headerName: 'CP', hide: true},
@@ -51,15 +51,11 @@ const Editeur = () => {
 
             }
         },
-        {
-            field: "",
-            headerName: "",
-            sortable: false,
-            flex:1,
-            disableClickEventBubbling: true,
-            renderCell: (params: CellParams) => {
+        { field : '', headerName: '', flex: 1,
+            renderCell:(params) =>
+            {
 
-                return <UpdateDeleteSociete row={params.row} setTrig={setTrig}/>
+                return <UpdateDeleteSociete row = {params.row} setTrig={setTrig} editeurs = {editeurs}/>
             }
         },
     ]

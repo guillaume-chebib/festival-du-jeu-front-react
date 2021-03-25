@@ -16,7 +16,7 @@ import {renameKey, requestToBack} from "../../utils/utils_functions"
 
 import useStylesTableValueColor from "../table/styles";
 import {CheckBox} from "@material-ui/icons";
-import {UpdateDeleteSociete} from "./updateDeleteSociete";
+import UpdateDeleteSociete from "./updateDeleteSociete";
 
 
 
@@ -47,15 +47,11 @@ const Exposant = () => {
 
             },
         },
-        {
-            field: "",
-            headerName: "",
-            sortable: false,
-            flex:1,
-            disableClickEventBubbling: true,
-            renderCell: (params: CellParams) => {
+        { field : '', headerName: '', flex: 1,
+            renderCell:(params) =>
+            {
 
-                return <UpdateDeleteSociete row={params.row} setTrig={setTrig}/>
+                return <UpdateDeleteSociete row = {params.row} setTrig={setTrig} editeurs = {exposants}/>
             }
         },
 
