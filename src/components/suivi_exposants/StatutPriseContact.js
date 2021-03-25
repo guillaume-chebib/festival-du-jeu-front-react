@@ -7,14 +7,21 @@ import {
     KeyboardDatePicker,
 } from '@material-ui/pickers';
 import {MenuItem, Select} from "@material-ui/core";
+import {requestToBack} from "../../utils/utils_functions";
+import {useAuthHeader} from "react-auth-kit";
 
 
 const StatutPriseContact = ({row,setTrig,statuts}) => {
-    const [statut, setStatut] = React.useState(row.statut_prise_contact);
+    const authHeader = useAuthHeader()
 
-    const handleChangeStatus = (event) => {
-        setStatut(event.target.value);
+    const handleChangeStatus = async (event) => {
+        row.statut_prise_contact = event.target.value
+        const response = await requestToBack('PUT',row,`/societe/${row.id}/priseContact/festival/${row.id_festival_prise_contact}`,authHeader())
+        const body = await response[0]
 
+        if (response[1] !== 200) {
+            console.log("erreur serveur")
+        }
     };
 
 
@@ -22,7 +29,7 @@ const StatutPriseContact = ({row,setTrig,statuts}) => {
         <Select
             labelId="demo-simple-select-filled-label"
             id="id_editeur_jeu"
-            value={statut}
+            value={row.statut_prise_contact}
             onChange={handleChangeStatus}
         >
             {

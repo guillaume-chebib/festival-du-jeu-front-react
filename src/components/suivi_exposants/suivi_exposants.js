@@ -112,7 +112,6 @@ const SuiviExposants = () => {
 
             const bodyStatuts = await reponseStatuts[0]
             const list_statuts = bodyStatuts.message
-            console.log(list_statuts.rows)
             if (reponseStatuts[1] !== 200) {
                 console.log(reponseStatuts[1])
             }

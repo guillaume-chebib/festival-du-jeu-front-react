@@ -19,6 +19,8 @@ import {
 
 
 const DateContact = ({row,id,disabled}) => {
+    const authHeader = useAuthHeader()
+
     let val
     switch (id){
         case 1:
@@ -34,7 +36,7 @@ const DateContact = ({row,id,disabled}) => {
 
     // const [selectedDate, setSelectedDate] = React.useState(val);
     const handleDateChange = async (date) => {
-        // setSelectedDate(date);
+        console.log(row)
         switch (id){
             case 1:
                 row.premier_prise_contact = date
@@ -46,7 +48,7 @@ const DateContact = ({row,id,disabled}) => {
                 row.troisieme_prise_contact = date
                 break
         }
-        const response = await requestToBack('PUT',jeu,`/jeu/${row.id}`,authHeader())
+        const response = await requestToBack('PUT',row,`/societe/${row.id}/priseContact/festival/${row.id_festival_prise_contact}`,authHeader())
         const body = await response[0]
 
         if (response[1] !== 200) {
@@ -54,12 +56,7 @@ const DateContact = ({row,id,disabled}) => {
         }
 
     };
-    const name_id = 'date-picker-inline-' + {id}
-
-
-
-
-
+    const name_id = 'date-picker-inline-' + id
     return (
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
             <Grid container justify="space-around">
