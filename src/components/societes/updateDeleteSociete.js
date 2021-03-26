@@ -60,7 +60,7 @@ const UpdateDeleteSociete = ({row,setTrig,societes}) => {
 
             <UpdateDeleteButtons onClickOpenDelete={handleClickOpenDelete} onClickOpenEdit={handleClickOpenEdit} />
 
-            <ModalSociete titre="Editer société" editeurs = {societes} row={societe} setRow={setSociete} onClose={handleCloseEdit} onUpdate={handleEdit} open={openEdit}/>
+            <ModalSociete titre="Editer société" row={societe} setRow={setSociete} onClose={handleCloseEdit} onUpdate={handleEdit} open={openEdit}/>
             <AlertDialogDelete titre="Supprimer société" message={"Etes vous sur de vouloir supprimer : "+row.id} onClose={handleCloseDelete} onDelete={handleDelete} open={openDelete}/>
         </div>
 

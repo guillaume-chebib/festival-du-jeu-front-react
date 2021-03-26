@@ -4,13 +4,20 @@ import Button from "@material-ui/core/Button";
 import {Dialog, DialogTitle, List, ListItem, ListItemAvatar, ListItemText, makeStyles} from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
 import PersonIcon from '@material-ui/icons/Person';
+import AddContact from "./addContact";
 
 
+
+
+// const ListeContact = ({nom_societe,contacts, id_societe, isEdit}) => {
+//     const [openListeContact, setListeContact] = useState(false);
+//     const [reponse,setReponse] = useState()
 
 const ListeContact = ({row,setTrig}) => {
 
     const [openListeContact, setListeContact] = useState(false);
     const [societe,setSociete] = useState(row);
+
 
 
     const authHeader = useAuthHeader()
@@ -39,6 +46,8 @@ const ListeContact = ({row,setTrig}) => {
                             <ListItemText primary={c.nom_contact} secondary={c.prenom_contact} />
                         </ListItem>
                     ))}
+
+                    {/*<AddContact nom_societe={nom_societe} id_societe={id_societe} isEdit={isEdit}/>*/}
                 </List>
             </Dialog>
         </div>
