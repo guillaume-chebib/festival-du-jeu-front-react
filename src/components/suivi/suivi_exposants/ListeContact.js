@@ -13,7 +13,7 @@ import AddContact from "./addContact";
 //     const [openListeContact, setListeContact] = useState(false);
 //     const [reponse,setReponse] = useState()
 
-const ListeContact = ({row,setTrig}) => {
+const ListeContact = ({row,setTrig,isEdit}) => {
 
     const [openListeContact, setListeContact] = useState(false);
     const [societe,setSociete] = useState(row);
@@ -29,6 +29,11 @@ const ListeContact = ({row,setTrig}) => {
     const handleClose = () => {
         setListeContact(false);
     };
+
+    let addContact;
+    if (isEdit) {
+        addContact = <AddContact nom_societe={societe.nom_societe} id_societe={societe.id_societe} isEdit={isEdit}/>;
+    }
 
     return (
         <div>
@@ -46,8 +51,7 @@ const ListeContact = ({row,setTrig}) => {
                             <ListItemText primary={c.nom_contact} secondary={c.prenom_contact} />
                         </ListItem>
                     ))}
-
-                    {/*<AddContact nom_societe={nom_societe} id_societe={id_societe} isEdit={isEdit}/>*/}
+                    {addContact}
                 </List>
             </Dialog>
         </div>

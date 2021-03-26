@@ -61,9 +61,7 @@ const Editeur = () => {
         },
         { field : 'Contacts', headerName: 'Contacts', flex: 1,
             renderCell: (params) =>{
-                return <ListeContact row = {params.row} setTrig={setTrig} />
-                //return <ListeContact nom_societe={params.row.nom_societe} id_societe={params.row.id_societe} contacts={params.row.contacts} isEdit={true}/>
-
+                return <ListeContact row = {params.row} setTrig={setTrig} isEdit={true}/>
             }
         },
     ]

@@ -57,9 +57,7 @@ const Exposant = () => {
         },
         { field : 'Contacts', headerName: 'Contacts', flex: 1,
             renderCell: (params) =>{
-                console.log("AH" + params.row.id_societe_contact)
-                //return <ListeContact nom_societe={params.row.nom_societe} id_societe={params.row.id_societe_contact} contacts={params.row.contacts} isEdit={true}/>
-                return <ListeContact row = {params.row} setTrig={setTrig} />
+                return <ListeContact row = {params.row} setTrig={setTrig} isEdit={true}/>
             }
         },
 
