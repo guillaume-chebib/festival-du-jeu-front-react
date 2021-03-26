@@ -91,7 +91,7 @@ const SuiviExposants = () => {
         },
         { field : 'Contacts', headerName: 'Contacts', flex: 1,
             renderCell: (params) =>{
-                return <ListeContact nom_societe={params.row.nom_societe} contacts={params.row.contacts}/>
+                return <ListeContact nom_societe={params.row.nom_societe} id_societe={params.row.id_societe} contacts={params.row.contacts} isEdit={false}/>
 
             }
         },

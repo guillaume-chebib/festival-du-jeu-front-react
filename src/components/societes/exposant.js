@@ -17,6 +17,7 @@ import {renameKey, requestToBack} from "../../utils/utils_functions"
 import useStylesTableValueColor from "../table/styles";
 import {CheckBox} from "@material-ui/icons";
 import UpdateDeleteSociete from "./updateDeleteSociete";
+import ListeContact from "../suivi_exposants/ListeContact";
 
 
 
@@ -52,6 +53,13 @@ const Exposant = () => {
             {
 
                 return <UpdateDeleteSociete row = {params.row} setTrig={setTrig} editeurs = {exposants}/>
+            }
+        },
+        { field : 'Contacts', headerName: 'Contacts', flex: 1,
+            renderCell: (params) =>{
+                console.log("AH" + params.row.id_societe_contact)
+                return <ListeContact nom_societe={params.row.nom_societe} id_societe={params.row.id_societe_contact} contacts={params.row.contacts} isEdit={true}/>
+
             }
         },
 

@@ -9,16 +9,13 @@ import {Dialog, DialogTitle, List, ListItem, ListItemAvatar, ListItemText, makeS
 import Avatar from "@material-ui/core/Avatar";
 import {blue} from "@material-ui/core/colors";
 import PersonIcon from '@material-ui/icons/Person';
+import AddContact from "./addContact";
 
 
 
-const ListeContact = ({nom_societe,contacts}) => {
+const ListeContact = ({nom_societe,contacts, id_societe, isEdit}) => {
     const [openListeContact, setListeContact] = useState(false);
     const [reponse,setReponse] = useState()
-    const [jeu,setJeu] = useState({
-        titre_jeu : null, min_joueur_jeu : null, max_joueur_jeu : null, id_editeur_jeu : null,
-        age_min_jeu : null, duree_jeu : null, url_consignes_jeu : null, proto_jeu : null
-    });
 
 
     const authHeader = useAuthHeader()
@@ -47,6 +44,8 @@ const ListeContact = ({nom_societe,contacts}) => {
                             <ListItemText primary={c.nom_contact} secondary={c.prenom_contact} />
                         </ListItem>
                     ))}
+
+                    <AddContact nom_societe={nom_societe} id_societe={id_societe} isEdit={isEdit}/>
                 </List>
             </Dialog>
         </div>

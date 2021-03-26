@@ -11,6 +11,7 @@ import Editeur from "./editeur";
 import EditeurExposant from "./editeur_exposant";
 import {TextField} from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
+import CreateSociete from "./createSociete";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -71,15 +72,15 @@ export default function Societe() {
                 </Tabs>
             </AppBar>
             <TabPanel value={value} index={0}>
-                Item One
+                <CreateSociete/>
                 <Exposant/>
             </TabPanel>
             <TabPanel value={value} index={1}>
-                Item Two
+                <CreateSociete/>
                 <Editeur/>
             </TabPanel>
             <TabPanel value={value} index={2}>
-                Item Two
+                <CreateSociete/>
                 <EditeurExposant/>
             </TabPanel>
         </div>
