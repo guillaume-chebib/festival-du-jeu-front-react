@@ -35,25 +35,26 @@ const SuiviExposants = () => {
     };
 
 
+
     const columns = [
         { field: 'id', headerName: 'ID', hide: false },
         { field : 'nom_societe', headerName: 'Nom de la société', flex: 1,type: 'string'},
         { field : 'premier_prise_contact', headerName: 'Première prise de contact', flex: 1,type: 'date',
             renderCell: (params) =>{
-                return <DateContact row = {params.row} id={1} disabled={params.row.deuxieme_prise_contact !== null}/>
+                return <DateContact row = {params.row} setTrig={setTrig} id={1} disabled={params.row.deuxieme_prise_contact !== null}/>
             }
         },
         { field : 'deuxieme_prise_contact', headerName: 'Deuxieme prise de contact', flex: 1,type: 'date',
             renderCell: (params) =>{
                 if(params.row.premier_prise_contact !== null){
-                    return <DateContact row = {params.row} id={2} disabled={params.row.troisieme_prise_contact !== null}/>
+                    return <DateContact row = {params.row} setTrig={setTrig} id={2} disabled={params.row.troisieme_prise_contact !== null}/>
                 }
             }
         },
         { field : 'troisieme_prise_contact', headerName: 'Troisième prise de contact', flex: 1,type: 'date',
             renderCell: (params) =>{
                 if(params.row.deuxieme_prise_contact !== null){
-                    return <DateContact row = {params.row}  id={3}/>
+                    return <DateContact row = {params.row}  id={3} setTrig={setTrig}/>
                 }
             }
         },

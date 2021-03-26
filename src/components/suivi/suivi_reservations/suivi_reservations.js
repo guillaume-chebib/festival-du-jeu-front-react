@@ -5,6 +5,10 @@ import {CellParams, DataGrid} from '@material-ui/data-grid';
 import useStylesTableValueColor from "../../table/styles";
 import {useAuthHeader} from 'react-auth-kit'
 import {renameKey, requestToBack} from "../../../utils/utils_functions";
+import DateContact from "../suivi_exposants/DateContact";
+import DateFactureReservation from "./DateFactureReservation";
+import {CheckBox} from "@material-ui/icons";
+import {Checkbox} from "@material-ui/core";
 
 
 
@@ -30,7 +34,17 @@ const SuiviReservations = () => {
         setOpenCreate(false);
     };
 
+    const updateRow = async (row) =>{
+        row.besoin_benevole_reservation = !row.besoin_benevole_reservation
+        // updateRow(params.row.id)
+        // const response = await requestToBack('PUT',row,`/reservation/${row.id}`,authHeader())
+        // const body = await response[0]
+        //
+        // if (response[1] !== 200) {
+        //     console.log("erreur serveur")
+        // }
 
+    }
     const columns = [
         { field: 'id', headerName: 'ID', hide: false },
         { field : 'nom_societe', headerName: 'Nom de la société', flex: 1,type: 'string'},
@@ -39,8 +53,16 @@ const SuiviReservations = () => {
         { field : 'apport_jeux_reservation', headerName: 'Apport des jeux', flex: 1},
         { field : 'reduction_reservation', headerName: 'Réduction', flex: 1},
         { field : 'cr_envoye_reservation', headerName: 'Cr envoyé', flex: 1},
-        { field : 'date_envoi_facture', headerName: 'Date envoi facture', flex: 1},
-        { field : 'date_paye_facture', headerName: 'Date facture paye', flex: 1},
+        { field : 'date_envoi_facture', headerName: 'Date envoi facture', flex: 1,
+            renderCell: (params) =>{
+                return <DateFactureReservation row = {params.row} setTrig={setTrig} id={1} disabled={params.row.date_paye_facture !== null}/>
+            }
+        },
+        { field : 'date_paye_facture', headerName: 'Date facture paye', flex: 1,
+            renderCell: (params) =>{
+                return <DateFactureReservation row = {params.row} setTrig={setTrig} id={2}/>
+            }
+        },
     ]
 
 
@@ -61,9 +83,6 @@ const SuiviReservations = () => {
                 console.log(listesReservations)
                 setReservations(listesReservations)
             }
-
-
-
         }
 
         fetchData();
