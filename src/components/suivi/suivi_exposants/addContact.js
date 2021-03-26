@@ -18,7 +18,7 @@ import Avatar from "@material-ui/core/Avatar";
 import {blue} from "@material-ui/core/colors";
 import PersonIcon from '@material-ui/icons/Person';
 import Grid from "@material-ui/core/Grid";
-import {requestToBack} from "../../utils/utils_functions";
+import {requestToBack} from "../../../utils/utils_functions";
 
 
 

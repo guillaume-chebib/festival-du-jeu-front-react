@@ -9,7 +9,7 @@ import useStylesTableValueColor from "../table/styles";
 import {CheckBox} from "@material-ui/icons";
 import Switch from "@material-ui/core/Switch";
 import UpdateDeleteSociete from "./updateDeleteSociete";
-import ListeContact from "../suivi_exposants/ListeContact";
+import ListeContact from "../suivi/suivi_exposants/ListeContact";
 
 function getFullAdresse(params) {
     return `${params.getValue('numero_rue_editeur')+', ' || ''} ${
@@ -61,7 +61,8 @@ const Editeur = () => {
         },
         { field : 'Contacts', headerName: 'Contacts', flex: 1,
             renderCell: (params) =>{
-                return <ListeContact nom_societe={params.row.nom_societe} id_societe={params.row.id_societe} contacts={params.row.contacts} isEdit={true}/>
+                return <ListeContact row = {params.row} setTrig={setTrig} />
+                //return <ListeContact nom_societe={params.row.nom_societe} id_societe={params.row.id_societe} contacts={params.row.contacts} isEdit={true}/>
 
             }
         },
