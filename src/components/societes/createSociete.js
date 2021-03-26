@@ -13,7 +13,7 @@ const CreateSociete = () => {
     const [reponse,setReponse] = useState()
     const [societe,setSociete] = useState({
         nom_societe : null,
-        est_exposant : false,
+        est_exposant_societe : false,
         numero_rue_editeur : null,
         rue_editeur : null,
         est_editeur_societe : false,

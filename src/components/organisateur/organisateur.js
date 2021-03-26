@@ -27,7 +27,7 @@ const Organisateur = () => {
             sortable: false,
             flex:1,
             disableClickEventBubbling: true,
-            renderCell: (params: CellParams) => {
+            renderCell: (params) => {
 
                 return <UpdateDeleteOrganisateur row={params.row} setTrig={setTrig}/>
             }

@@ -31,23 +31,30 @@ const useStyles = makeStyles((theme) => ({
 const nomRegex = "^[0-9]*$";
 const nomAdrRegex = "^[^0-9]*$";
 
-const UpdateSocieteModal = ({titre,row,setRow,onUpdate,onClose,open}) =>  {
+const UpdateSocieteModal = ({titre,row,setRow,onClose,onUpdate,open}) =>  {
     const inputRef = useRef("form");
     const classes = useStyles();
     const [nameError,setNameError] = React.useState("")
-    const [checkedEditeur, setCheckedEiteur] = React.useState(row.est_editeur_societe);
+
     const handleChangeEditeur = () => {
-        setCheckedEiteur((prev) => !prev);
+        setRow(prevState => ({
+            ...prevState,
+            est_editeur_societe: !prevState.est_editeur_societe
+        }))
     };
 
-    const [checkedExposant, setCheckedExposant] = React.useState(row.est_exposant_societe);
     const handleChangeExposant = () => {
-        setCheckedExposant((prev) => !prev);
+        setRow(prevState => ({
+            ...prevState,
+            est_exposant_societe: !prevState.est_exposant_societe
+        }))
     };
 
-    const [checkedInactif, setCheckedInactif] = React.useState(row.est_inactif_societe);
     const handleChangeInactif = () => {
-        setCheckedInactif((prev) => !prev);
+        setRow(prevState => ({
+            ...prevState,
+            est_inactif_societe: !prevState.est_inactif_societe
+        }))
     };
 
     const onChangeNom = (e) => {
@@ -107,7 +114,7 @@ const UpdateSocieteModal = ({titre,row,setRow,onUpdate,onClose,open}) =>  {
                             <div className={classes.root}>
                                 <FormControlLabel
                                     control={<Checkbox
-                                        checked={checkedExposant}
+                                        checked={row.est_exposant_societe}
                                         onChange={handleChangeExposant}
                                         inputProps={{ 'aria-label': 'primary checkbox' }}
                                     />}
@@ -119,7 +126,7 @@ const UpdateSocieteModal = ({titre,row,setRow,onUpdate,onClose,open}) =>  {
                             <div className={classes.root}>
                                 <FormControlLabel
                                     control={<Checkbox
-                                        checked={checkedInactif}
+                                        checked={row.est_inactif_societe}
                                         onChange={handleChangeInactif}
                                         inputProps={{ 'aria-label': 'primary checkbox' }}
                                     />}
@@ -131,14 +138,14 @@ const UpdateSocieteModal = ({titre,row,setRow,onUpdate,onClose,open}) =>  {
                             <div className={classes.root}>
                                 <FormControlLabel
                                     control={<Checkbox
-                                        checked={checkedEditeur}
+                                        checked={row.est_editeur_societe}
                                         onChange={handleChangeEditeur}
                                         inputProps={{ 'aria-label': 'primary checkbox' }}
                                     />}
                                     label="Est editeur ?"
                                 />
                                 <div className={classes.container}>
-                                    <Fade in={checkedEditeur}>
+                                    <Fade in={row.est_editeur_societe}>
                                         <Grid container spacing={2}>
                                             <Grid item xs={12} sm={6}>
                                                 <TextField
@@ -146,7 +153,7 @@ const UpdateSocieteModal = ({titre,row,setRow,onUpdate,onClose,open}) =>  {
                                                     defaultValue={row.numero_rue_editeur}
                                                     name="numero"
                                                     variant="outlined"
-                                                    required={!!checkedEditeur}
+                                                    required={!!row.est_editeur_societe}
                                                     fullWidth
                                                     id="numero"
                                                     label="Numero de rue"
@@ -164,7 +171,7 @@ const UpdateSocieteModal = ({titre,row,setRow,onUpdate,onClose,open}) =>  {
                                                     defaultValue={row.rue_editeur}
                                                     name="rue"
                                                     variant="outlined"
-                                                    required={!!checkedEditeur}
+                                                    required={!!row.est_editeur_societe}
                                                     fullWidth
                                                     id="rue"
                                                     label="Nom de la rue"
@@ -172,7 +179,7 @@ const UpdateSocieteModal = ({titre,row,setRow,onUpdate,onClose,open}) =>  {
                                                     onChange={(e) => {
                                                         setRow(prevState => ({
                                                             ...prevState,
-                                                            rue_societe: e.target.value
+                                                            rue_editeur: e.target.value
                                                         }));
                                                         //return onChangeNomAdresse(e);
                                                     }}
@@ -185,7 +192,7 @@ const UpdateSocieteModal = ({titre,row,setRow,onUpdate,onClose,open}) =>  {
                                                     defaultValue={row.code_postal_editeur}
                                                     name="code_postal"
                                                     variant="outlined"
-                                                    required={!!checkedEditeur}
+                                                    required={!!row.est_editeur_societe}
                                                     fullWidth
                                                     id="code_postal"
                                                     label="Code postal"
@@ -202,7 +209,7 @@ const UpdateSocieteModal = ({titre,row,setRow,onUpdate,onClose,open}) =>  {
                                                     defaultValue={row.ville_editeur}
                                                     name="ville"
                                                     variant="outlined"
-                                                    required={!!checkedEditeur}
+                                                    required={!!row.est_editeur_societe}
                                                     fullWidth
                                                     id="ville"
                                                     label="Ville"
@@ -227,7 +234,7 @@ const UpdateSocieteModal = ({titre,row,setRow,onUpdate,onClose,open}) =>  {
                     <Button color="primary" onClick={onClose} color="primary">
                         Annuler
                     </Button>
-                    <Button type="submit" color="primary" autoFocus>
+                    <Button onClick={onUpdate} type="submit" color="primary" autoFocus>
                         Oui
                     </Button>
                 </DialogActions>
