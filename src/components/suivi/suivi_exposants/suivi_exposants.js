@@ -2,26 +2,12 @@ import React, { useEffect, useState} from 'react';
 import {useHistory, useParams} from "react-router-dom";
 
 import {CellParams, DataGrid} from '@material-ui/data-grid';
-import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
-import Switch from '@material-ui/core/Switch';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Button from "@material-ui/core/Button";
-
-import useStylesTableValueColor from "../table/styles";
-import {renameKey, requestToBack} from "../../utils/utils_functions"
+import useStylesTableValueColor from "../../table/styles";
+import {renameKey, requestToBack} from "../../../utils/utils_functions"
 import {useAuthHeader} from 'react-auth-kit'
-import {Checkbox, MenuItem, Select} from "@material-ui/core";
 import ListeContact from "./ListeContact";
 
 import DateContact from "./DateContact";
-import Grid from "@material-ui/core/Grid";
-import UpdateDeleteJeu from "../jeux/UpdateDeleteJeu";
 import StatutPriseContact from "./StatutPriseContact";
 
 
@@ -94,15 +80,15 @@ const SuiviExposants = () => {
     useEffect(() => {
 
         async function fetchData() {
-            const [responseJeu, reponseStatuts] = await Promise.all([
+            const [responsePriseContact, reponseStatuts] = await Promise.all([
                 await requestToBack('GET',null,`/festival/${id}/prise_contact`,authHeader()),
                 await requestToBack('GET',null,`/priseContact/statutsPriseContact/`,authHeader())
             ]);
-            const bodyEditeursNonInactif = await responseJeu[0]
+            const bodyEditeursNonInactif = await responsePriseContact[0]
             const editeursNonInactif = bodyEditeursNonInactif.message
 
-            if (responseJeu[1] !== 200) {
-                console.log(responseJeu[1])
+            if (responsePriseContact[1] !== 200) {
+                console.log(responsePriseContact[1])
             }
             else {
                 editeursNonInactif.forEach(obj => renameKey(obj, 'id_societe', 'id'));
