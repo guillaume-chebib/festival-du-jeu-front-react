@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 const nomRegex = "^[0-9]*$";
 const nomAdrRegex = "^[^0-9]*$";
 
-const UpdateSocieteModal = ({titre,row,setRow,onClose,onUpdate,open}) =>  {
+const ModalSociete = ({titre,row,setRow,onClose,onUpdate,open}) =>  {
     const inputRef = useRef("form");
     const classes = useStyles();
     const [nameError,setNameError] = React.useState("")
@@ -243,4 +243,4 @@ const UpdateSocieteModal = ({titre,row,setRow,onClose,onUpdate,open}) =>  {
     );
 }
 
-export default UpdateSocieteModal
+export default ModalSociete
