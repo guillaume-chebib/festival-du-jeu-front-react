@@ -7,15 +7,21 @@ import Alert from "@material-ui/lab/Alert";
 import Button from "@material-ui/core/Button";
 import {Dialog, DialogTitle, List, ListItem, ListItemAvatar, ListItemText, makeStyles} from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
-import {blue} from "@material-ui/core/colors";
 import PersonIcon from '@material-ui/icons/Person';
 import AddContact from "./addContact";
 
 
 
-const ListeContact = ({nom_societe,contacts, id_societe, isEdit}) => {
+
+// const ListeContact = ({nom_societe,contacts, id_societe, isEdit}) => {
+//     const [openListeContact, setListeContact] = useState(false);
+//     const [reponse,setReponse] = useState()
+
+const ListeContact = ({row,setTrig}) => {
+
     const [openListeContact, setListeContact] = useState(false);
-    const [reponse,setReponse] = useState()
+    const [societe,setSociete] = useState(row);
+
 
 
     const authHeader = useAuthHeader()
@@ -32,9 +38,9 @@ const ListeContact = ({nom_societe,contacts, id_societe, isEdit}) => {
         <div>
             <Button onClick={handleClickOpen} variant="contained" color="primary">Liste contact </Button>
             <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={openListeContact}>
-                <DialogTitle id="simple-dialog-title">Contacts de {nom_societe}</DialogTitle>
+                <DialogTitle id="simple-dialog-title">Contacts de {societe.nom_societe}</DialogTitle>
                 <List>
-                    {contacts.map((c) => (
+                    {societe.contacts.map((c) => (
                         <ListItem >
                             <ListItemAvatar>
                                 <Avatar >
@@ -45,7 +51,7 @@ const ListeContact = ({nom_societe,contacts, id_societe, isEdit}) => {
                         </ListItem>
                     ))}
 
-                    <AddContact nom_societe={nom_societe} id_societe={id_societe} isEdit={isEdit}/>
+                    {/*<AddContact nom_societe={nom_societe} id_societe={id_societe} isEdit={isEdit}/>*/}
                 </List>
             </Dialog>
         </div>

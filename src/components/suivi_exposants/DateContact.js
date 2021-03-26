@@ -18,12 +18,46 @@ import {
 } from '@material-ui/pickers';
 
 
-const DateContact = ({value,disabled}) => {
-    const [selectedDate, setSelectedDate] = React.useState(value);
+const DateContact = ({row,id,disabled}) => {
+    let val
+    switch (id){
+        case 1:
+            val = row.premier_prise_contact
+            break
+        case 2:
+            val = row.deuxieme_prise_contact
+            break
+        case 3:
+            val = row.troisieme_prise_contact
+            break
+    }
 
-    const handleDateChange = (date) => {
-        setSelectedDate(date);
+    // const [selectedDate, setSelectedDate] = React.useState(val);
+    const handleDateChange = async (date) => {
+        // setSelectedDate(date);
+        switch (id){
+            case 1:
+                row.premier_prise_contact = date
+                break
+            case 2:
+                row.deuxieme_prise_contact = date
+                break
+            case 3:
+                row.troisieme_prise_contact = date
+                break
+        }
+        const response = await requestToBack('PUT',jeu,`/jeu/${row.id}`,authHeader())
+        const body = await response[0]
+
+        if (response[1] !== 200) {
+            console.log("erreur serveur")
+        }
+
     };
+    const name_id = 'date-picker-inline-' + {id}
+
+
+
 
 
     return (
@@ -34,9 +68,13 @@ const DateContact = ({value,disabled}) => {
                     variant="inline"
                     format="MM/dd/yyyy"
                     margin="normal"
-                    id="date-picker-inline"
+                    id={name_id}
+                    disabled={disabled}
                     label="Date picker inline"
-                    value={selectedDate}
+                    value={val}
+                    InputProps={{
+                        disableUnderline: true,
+                    }}
                     onChange={handleDateChange}
                     KeyboardButtonProps={{
                         'aria-label': 'change date',
