@@ -23,7 +23,7 @@ import ModalContact from "./modalContact";
 
 
 
-const AddContact = ({id_societe, isEdit}) => {
+const AddContact = ({id_societe, setTrig, isEdit}) => {
     const authHeader = useAuthHeader()
     const [reponse,setReponse] = useState()
     const [visible, setVisible] = useState(false);
@@ -55,6 +55,7 @@ const AddContact = ({id_societe, isEdit}) => {
         }
         else {
             setReponse(<Alert severity="success">Contact créé avec succes ! </Alert>)
+            setTrig(contact)
             setVisible(false)
         }
     };
@@ -73,7 +74,7 @@ const AddContact = ({id_societe, isEdit}) => {
             <div>
                 <Fade in={visible}>
                     <Paper>
-                        <ModalContact row={contact} onUpdate={handleCreate}/>
+                        <ModalContact row={contact} setContact={setContact} onUpdate={handleCreate}/>
                     </Paper>
                 </Fade>
             </div>
