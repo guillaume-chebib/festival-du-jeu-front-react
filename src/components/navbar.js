@@ -35,11 +35,11 @@ const Navbar = () => {
 
                     </IconButton>
                     <img src="../images/logo_seul_festival.png" alt="logo" className={classes.logo} />
-                    <ThemeProvider theme={theme}>
+
                     <Typography variant="h6" className={classes.title}>
                         Festival du jeu
                     </Typography>
-                    </ThemeProvider>
+
                     {isAuthenticated() ? (
                         <Button component={ Link } color="inherit" to="/dashboard" >Tableau de bord</Button>
                     ) : (
