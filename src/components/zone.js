@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { Accordion, AccordionSummary, AccordionDetails, Typography, Paper, Grid } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { makeStyles } from '@material-ui/core/styles';
-import JeuxReserves from './jeux_reserve'
+import JeuxReservesZone from './jeux_reserve_zone'
 import '../styles/App.scss';
 import {useAuthHeader} from 'react-auth-kit';
 
@@ -79,7 +79,7 @@ const Zones = ({id}) => {
                                         <Typography className={classes.heading}>{nom_zone}</Typography>
                                         <Typography className={classes.secondaryHeading}>{zone.jeux.length} jeu(x)</Typography>
                                     </AccordionSummary>
-                                    <JeuxReserves jeux={zone.jeux}></JeuxReserves>
+                                    <JeuxReservesZone jeux={zone.jeux}></JeuxReservesZone>
                                 </Accordion>
                             </Grid>
                             )

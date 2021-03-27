@@ -72,7 +72,7 @@ const columns = [
     { field: 'recu_jeu_reserve', headerName: 'Reçu ?', hide: false },
 ]
 
-export const JeuxReserves = ({jeux}) => {
+export const JeuxReservesZone = ({jeux}) => {
     console.log("Après " + jeux)
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
@@ -165,4 +165,4 @@ export const JeuxReserves = ({jeux}) => {
     );
 }
 
-export default JeuxReserves
+export default JeuxReservesZone
