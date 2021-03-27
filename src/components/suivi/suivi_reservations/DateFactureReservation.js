@@ -1,48 +1,34 @@
 import React, {useState} from "react";
 import {requestToBack} from "../../../utils/utils_functions";
 import {useAuthHeader} from "react-auth-kit";
-import Grid from '@material-ui/core/Grid';
-import DateFnsUtils from '@date-io/date-fns';
-import {
-    MuiPickersUtilsProvider,
-    KeyboardTimePicker,
-    KeyboardDatePicker,
-} from '@material-ui/pickers';
 import DatePickerComponent from "../DatePickerComponent";
 
 
-const DateContact = ({row,id,disabled,setTrig}) => {
+const DateFactureReservation = ({row,id,disabled,setTrig}) => {
     const authHeader = useAuthHeader()
 
     let val
     switch (id){
         case 1:
-            val = row.premier_prise_contact
+            val = row.date_envoi_facture
             break
         case 2:
-            val = row.deuxieme_prise_contact
-            break
-        case 3:
-            val = row.troisieme_prise_contact
+            val = row.date_paye_facture
             break
     }
 
-    // const [selectedDate, setSelectedDate] = React.useState(val);
     const handleDateChange = async (date) => {
-        console.log(row)
         switch (id){
             case 1:
-                row.premier_prise_contact = date
+                row.date_envoi_facture = date
                 break
             case 2:
-                row.deuxieme_prise_contact = date
-                break
-            case 3:
-                row.troisieme_prise_contact = date
+                row.date_paye_facture = date
                 break
         }
+
         console.log(row)
-        const response = await requestToBack('PUT',row,`/societe/${row.id}/priseContact/festival/${row.id_festival_prise_contact}`,authHeader())
+        const response = await requestToBack('PUT',row,`/reservation/${row.id}`,authHeader())
         const body = await response[0]
 
         if (response[1] !== 200) {
@@ -51,6 +37,7 @@ const DateContact = ({row,id,disabled,setTrig}) => {
         setTrig(row)
     };
 
+    const name_id = 'date-picker-inline-' + id
     return <DatePickerComponent val={val}
                                 id={id}
                                 disabled={disabled}
@@ -60,4 +47,4 @@ const DateContact = ({row,id,disabled,setTrig}) => {
 
 
 }
-export default DateContact
+export default DateFactureReservation

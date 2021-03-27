@@ -26,7 +26,6 @@ import {CheckBox} from "@material-ui/icons";
 const ListeContact = ({row,setTrig,isEdit}) => {
     const [openListeContact, setListeContact] = useState(false);
     const [societe,setSociete] = useState(row);
-    const [contact, setContact] = useState({})
 
     const authHeader = useAuthHeader()
 
@@ -38,20 +37,9 @@ const ListeContact = ({row,setTrig,isEdit}) => {
         setListeContact(false);
     };
 
-    let addContact, deleteIcon;
+    let addContact;
     if (isEdit) {
         addContact = <AddContact id_societe={societe.id} setTrig={setTrig} isEdit={false}/>;
-        // deleteIcon = (c) => {
-        //     setContact(c)
-        //     return (<div>
-        //         <IconButton onClick={handleClickOpenDelete} aria-label="delete">
-        //             <DeleteIcon fontSize="small"/>
-        //         </IconButton>
-        //         <AlertDialogDelete titre="Supprimer contact"
-        //                            message={"Etes vous sur de vouloir supprimer : " + contact.id_contact}
-        //                            onClose={handleCloseDelete} onDelete={handleDelete} open={openDelete}/>
-        //     </div>)
-        // }
     }
 
     return (
@@ -81,7 +69,6 @@ const ListeContact = ({row,setTrig,isEdit}) => {
                             {/*    labelPlacement="top"*/}
                             {/*/>*/}
                             <EditContact row={c} setTrig={setTrig}/>
-                            {/*{deleteIcon}*/}
                         </ListItem>
                     ))}
                     <div>{addContact}</div>

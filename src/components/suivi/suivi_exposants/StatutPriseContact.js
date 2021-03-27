@@ -15,6 +15,7 @@ const StatutPriseContact = ({row,setTrig,statuts}) => {
         if (response[1] !== 200) {
             console.log("erreur serveur")
         }
+        setTrig(row)
     };
 
 
