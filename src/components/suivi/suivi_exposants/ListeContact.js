@@ -10,13 +10,11 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import AlertDialogDelete from "../../modals/AlertDialogDelete";
 import {requestToBack} from "../../../utils/utils_functions";
 import EditIcon from "@material-ui/icons/Edit";
-import ModalContact from "./modalContact";
+import EditContact from "./editContact";
 
 
 const ListeContact = ({row,setTrig,isEdit}) => {
     const [openDelete, setOpenDelete] = useState(false);
-    const [openDialog, setOpenDialog] = useState(false);
-    const [openEdit, setOpenEdit] = useState(false);
     const [openListeContact, setListeContact] = useState(false);
     const [societe,setSociete] = useState(row);
 
@@ -40,21 +38,6 @@ const ListeContact = ({row,setTrig,isEdit}) => {
         setOpenDelete(false);
     }
 
-    const handleClickOpenEdit = () => {
-        setOpenDialog((prev) => !prev);
-    };
-
-    const handleEdit = async () => {
-
-        const response = await requestToBack('PUT',row,`/contact/${societe.id}`,authHeader())
-        const body = await response[0]
-
-        if (response[1] !== 200) {
-            console.log("erreur serveur")
-        }
-        setOpenEdit(false);
-    };
-
     const authHeader = useAuthHeader()
 
     const handleClickOpen = () => {
@@ -65,11 +48,7 @@ const ListeContact = ({row,setTrig,isEdit}) => {
         setListeContact(false);
     };
 
-    const handleCloseDialog = () => {
-        setOpenDialog(false)
-    }
-
-    let addContact, deleteIcon, editIcon;
+    let addContact, deleteIcon;
     if (isEdit) {
         addContact = <AddContact id_societe={societe.id} isEdit={false}/>;
         deleteIcon = (
@@ -79,21 +58,6 @@ const ListeContact = ({row,setTrig,isEdit}) => {
                 </IconButton>
                 <AlertDialogDelete titre="Supprimer contact" message={"Etes vous sur de vouloir supprimer : "+row.id} onClose={handleCloseDelete} onDelete={handleDelete} open={openDelete}/>
             </div>)
-        editIcon = (
-            <div>
-                <IconButton onClick={handleClickOpenEdit} aria-label="edit">
-                    <EditIcon fontSize="small" />
-                </IconButton>
-                <Dialog onClose={handleCloseDialog} open={openDialog}>
-                    <DialogTitle id="customized-dialog-title" onClose={handleCloseDialog}>
-                        Modifier
-                    </DialogTitle>
-                    <ModalContact row={row} onUpdate={handleEdit} open={openDialog}/>
-                </Dialog>
-
-            </div>
-        )
-
     }
 
     return (
@@ -110,7 +74,7 @@ const ListeContact = ({row,setTrig,isEdit}) => {
                                 </Avatar>
                             </ListItemAvatar>
                             <ListItemText primary={c.nom_contact} secondary={c.prenom_contact} />
-                            {editIcon}
+                            <EditContact row={c}/>
                             {deleteIcon}
                         </ListItem>
                     ))}
