@@ -43,7 +43,7 @@ const DateContact = ({row,id,disabled,setTrig}) => {
         }
         console.log(row)
         const response = await requestToBack('PUT',row,`/societe/${row.id}/priseContact/festival/${row.id_festival_prise_contact}`,authHeader())
-        const body = await response[0]
+        // const body = await response[0]
 
         if (response[1] !== 200) {
             console.log("erreur serveur")
@@ -52,7 +52,7 @@ const DateContact = ({row,id,disabled,setTrig}) => {
     };
 
     return <DatePickerComponent val={val}
-                                id={id}
+                                id={'date-picker-inline-' + id + row.id}
                                 disabled={disabled}
                                 handleDateChange={handleDateChange}
     />

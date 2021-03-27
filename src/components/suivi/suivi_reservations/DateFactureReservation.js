@@ -37,9 +37,9 @@ const DateFactureReservation = ({row,id,disabled,setTrig}) => {
         setTrig(row)
     };
 
-    const name_id = 'date-picker-inline-' + id
+    const name_id = 'date-picker-inline-' + id + row.id
     return <DatePickerComponent val={val}
-                                id={id}
+                                id={name_id}
                                 disabled={disabled}
                                 handleDateChange={handleDateChange}
     />
