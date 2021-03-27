@@ -17,7 +17,7 @@ const ListeContact = ({row,setTrig,isEdit}) => {
     const [openDelete, setOpenDelete] = useState(false);
     const [openListeContact, setListeContact] = useState(false);
     const [societe,setSociete] = useState(row);
-
+    console.log(row)
     const handleClickOpenDelete = () => {
         setOpenDelete(true);
     };

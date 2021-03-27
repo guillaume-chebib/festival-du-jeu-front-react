@@ -24,7 +24,7 @@ const SuiviReservations = () => {
     const [statuts,setStatuts] = useState([])
     const [trig,setTrig] = useState([])
     const authHeader = useAuthHeader()
-
+    const [reserva,setReservation]= useState([])
     const [openCreate, setOpenCreate] = useState(false);
     const handleClickOpenCreate = () => {
         setOpenCreate(true);
@@ -36,19 +36,30 @@ const SuiviReservations = () => {
 
     const updateRow = async (row) =>{
         row.besoin_benevole_reservation = !row.besoin_benevole_reservation
-        // updateRow(params.row.id)
-        // const response = await requestToBack('PUT',row,`/reservation/${row.id}`,authHeader())
-        // const body = await response[0]
-        //
-        // if (response[1] !== 200) {
-        //     console.log("erreur serveur")
-        // }
+
+        const response = await requestToBack('PUT',row,`/reservation/${row.id}`,authHeader())
+        const body = await response[0]
+
+        if (response[1] !== 200) {
+            console.log("erreur serveur")
+        }
 
     }
     const columns = [
         { field: 'id', headerName: 'ID', hide: false },
         { field : 'nom_societe', headerName: 'Nom de la société', flex: 1,type: 'string'},
-        { field : 'besoin_benevole_reservation', headerName: 'Besoin de bénévole', flex: 1},
+        { field : 'besoin_benevole_reservation', headerName: 'Besoin de bénévole', flex: 1,
+            renderCell: (params) =>{
+                return <Checkbox
+                    checked={params.row.besoin_benevole_reservation}
+                    onChange={(e) => {
+                        console.log(e.target.value)
+                    }
+                    }
+                    inputProps={{ 'aria-label': 'primary checkbox' }}
+                />
+            }
+        },
         { field : 'deplacement_reservation', headerName: 'Déplacement', flex: 1},
         { field : 'apport_jeux_reservation', headerName: 'Apport des jeux', flex: 1},
         { field : 'reduction_reservation', headerName: 'Réduction', flex: 1},
