@@ -15,6 +15,7 @@ import Societe from "./societes/societe";
 import Dashboard from "./user/dashboard";
 import SuiviExposants from "./suivi/suivi_exposants/suivi_exposants"
 import SuiviReservations from "./suivi/suivi_reservations/suivi_reservations"
+import JeuxReserves from "./jeuxReserves";
 import Reservation from "./reservations/reservation"
 
 
@@ -25,6 +26,7 @@ const Routes = () => (
         <PrivateRoute exact path="/contact" loginPath={'/login'} component={Contact}/>
         <PrivateRoute exact path="/jeu" loginPath={'/login'} component={Jeu}/>
         <PrivateRoute exact path="/festival/:id/exposants" loginPath={'/login'} component={SuiviExposants}/>
+        <PrivateRoute exact path="/festival/:id/reservation/:id_reservation/jeuxReserves" loginPath={'/login'} component={JeuxReserves}/>
         <PrivateRoute exact path="/festival/:id/reservations" loginPath={'/login'} component={SuiviReservations}/>
         <PrivateRoute exact path="/reservation/:id" loginPath={'/login'} component={Reservation}/>
         <Route exact path="/login" component={Connexion}/>
