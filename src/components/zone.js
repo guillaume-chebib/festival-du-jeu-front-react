@@ -67,7 +67,7 @@ const Zones = ({id}) => {
                     <Grid container spacing={2}>
                     {zones.map(zone => {
                     const {id_zone, nom_zone} = zone.zone
-                        console.log("Avant " + zone.jeux)
+
                     return (
                          <Grid item xs={12} sm={6}>
                              <Accordion>

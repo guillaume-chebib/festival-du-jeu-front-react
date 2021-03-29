@@ -73,7 +73,6 @@ const columns = [
 ]
 
 export const JeuxReservesZone = ({jeux}) => {
-    console.log("Après " + jeux)
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
