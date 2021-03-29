@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import {useAuthHeader} from 'react-auth-kit'
-
+import {IsAdmin} from "../../utils/utils_functions";
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';import Container from '@material-ui/core/Container';
 import Alert from "@material-ui/lab/Alert";
@@ -42,6 +42,7 @@ const AjoutOrganisateur = () => {
 
     return (
         <div>
+            <IsAdmin/>
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
                 <div className={classes.paper}>

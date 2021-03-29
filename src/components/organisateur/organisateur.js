@@ -6,6 +6,7 @@ import {useAuthHeader} from 'react-auth-kit'
 import {useStylesThemeFestival,themeFestival} from "../styles/themes";
 import {UpdateDeleteOrganisateur} from "./updateDeleteOrganisateur";
 import {requestToBack} from "../../utils/utils_functions";
+import {IsAdmin} from "../../utils/utils_functions";
 
 const Organisateur = () => {
 
@@ -65,6 +66,7 @@ const Organisateur = () => {
 
     return (
         <div>
+            <IsAdmin/>
             <Button variant="contained" color="primary" onClick={() => history.push('/organisateur/ajout')}>
                 Ajouter un organisateur
             </Button>
