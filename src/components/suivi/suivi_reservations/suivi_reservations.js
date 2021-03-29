@@ -13,16 +13,6 @@ import CheckBoxReservation from "./CheckBoxReservation";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 
-
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-        '& > * + *': {
-            marginLeft: theme.spacing(2),
-        },
-    },
-}));
-
 const SuiviReservations = () => {
     let {id} = useParams();
 
@@ -64,7 +54,7 @@ const SuiviReservations = () => {
                 return (
                         <Button
                             onClick={event => {
-                                history.push("/home");
+                                history.push("/reservation/"+params.row.id);
                             }}
                             color="primary"
                         >
@@ -86,6 +76,7 @@ const SuiviReservations = () => {
                         disableUnderline: true,
                     }}
                     onChange={(event => {
+
                         params.row.commentaire_reservation = event.target.value
                         handleDateChange(params.row)
                     })}

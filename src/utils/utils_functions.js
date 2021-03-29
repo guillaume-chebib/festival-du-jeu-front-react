@@ -1,3 +1,6 @@
+import {useAuthUser, useSignOut} from "react-auth-kit";
+import React, {useEffect, useState} from "react";
+import {Redirect} from "react-router-dom";
 
 
 export function renameKey ( obj, oldKey, newKey ) { //permet de renommer les colonnes
@@ -39,4 +42,26 @@ export async function requestToBack(verbe,data,route,token){
         return [body,response.status]
     }
 
+}
+
+export const IsAdmin = ({}) => {
+    const signOut = useSignOut()
+    const auth = useAuthUser()
+    const [status,setStatus] = useState("")
+    const [logoff,setLogoff] = useState("")
+
+    useEffect(() => {
+        let isAdmin = auth().superuser
+        if(isAdmin === "false"){
+            setStatus(<Redirect to="/login" /> )
+            setLogoff(signOut)
+        }
+    })
+
+    return(
+        <div>
+            {status}
+            {logoff}
+        </div>
+    )
 }
