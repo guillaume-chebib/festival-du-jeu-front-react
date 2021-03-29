@@ -17,7 +17,6 @@ const Reservation = () => {
     const history = useHistory();
     const [reservation,setReservation] = useState([])
 
-
     const preventDefault = (event) => event.preventDefault();
 
     const columns = [

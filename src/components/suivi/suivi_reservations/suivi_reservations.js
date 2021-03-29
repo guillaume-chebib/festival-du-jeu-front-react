@@ -54,7 +54,7 @@ const SuiviReservations = () => {
                 return (
                         <Button
                             onClick={event => {
-                                history.push("/reservation/"+params.row.id_societe);
+                                history.push("/reservation/"+params.row.id);
                             }}
                             color="primary"
                         >
@@ -76,6 +76,7 @@ const SuiviReservations = () => {
                         disableUnderline: true,
                     }}
                     onChange={(event => {
+
                         params.row.commentaire_reservation = event.target.value
                         handleDateChange(params.row)
                     })}
