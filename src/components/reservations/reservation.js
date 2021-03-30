@@ -5,52 +5,65 @@ import {CellParams, DataGrid} from '@material-ui/data-grid';
 import useStylesTableValueColor from "../table/styles";
 import {useAuthHeader} from 'react-auth-kit'
 import {renameKey, requestToBack} from "../../utils/utils_functions";
-import {CheckBox} from "@material-ui/icons";
-import {Checkbox, FormControlLabel, Link, makeStyles, TextField} from "@material-ui/core";
+import {Checkbox, FormControlLabel} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
+import {EtatReservation} from "./EtatReservation";
 
 const Reservation = () => {
     const classes = useStylesTableValueColor();
     const authHeader = useAuthHeader()
 
     const history = useHistory();
-    const [reservation,setReservation] = useState([])
+    const [reservation,setReservation] = useState()
 
     const preventDefault = (event) => event.preventDefault();
+    const [trig,setTrig] = useState([])
 
-    const columns = [
 
-    ]
+
     const {id} = useParams()
 
     useEffect(() => {
 
         async function fetchData() {
-            const responseReservation = await requestToBack('GET',null,`/reservation/${id}`,authHeader())
+            const responseReservation = await requestToBack('GET',null,`/reservation/`+id,authHeader())
 
             const bodyReservation = await responseReservation[0]
             const reserv = bodyReservation.message
+            console.log(reserv)
 
+            reserv.id = reserv.id_reservation
+            delete reserv.id_reservation
             if (responseReservation[1] !== 200) {
                 console.log(responseReservation[1])
             }
             else {
-                console.log(reserv)
                 setReservation(reserv)
+
             }
+
+
         }
 
         fetchData();
 
-    },[]);
+    },[trig]);
 
 
     return (
         <div>
             <h1>
-                {reservation.nom_societe}
+                Réservation de : {
+                    reservation && (reservation.nom_societe)
+                }
+
             </h1>
+            <div>
+                {reservation && <EtatReservation row={reservation} setTrig={setTrig} />}
+            </div>
+
+
+
         </div>
     )
 }
