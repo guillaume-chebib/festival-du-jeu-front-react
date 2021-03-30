@@ -7,7 +7,7 @@ import {useAuthHeader} from "react-auth-kit";
 import Alert from "@material-ui/lab/Alert";
 import Button from "@material-ui/core/Button";
 
-const CreateSociete = () => {
+const CreateSociete = ({setTrig}) => {
 
     const [openCreate, setOpenCreate] = useState(false);
     const [reponse,setReponse] = useState()
@@ -51,9 +51,9 @@ const CreateSociete = () => {
             setReponse(<Alert severity="error">{body.message}</Alert>)
         }
         else {
-            setReponse(<Alert severity="success">Société créé avec succes ! </Alert>)
+            setReponse(<Alert severity="success">Société créée avec succes ! </Alert>)
         }
-        //setTrig(societe)
+        setTrig(societe)
         setOpenCreate(false);
     };
 

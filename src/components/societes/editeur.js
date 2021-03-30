@@ -17,13 +17,12 @@ function getFullAdresse(params) {
 }
 
 
-const Editeur = () => {
+const Editeur = ({setTrig, trig}) => {
 
     const classes = useStylesTableValueColor();
     const authHeader = useAuthHeader()
     const history = useHistory();
     const [editeurs,setEditeurs] = useState([])
-    const [trig,setTrig] = useState([])
 
 
     const columns = [

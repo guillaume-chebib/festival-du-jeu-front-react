@@ -25,13 +25,12 @@ function getFullAdresse(params) {
         params.getValue('rue_editeur') || ''} \n ${params.getValue('code_postal_editeur') || ''} ${params.getValue('ville_editeur') || ''}`;
 }
 
-const EditeurExposant = () => {
+const EditeurExposant = ({setTrig,trig}) => {
 
     const classes = useStylesTableValueColor();
     const authHeader = useAuthHeader()
     const history = useHistory();
     const [exposants,setExposants] = useState([])
-    const [trig,setTrig] = useState([])
 
 
     const columns = [

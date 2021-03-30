@@ -22,13 +22,12 @@ import ListeContact from "../suivi/suivi_exposants/ListeContact";
 
 
 
-const Exposant = () => {
+const Exposant = ({setTrig, trig}) => {
 
     const classes = useStylesTableValueColor();
     const authHeader = useAuthHeader()
     const history = useHistory();
     const [exposants,setExposants] = useState([])
-    const [trig,setTrig] = useState([])
 
 
     const columns = [

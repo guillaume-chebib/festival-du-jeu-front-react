@@ -15,8 +15,10 @@ import Societe from "./societes/societe";
 import Dashboard from "./user/dashboard";
 import SuiviExposants from "./suivi/suivi_exposants/suivi_exposants"
 import SuiviReservations from "./suivi/suivi_reservations/suivi_reservations"
-import JeuxReserves from "./jeuxReserves";
+
+import JeuxReserves from "./jeux_reserves/jeuxReserves";
 import Reservation from "./reservations/reservation"
+
 
 
 const Routes = () => (

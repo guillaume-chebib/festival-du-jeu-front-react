@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -56,6 +56,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Societe() {
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
+    const [trig,setTrig] = useState([])
 
     const handleChange = (event, newValue) => {
         event.preventDefault()
@@ -72,16 +73,16 @@ export default function Societe() {
                 </Tabs>
             </AppBar>
             <TabPanel value={value} index={0}>
-                <CreateSociete/>
-                <Exposant/>
+                <CreateSociete setTrig={setTrig}/>
+                <Exposant setTrig={setTrig} trig={trig}/>
             </TabPanel>
             <TabPanel value={value} index={1}>
-                <CreateSociete/>
-                <Editeur/>
+                <CreateSociete setTrig={setTrig}/>
+                <Editeur setTrig={setTrig} trig={trig}/>
             </TabPanel>
             <TabPanel value={value} index={2}>
-                <CreateSociete/>
-                <EditeurExposant/>
+                <CreateSociete setTrig={setTrig}/>
+                <EditeurExposant setTrig={setTrig} trig={trig}/>
             </TabPanel>
         </div>
     );
