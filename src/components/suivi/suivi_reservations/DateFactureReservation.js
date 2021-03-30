@@ -28,7 +28,7 @@ const DateFactureReservation = ({row,id,disabled,setTrig}) => {
         }
 
         console.log(row)
-        const response = await requestToBack('PUT',row,`/reservation/${row.id}`,authHeader())
+        const response = await requestToBack('PUT',row,`/reservation/${row.id}/date`,authHeader())
         const body = await response[0]
 
         if (response[1] !== 200) {
