@@ -153,9 +153,10 @@ export default function ModalJeuReserve({open,zones,titre,row,setRow,jeux,onUpda
                                 control={
                                     <Checkbox
                                         checked={row.tombola_jeu_reserve}
-                                        onChange={(event => {
-                                            row.tombola_jeu_reserve = event.target.checked
-                                        })}
+                                        onClickCapture={e =>  setRow(prevState => ({
+                                            ...prevState,
+                                            tombola_jeu_reserve: e.target.checked
+                                        }))}
 
                                         inputProps={{ 'aria-label': 'primary checkbox' }}
                                     />
@@ -170,9 +171,10 @@ export default function ModalJeuReserve({open,zones,titre,row,setRow,jeux,onUpda
                                 control={
                                     <Checkbox
                                         checked={row.dotation_jeu_reserve}
-                                        onChange={(event => {
-                                            row.dotation_jeu_reserve = event.target.checked
-                                        })}
+                                        onClickCapture={e =>  setRow(prevState => ({
+                                            ...prevState,
+                                            dotation_jeu_reserve: e.target.checked
+                                        }))}
 
                                         inputProps={{ 'aria-label': 'primary checkbox' }}
                                     />
@@ -187,9 +189,10 @@ export default function ModalJeuReserve({open,zones,titre,row,setRow,jeux,onUpda
                                 control={
                                     <Checkbox
                                         checked={row.place_plan_jeu_reserve}
-                                        onChange={(event => {
-                                            row.place_plan_jeu_reserve = event.target.checked
-                                        })}
+                                        onClickCapture={e =>  setRow(prevState => ({
+                                            ...prevState,
+                                            place_plan_jeu_reserve: e.target.checked
+                                        }))}
                                         inputProps={{ 'aria-label': 'primary checkbox' }}
                                     />
                                 }
@@ -203,9 +206,10 @@ export default function ModalJeuReserve({open,zones,titre,row,setRow,jeux,onUpda
                                 control={
                                     <Checkbox
                                         checked={row.recu_jeu_reserve}
-                                        onChange={(event => {
-                                            row.recu_jeu_reserve = event.target.checked
-                                        })}
+                                        onClickCapture={e =>  setRow(prevState => ({
+                                            ...prevState,
+                                            recu_jeu_reserve: e.target.checked
+                                        }))}
 
                                         inputProps={{ 'aria-label': 'primary checkbox' }}
                                     />
@@ -220,9 +224,10 @@ export default function ModalJeuReserve({open,zones,titre,row,setRow,jeux,onUpda
                                 control={
                                     <Checkbox
                                         checked={row.a_renvoyer_jeu_reserve}
-                                        onChange={(event => {
-                                            row.a_renvoyer_jeu_reserve = event.target.checked
-                                        })}
+                                        onChange={e =>  setRow(prevState => ({
+                                            ...prevState,
+                                            a_renvoyer_jeu_reserve: e.target.checked
+                                        }))}
 
                                         inputProps={{ 'aria-label': 'primary checkbox' }}
                                     />
