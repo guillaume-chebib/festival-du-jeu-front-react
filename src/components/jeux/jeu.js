@@ -17,10 +17,8 @@ import useStylesTableValueColor from "../table/styles";
 import {renameKey, requestToBack} from "../../utils/utils_functions"
 import UpdateDeleteJeu from "./UpdateDeleteJeu";
 import {useAuthHeader} from 'react-auth-kit'
-import ModalJeu from "./ModalJeu";
 import CreateJeu from "./CreateJeu";
 import {Checkbox} from "@material-ui/core";
-import CheckBoxReservation from "../suivi/suivi_reservations/CheckBoxReservation";
 
 
 

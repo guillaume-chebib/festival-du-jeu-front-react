@@ -12,16 +12,7 @@ import {Checkbox, FormControlLabel, Link, makeStyles, TextField} from "@material
 import CheckBoxReservation from "./CheckBoxReservation";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
-
-
-
-const useStyles = makeStyles((theme) => ({
-    root: {
-        '& > * + *': {
-            marginLeft: theme.spacing(2),
-        },
-    },
-}));
+import {EtatReservation} from "../../reservations/EtatReservation";
 
 const SuiviReservations = () => {
     let {id} = useParams();
@@ -31,28 +22,15 @@ const SuiviReservations = () => {
 
     const history = useHistory();
     const [reservations,setReservations] = useState([])
-    const [statuts,setStatuts] = useState([])
     const [trig,setTrig] = useState([])
     const authHeader = useAuthHeader()
-    const [reserva,setReservation]= useState([])
-    const [openCreate, setOpenCreate] = useState(false);
-    const handleClickOpenCreate = () => {
-        setOpenCreate(true);
-    };
 
-    const handleCloseCreate = () => {
-        setOpenCreate(false);
-    };
-
-    const [row,setRow]= useState([])
-
-    const handleDateChange = async (row) => {
+    const handleChange = async (row) => {
         const response = await requestToBack('PUT',row,`/reservation/${row.id}`,authHeader())
         const body = await response[0]
         if (response[1] !== 200) {
             console.log("erreur serveur")
         }
-        setTrig(row)
 
     };
     const preventDefault = (event) => event.preventDefault();
@@ -64,7 +42,7 @@ const SuiviReservations = () => {
                 return (
                         <Button
                             onClick={event => {
-                                history.push("/home");
+                                history.push("/reservation/"+params.row.id);
                             }}
                             color="primary"
                         >
@@ -74,102 +52,48 @@ const SuiviReservations = () => {
                 )
             }
         },
-        { field : 'commentaire_reservation', headerName: 'Commentaire', flex: 2,
-            renderCell: (params) =>{
-                return <TextField
-                    id="commentaire"
-                    label="Standard"
-                    value={params.row.commentaire_reservation}
-                    multiline
-                    rowsMax={4}
-                    InputProps={{
-                        disableUnderline: true,
-                    }}
-                    onChange={(event => {
-                        params.row.commentaire_reservation = event.target.value
-                        handleDateChange(params.row)
-                    })}
-                />
-            }
+        { field : 'commentaire_reservation', headerName: 'Commentaire', flex: 2
+            // ,
+            // renderCell: (params) =>{
+            //     return <TextField
+            //         id="commentaire"
+            //         label="Standard"
+            //         value={params.row.commentaire_reservation}
+            //         InputProps={{
+            //             disableUnderline: true,
+            //         }}
+            //         onChange={(event => {
+            //             params.row.commentaire_reservation = event.target.value
+            //             handleChange(params.row)
+            //         })}
+            //     />
+            // }
         },
-        { field : 'deplacement_reservation', headerName: 'Déplacement', flex: 2,
+        { field : 'checkbox', headerName: 'Suivi', flex: 4,
             renderCell: (params) =>{
                 return(
-                    <div>
-                        <FormControlLabel
-                            control={
-                                <Checkbox
-                                    checked={params.row.besoin_benevole_reservation}
-                                    onClickCapture={(event => {
-                                        params.row.besoin_benevole_reservation = event.target.checked
-                                        handleDateChange(params.row)
-                                    })}// a cause du bug datagrid
-                                    onChange={handleDateChange}
-
-                                    inputProps={{ 'aria-label': 'primary checkbox' }}
-                                />
-                            }
-                            labelPlacement="top"
-                            label={<Typography variant="body2" color="textSecondary">Besoin bénévole ?</Typography>}
-
-                        />
-
-                        <Checkbox
-                            checked={params.row.deplacement_reservation}
-                            onClickCapture={(event => {
-                                params.row.deplacement_reservation = event.target.checked
-                                handleDateChange(params.row)
-                            })}// a cause du bug datagrid
-                            onChange={handleDateChange}
-                            inputProps={{ 'aria-label': 'primary checkbox' }}
-                        />
-                    </div>
+                    <EtatReservation row={params.row} setTrig={setTrig}/>
                 )
 
             }
         },
-        { field : 'apport_jeux_reservation', headerName: 'Apport des jeux', flex: 1,
-            renderCell: (params) =>{
-                return <Checkbox
-                    checked={params.row.apport_jeux_reservation}
-                    onClickCapture={(event => {
-                        params.row.apport_jeux_reservation = event.target.checked
-                        handleDateChange(params.row)
-                    })}// a cause du bug datagrid
-                    onChange={handleDateChange}
-                    inputProps={{ 'aria-label': 'primary checkbox' }}
-                />
-            }
-        },
-        { field : 'cr_envoye_reservation', headerName: 'Cr envoyé', flex: 1,
-            renderCell: (params) =>{
-                return <Checkbox
-                    checked={params.row.cr_envoye_reservation}
-                    onClickCapture={(event => {
-                        params.row.cr_envoye_reservation = event.target.checked
-                        handleDateChange(params.row)
-                    })}// a cause du bug datagrid
-                    onChange={handleDateChange}
-                    inputProps={{ 'aria-label': 'primary checkbox' }}
-                />
-            }
-        },
-        { field : 'reduction_reservation', headerName: 'Réduction', flex: 1,
-            renderCell: (params) =>{
-                return <TextField
-                    id="reduction_reservation"
-                    label="Standard"
-                    type="number"
-                    value={params.row.reduction_reservation}
-                    InputProps={{
-                        disableUnderline: true,
-                    }}
-                    onChange={(event => {
-                        params.row.reduction_reservation = event.target.value
-                        handleDateChange(params.row)
-                    })}
-                />
-            }
+        { field : 'reduction_reservation', headerName: 'Réduction', flex: 1
+            // ,
+            // renderCell: (params) =>{
+            //     return <TextField
+            //         id="reduction_reservation"
+            //         label="Standard"
+            //         type="number"
+            //         value={params.row.reduction_reservation}
+            //         InputProps={{
+            //             disableUnderline: true,
+            //         }}
+            //         onChange={(event => {
+            //             params.row.reduction_reservation = event.target.value
+            //             handleChange(params.row)
+            //         })}
+            //     />//TODO Plutot prix total
+            // }
         },
         { field : 'date_envoi_facture', headerName: 'Date envoi facture', flex: 1,
             renderCell: (params) =>{
@@ -197,8 +121,6 @@ const SuiviReservations = () => {
             }
             else {
                 listesReservations.forEach(obj => renameKey(obj, 'id_reservation', 'id'));
-                const updatedJson = JSON.stringify(listesReservations);
-                console.log(listesReservations)
                 setReservations(listesReservations)
             }
         }
