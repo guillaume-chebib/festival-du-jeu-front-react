@@ -7,191 +7,53 @@ import {makeStyles, ThemeProvider} from '@material-ui/core/styles';
 import useStylesTableValueColor from "../table/styles";
 import {useAuthHeader} from 'react-auth-kit'
 import Typography from "@material-ui/core/Typography";
-import Input from '@material-ui/core/Input';
-import InputLabel from "@material-ui/core/InputLabel";
-import FormHelperText from "@material-ui/core/FormHelperText";
-import InputAdornment from '@material-ui/core/InputAdornment';
-
-import FormControl from '@material-ui/core/FormControl';
-
 
 import '../../styles/App.scss';
 import {requestToBack} from "../../utils/utils_functions";
 import {themeFestival} from "../styles/themes";
-import Fab from "@material-ui/core/Fab";
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
-
+import {AddFestivalModal} from "./addFestivalModal";
+import {UpdateFestival} from "./updateFestival";
 
 const Festival = () => {
 
     const year = new Date().getFullYear()
-
-
-    const [annee,setAnnee] = useState(year) // contient le contenu à ajouter
-    const [nom,setNom] = useState("") // contient le contenu à ajouter
+    const [openAddFestival, setOpenAddFestival] = useState(false)
     const [reponse,setReponse] = useState("") //reponse depuis le back
     const [festival,setFestival] = useState({annee_festival:year})
     const authHeader = useAuthHeader()
 
 
+    const onClickOpenAddFestival = () => {
+        setOpenAddFestival(true);
+    };
+
+    const onCloseAddFestival = () => {
+        setOpenAddFestival(false);
+    };
+
     const handleSubmit = async e => {
         e.preventDefault();
         const response = await requestToBack('POST',festival,`/festival`,authHeader())
-
         const body = await response[0]
         if (response[1] !== 200) {
 
         }
         else {
             setReponse(body)
+            setOpenAddFestival(false)
         }
-
     };
-
     return(
         <div>
             <h1>Test</h1>
-            <form noValidate autoComplete="on" onSubmit={handleSubmit} >
-                <TextField required id="outlined-required" isrequired="true" label="Nom du festival" variant="outlined"
-                           onChange={e => setFestival(prevState => ({
-                               ...prevState,
-                               nom_festival: e.target.value
-                           }))}/>
-                <TextField
-                    id="outlined-number"
-                    label="Année du festival"
-                    type="number"
-                    defaultValue={year}
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-                    variant="outlined"
-                    onChange={e => setFestival(prevState => ({
-                        ...prevState,
-                        annee_festival: e.target.value
-                    }))}/>
-                <FormEspace setForm={setFestival} value={1} />
-                <FormEspace setForm={setFestival} value={2}/>
-
-                <FormEspace setForm={setFestival} value={3}/>
-
-                <Button type="submit" variant="contained" color="secondary">Soumettre</Button>
-            </form>
+            <Button type="submit" variant="contained" color="secondary" onClick={onClickOpenAddFestival}> Ajouter un festival</Button>
+            <AddFestivalModal titre="Ajouter un festival" setRow={setFestival} onClose={onCloseAddFestival} onAdd={handleSubmit} open={openAddFestival}/>
             <Festivals body={reponse}/>
         </div>
     )
 }
 
-const FormEspace = ({setForm,value}) => {
 
-    const setValue_prix_espace = async e => {
-        switch (value) {
-            case 1:
-                setForm(prevState => ({
-                    ...prevState,
-                    prix_surface_espace_1: e.target.value
-
-                }))
-                break;
-            case 2:
-                setForm(prevState => ({
-                    ...prevState,
-                    prix_surface_espace_2: e.target.value
-
-                }))
-                break;
-            case 3:
-                setForm(prevState => ({
-                    ...prevState,
-                    prix_surface_espace_3: e.target.value
-
-                }))
-                break
-        }
-    }
-
-    const setValue_nb_tables_espace = async e => {
-        switch (value) {
-            case 1:
-                setForm(prevState => ({
-                    ...prevState,
-                    nb_table_espace_1: e.target.value
-
-                }))
-                break;
-            case 2:
-                setForm(prevState => ({
-                    ...prevState,
-                    nb_table_espace_2: e.target.value
-
-                }))
-                break;
-            case 3:
-                setForm(prevState => ({
-                    ...prevState,
-                    nb_table_espace_3: e.target.value
-
-                }))
-                break
-        }
-    }
-
-    const setValue_prix_tables_espace = async e =>{
-        switch(value) {
-            case 1:
-                setForm(prevState => ({
-                    ...prevState,
-                    prix_table_espace_1: e.target.value
-
-                }))
-                break;
-            case 2:
-                setForm(prevState => ({
-                    ...prevState,
-                    prix_table_espace_2: e.target.value
-
-                }))
-                break;
-            case 3:
-                setForm(prevState => ({
-                    ...prevState,
-                    prix_table_espace_3: e.target.value
-
-                }))
-                break
-        }
-    }
-    return(
-        <div>
-            <FormControl >
-                <InputLabel htmlFor="prix-m2">Prix m²</InputLabel>
-                <Input
-                    id="prix-m2"
-                    endAdornment={<InputAdornment position="end">€</InputAdornment>}
-                    onChange={e => setValue_prix_espace(e)}
-
-                />
-            </FormControl>
-            <FormControl >
-                <InputLabel htmlFor="nb-tables">Nb tables</InputLabel>
-                <Input
-                    id="nb-tables"
-                    onChange={e => setValue_nb_tables_espace(e)}
-                />
-            </FormControl>
-            <FormControl >
-                <InputLabel htmlFor="prix-table">Prix table</InputLabel>
-                <Input
-                    id="prix-table"
-                    endAdornment={<InputAdornment position="end">€</InputAdornment>}
-                    onChange={e => setValue_prix_tables_espace(e)}
-                />
-            </FormControl>
-        </div>
-
-    )
-}
 
 const Festivals = ({body}) => {
     const classes = useStylesTableValueColor();
@@ -199,6 +61,8 @@ const Festivals = ({body}) => {
     const [festivals,setFestivals] = useState([]) //contient tous les festivals
     const [value, setValue] = useState(""); //contient le festival courant actif
     const authHeader = useAuthHeader()
+    const [trig,setTrig] = useState()
+
 
     const columns = [ //structure du tableau des festivals
         {
@@ -290,6 +154,18 @@ const Festivals = ({body}) => {
                     </div>
                 ),
         },
+        {
+            field: "Update",
+            headerName: "",
+            sortable: false,
+            flex:1,
+            disableClickEventBubbling: true,
+            renderCell: (params) => {
+
+                return  <UpdateFestival row={params.row} setTrig={setTrig}/>
+
+            }
+        }
     ];
 
 
@@ -320,16 +196,12 @@ const Festivals = ({body}) => {
 
         fetchData();
 
-    },[body]);
-
-    useEffect(() => { console.log(value) }, [value])
-
-
+    },[body,trig]);
 
 
     return (
         <div style={{paddingTop: '2em'}}>
-            <div style={{ height: 400, width: '100%' }}>
+            <div style={{ height: 500, width: '100%' }}>
                 <DataGrid
                     rowHeight={80}
                     sortModel={[
@@ -343,17 +215,14 @@ const Festivals = ({body}) => {
 
                           className={classes.root}
                           rows={festivals}
-                          {...festivals} columns={columns} pageSize={5} />
+                          {...festivals} columns={columns} pageSize={4} />
 
             </div>
         </div>
+
     )
 }
 
-const useStyles = makeStyles({
-    table: {
-        minWidth: 650,
-    },
-});
+
 
 export default Festival
