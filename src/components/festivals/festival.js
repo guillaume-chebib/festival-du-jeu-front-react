@@ -69,7 +69,7 @@ const Festivals = ({body}) => {
             field: "",
             headerName: "",
             sortable: false,
-            flex:0.7,
+            flex:0.8,
             disableClickEventBubbling: true,
             renderCell: (params) => {
                 const onClick = async () => {
@@ -158,7 +158,7 @@ const Festivals = ({body}) => {
             field: "Update",
             headerName: "",
             sortable: false,
-            flex:1,
+            flex:0.6,
             disableClickEventBubbling: true,
             renderCell: (params) => {
 
