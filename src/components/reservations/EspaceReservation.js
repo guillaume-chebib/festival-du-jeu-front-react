@@ -61,7 +61,7 @@ const EspaceReservation = ({setTrig,reservation}) => {
     },[]);
 
     return (
-        <div>
+        <div style={{width: '100%'}}>
             {espaces &&
             <div style={{paddingTop: '2em'}}>
                 <div style={{ height: 400, width: '100%' }}>

@@ -15,6 +15,7 @@ import EspaceReservation from "./EspaceReservation";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import {Comment} from "@material-ui/icons";
 import {CommentaireReservation} from "./commentairesReservation";
+import JeuxReserves from "../jeux_reserves/jeuxReserves";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -124,6 +125,15 @@ const Reservation = () => {
                         </AccordionSummary>
                         <AccordionDetails>
                             <EspaceReservation setTrig={setTrig} reservation={reservation}/>
+                        </AccordionDetails>
+                    </Accordion>
+
+                    <Accordion>
+                        <AccordionSummary>
+                            <Typography className={classes.heading}>Jeux liés à cette réservation</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <JeuxReserves reservation={reservation} setTrig={setTrig}/>
                         </AccordionDetails>
                     </Accordion>
 
