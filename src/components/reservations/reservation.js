@@ -1,20 +1,12 @@
 import React, { useEffect, useState} from 'react';
 import {useHistory, useParams} from "react-router-dom";
-
-import {CellParams, DataGrid} from '@material-ui/data-grid';
-import useStylesTableValueColor from "../table/styles";
 import {useAuthHeader} from 'react-auth-kit'
-import {IsAdmin, renameKey, requestToBack} from "../../utils/utils_functions";
-import {Checkbox, FormControlLabel} from "@material-ui/core";
-import {renameKey, requestToBack} from "../../utils/utils_functions";
+import {renameKey,IsAdmin, requestToBack} from "../../utils/utils_functions";
 import {
     Accordion,
     AccordionDetails,
     AccordionSummary,
-    Checkbox,
-    FormControlLabel,
     makeStyles,
-    Paper
 } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import {EtatReservation} from "./EtatReservation";
@@ -35,11 +27,9 @@ const useStyles = makeStyles((theme) => ({
 const Reservation = () => {
     const authHeader = useAuthHeader()
 
-    const history = useHistory();
     const [reservation,setReservation] = useState()
     const [statuts,setStatuts] = useState([])
 
-    const preventDefault = (event) => event.preventDefault();
     const [trig,setTrig] = useState([])
 
 
