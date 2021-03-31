@@ -9,7 +9,7 @@ import Connexion from "./connexion";
 import Organisateur from "./organisateur/organisateur"
 import AjoutOrganisateur from "./organisateur/ajoutOrganisateur"
 import { PrivateRoute } from 'react-auth-kit'
-import Zone from "./zone"
+import Zone from "./zones/zone"
 import PrivateComponent from "./privateComponent";
 import Societe from "./societes/societe";
 import Dashboard from "./user/dashboard";

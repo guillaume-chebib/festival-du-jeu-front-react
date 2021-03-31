@@ -4,10 +4,10 @@ import { Accordion, AccordionSummary, AccordionDetails, Typography, Paper, Grid 
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { makeStyles } from '@material-ui/core/styles';
 import JeuxReservesZone from './jeux_reserve_zone'
-import '../styles/App.scss';
+import '../../styles/App.scss';
 import {useAuthHeader} from 'react-auth-kit';
 
-import {renameKey, requestToBack} from "../utils/utils_functions"
+import {renameKey, requestToBack} from "../../utils/utils_functions"
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -46,20 +46,43 @@ const Zones = ({id}) => {
     const classes = useStyles();
     const authHeader = useAuthHeader()
     const [zones,setZones] = useState([])
+    const [trig, setTrig] = useState([])
 
-    useEffect(
-        async () => {
-            const response = await requestToBack('GET',null,`/festival/${id}/zone`,authHeader()) //exemple avec GET
+    useEffect(() => {
+        async function fetchData() {
+            const response = await requestToBack('GET',null,`/public/festival/zone`,authHeader())
 
             const body = await response[0]
+            const zones = body
+            console.log("ZONE : "+zones)
             if (response[1] !== 200) {
                 setZones("Impossible de fetch")
             }
             else {
-                setZones(body.message)
+                setZones(zones)
             }
 
-        },[id]);
+
+        }
+
+        fetchData();
+
+    },[trig]);
+
+
+    // useEffect(
+    //     async () => {
+    //         const response = await requestToBack('GET',null,`/public/festival/zone`,authHeader()) //exemple avec GET
+    //
+    //         const body = await response[0]
+    //         if (response[1] !== 200) {
+    //             setZones("Impossible de fetch")
+    //         }
+    //         else {
+    //             setZones(body.message)
+    //         }
+    //
+    //     },[id]);
     return (
         <div style={{paddingTop: '2em'}}>
             <div style={{ height: 400, width: '100%' }}>
@@ -79,7 +102,7 @@ const Zones = ({id}) => {
                                         <Typography className={classes.heading}>{nom_zone}</Typography>
                                         <Typography className={classes.secondaryHeading}>{zone.jeux.length} jeu(x)</Typography>
                                     </AccordionSummary>
-                                    <JeuxReservesZone jeux={zone.jeux}></JeuxReservesZone>
+                                    <JeuxReservesZone jeux={zone.jeux}/>
                                 </Accordion>
                             </Grid>
                             )

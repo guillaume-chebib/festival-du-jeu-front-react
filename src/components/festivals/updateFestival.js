@@ -20,6 +20,8 @@ export const UpdateFestival = ({row,setTrig}) => {
     const [festivalPost,setFestivalPost] = useState({
         nom_festival: row.nom_festival,
         annee_festival: row.annee_festival,
+        id_festival: row.id,
+        est_courant_festival: row.est_courant_festival,
         prix_surface_espace_1 : row.espaces.rows[0].prix_surface_espace,
         prix_surface_espace_2 : row.espaces.rows[1].prix_surface_espace,
         prix_surface_espace_3 : row.espaces.rows[2].prix_surface_espace,
@@ -48,7 +50,7 @@ export const UpdateFestival = ({row,setTrig}) => {
         console.log(festivalPost)
 
         const [response, response1,response2,response3] = await Promise.all([
-            await requestToBack('PUT',festival,`/festival/${row.id_festival}`,authHeader()),
+            await requestToBack('PUT',{id: festivalPost.id_festival,annee_festival:festivalPost.annee_festival,nom_festival:festivalPost.nom_festival,est_courant_festival:festivalPost.est_courant_festival},`/festival/${row.id_festival}`,authHeader()),
             await requestToBack('PUT',{prix_table_espace:festivalPost.prix_table_espace_1,prix_surface_espace:festivalPost.prix_surface_espace_1,nb_table_espace:festivalPost.nb_table_espace_1},`/espace/${row.espaces.rows[0].id_espace}`,authHeader()),
             await requestToBack('PUT',{prix_table_espace:festivalPost.prix_table_espace_2,prix_surface_espace:festivalPost.prix_surface_espace_2,nb_table_espace:festivalPost.nb_table_espace_2},`/espace/${row.espaces.rows[1].id_espace}`,authHeader()),
             await requestToBack('PUT',{prix_table_espace:festivalPost.prix_table_espace_3,prix_surface_espace:festivalPost.prix_surface_espace_3,nb_table_espace:festivalPost.nb_table_espace_3},`/espace/${row.espaces.rows[2].id_espace}`,authHeader())

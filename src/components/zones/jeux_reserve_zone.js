@@ -62,14 +62,12 @@ const useStyles = makeStyles({
 
 const columns = [
     { field: 'id_jeu', headerName: 'Id jeu', display: "none" },
-    { field: 'id_reservation', headerName: 'Id reservation',display: "none" },
     { field: 'titre_jeu', headerName: 'Titre du jeu' },
     { field: 'nom_societe', headerName: 'Editeur' },
     { field: 'min_joueur_jeu', headerName: 'Joueurs', hide: false },
     { field: 'age_min_jeu', headerName: 'Age min.', hide: false },
     { field: 'duree_jeu', headerName: 'Durée', hide: false },
     { field: 'proto_jeu', headerName: 'Avant 1ère ?', hide: false },
-    { field: 'recu_jeu_reserve', headerName: 'Reçu ?', hide: false },
 ]
 
 export const JeuxReservesZone = ({jeux}) => {
@@ -107,12 +105,11 @@ export const JeuxReservesZone = ({jeux}) => {
                     </TableHead>
                     <TableBody>
                         {jeux.map(jeu => {
-                            const {titre_jeu, id_jeu, nom_societe,min_joueur_jeu, id_reservation_jeu_reserve, max_joueur_jeu, age_min_jeu, duree_jeu, proto_jeu, recu_jeu_reserve} = jeu
+                            const {titre_jeu, id_jeu, nom_societe,min_joueur_jeu, max_joueur_jeu, age_min_jeu, duree_jeu, proto_jeu} = jeu
 
                             return (
                                 <TableRow>
                                     <TableCell style={{display: "none"}}>{id_jeu}</TableCell>
-                                    <TableCell style={{display: "none"}}>{id_reservation_jeu_reserve}</TableCell>
                                     <TableCell>{titre_jeu}</TableCell>
                                     <TableCell>{nom_societe}</TableCell>
                                     <TableCell>{min_joueur_jeu} - {max_joueur_jeu}</TableCell>
@@ -121,12 +118,6 @@ export const JeuxReservesZone = ({jeux}) => {
                                     <TableCell padding="checkbox">
                                         <Checkbox
                                             checked={proto_jeu}
-                                            disabled={true}
-                                        />
-                                    </TableCell>
-                                    <TableCell padding="checkbox">
-                                        <Checkbox
-                                            checked={recu_jeu_reserve}
                                             disabled={true}
                                         />
                                     </TableCell>
