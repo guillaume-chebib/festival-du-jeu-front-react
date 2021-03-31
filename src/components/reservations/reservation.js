@@ -5,13 +5,32 @@ import {CellParams, DataGrid} from '@material-ui/data-grid';
 import useStylesTableValueColor from "../table/styles";
 import {useAuthHeader} from 'react-auth-kit'
 import {renameKey, requestToBack} from "../../utils/utils_functions";
-import {Checkbox, FormControlLabel} from "@material-ui/core";
+import {
+    Accordion,
+    AccordionDetails,
+    AccordionSummary,
+    Checkbox,
+    FormControlLabel,
+    makeStyles,
+    Paper
+} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import {EtatReservation} from "./EtatReservation";
 import StatutPriseContact from "../suivi/suivi_exposants/StatutPriseContact";
+import EspaceReservation from "./EspaceReservation";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+
+const useStyles = makeStyles((theme) => ({
+    root: {
+        width: '100%',
+    },
+    heading: {
+        fontSize: theme.typography.pxToRem(15),
+        fontWeight: theme.typography.fontWeightRegular,
+    },
+}));
 
 const Reservation = () => {
-    const classes = useStylesTableValueColor();
     const authHeader = useAuthHeader()
 
     const history = useHistory();
@@ -29,9 +48,9 @@ const Reservation = () => {
 
         async function fetchData() {
 
-            const [responseReservation, reponseStatuts] = await Promise.all([
+            const [responseReservation, reponseStatuts,responseEspaces] = await Promise.all([
                 await requestToBack('GET',null,`/reservation/`+id,authHeader()),
-                await requestToBack('GET',null,`/priseContact/statutsPriseContact/`,authHeader())
+                await requestToBack('GET',null,`/priseContact/statutsPriseContact/`,authHeader()),
             ]);
 
             const bodyReservation = await responseReservation[0]
@@ -72,6 +91,7 @@ const Reservation = () => {
 
     },[trig]);
 
+    const classes = useStyles();
 
     return (
         <div>
@@ -83,13 +103,37 @@ const Reservation = () => {
             </h1>
             {reservation &&
             <div>
-                <div>
-                    <EtatReservation row={reservation} setTrig={setTrig} />
-                </div>
-                <div>
-                    {statuts && <StatutPriseContact row = {reservation} setTrig={setTrig} statuts={statuts} id={reservation.id_societe}/>}
+                <div className={classes.root}>
+                    <Accordion>
+                        <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel1a-content"
+                            id="panel1a-header"
+                        >
+                            <Typography className={classes.heading}> Statuts reservation</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <EtatReservation row={reservation} setTrig={setTrig} />
+                            {statuts && <StatutPriseContact row = {reservation} setTrig={setTrig} statuts={statuts} id={reservation.id_societe}/>}
 
+                        </AccordionDetails>
+                    </Accordion>
+
+                    <Accordion>
+                        <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel2a-content"
+                            id="panel2a-header"
+                        >
+                            <Typography className={classes.heading}>Accordion 2</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <EspaceReservation setTrig={setTrig} reservation={reservation}/>
+                        </AccordionDetails>
+                    </Accordion>
                 </div>
+                <EspaceReservation setTrig={setTrig} reservation={reservation}/>
+
             </div>
             }
         </div>

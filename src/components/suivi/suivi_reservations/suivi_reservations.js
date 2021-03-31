@@ -53,21 +53,21 @@ const SuiviReservations = () => {
             }
         },
         { field : 'commentaire_reservation', headerName: 'Commentaire', flex: 2
-            // ,
-            // renderCell: (params) =>{
-            //     return <TextField
-            //         id="commentaire"
-            //         label="Standard"
-            //         value={params.row.commentaire_reservation}
-            //         InputProps={{
-            //             disableUnderline: true,
-            //         }}
-            //         onChange={(event => {
-            //             params.row.commentaire_reservation = event.target.value
-            //             handleChange(params.row)
-            //         })}
-            //     />
-            // }
+            ,
+            renderCell: (params) =>{
+                return <TextField
+                    id="commentaire"
+                    label="Standard"
+                    value={params.row.commentaire_reservation}
+                    InputProps={{
+                        disableUnderline: true,
+                    }}
+                    onChange={(event => {
+                        params.row.commentaire_reservation = event.target.value
+                        handleChange(params.row)
+                    })}
+                />
+            }
         },
         { field : 'checkbox', headerName: 'Suivi', flex: 4,
             renderCell: (params) =>{
