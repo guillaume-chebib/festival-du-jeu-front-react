@@ -4,7 +4,7 @@ import {useHistory, useParams} from "react-router-dom";
 import {CellParams, DataGrid} from '@material-ui/data-grid';
 import useStylesTableValueColor from "../../table/styles";
 import {useAuthHeader} from 'react-auth-kit'
-import {renameKey, requestToBack} from "../../../utils/utils_functions";
+import {IsAdmin, renameKey, requestToBack} from "../../../utils/utils_functions";
 import DateContact from "../suivi_exposants/DateContact";
 import DateFactureReservation from "./DateFactureReservation";
 import {CheckBox} from "@material-ui/icons";
@@ -132,6 +132,7 @@ const SuiviReservations = () => {
 
     return (
         <div>
+            <IsAdmin/>
             <div>
                 <h1>
                     Suivi des réservations

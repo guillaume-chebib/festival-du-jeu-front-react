@@ -1,6 +1,6 @@
 import React, { useEffect, useState} from 'react';
 import {useAuthHeader} from 'react-auth-kit';
-import {renameKey, requestToBack} from "../utils/utils_functions"
+import {IsAdmin, renameKey, requestToBack} from "../utils/utils_functions"
 import TableContainer from "@material-ui/core/TableContainer";
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
@@ -28,7 +28,9 @@ const Contact = () => {
         },[]);
 
     return (
-        <TableContainer component={Paper}>
+        <div>
+            <IsAdmin/>
+            <TableContainer component={Paper}>
             <Table aria-label="simple table">
                 <TableHead>
                     <TableRow>
@@ -54,6 +56,7 @@ const Contact = () => {
                 </TableBody>
             </Table>
         </TableContainer>
+        </div>
     )
 }
 

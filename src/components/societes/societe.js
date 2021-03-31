@@ -12,6 +12,7 @@ import EditeurExposant from "./editeur_exposant";
 import {TextField} from "@material-ui/core";
 import Grid from "@material-ui/core/Grid";
 import CreateSociete from "./createSociete";
+import {IsAdmin} from "../../utils/utils_functions";
 
 function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -65,6 +66,7 @@ export default function Societe() {
 
     return (
         <div className={classes.root}>
+            <IsAdmin/>
             <AppBar position="static">
                 <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
                     <Tab label="Exposants Seulement" {...a11yProps(0)} />

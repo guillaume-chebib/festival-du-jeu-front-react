@@ -7,7 +7,7 @@ import JeuxReservesZone from './jeux_reserve_zone'
 import '../../styles/App.scss';
 import {useAuthHeader} from 'react-auth-kit';
 
-import {renameKey, requestToBack} from "../../utils/utils_functions"
+import {IsAdmin, renameKey, requestToBack} from "../../utils/utils_functions"
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -85,6 +85,7 @@ const Zones = ({id}) => {
     //     },[id]);
     return (
         <div style={{paddingTop: '2em'}}>
+            <IsAdmin/>
             <div style={{ height: 400, width: '100%' }}>
                 <div className={classes.root}>
                     <Grid container spacing={2}>

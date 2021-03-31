@@ -4,7 +4,7 @@ import {useHistory, useParams} from "react-router-dom";
 import {CellParams, DataGrid} from '@material-ui/data-grid';
 
 import useStylesTableValueColor from "../table/styles";
-import {renameKey, requestToBack} from "../../utils/utils_functions"
+import {IsAdmin, renameKey, requestToBack} from "../../utils/utils_functions"
 import {useAuthHeader} from 'react-auth-kit'
 import {
     Checkbox,
@@ -94,6 +94,7 @@ const JeuxReserves = () => {
             renderCell: (params) =>{
             return(
                 <div>
+                    <IsAdmin/>
                     <div>
                     <TextField
                         id="outlined-select-currency"

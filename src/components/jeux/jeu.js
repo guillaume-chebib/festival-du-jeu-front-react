@@ -14,7 +14,7 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import Button from "@material-ui/core/Button";
 
 import useStylesTableValueColor from "../table/styles";
-import {renameKey, requestToBack} from "../../utils/utils_functions"
+import {IsAdmin, renameKey, requestToBack} from "../../utils/utils_functions"
 import UpdateDeleteJeu from "./UpdateDeleteJeu";
 import {useAuthHeader} from 'react-auth-kit'
 import CreateJeu from "./CreateJeu";
@@ -102,6 +102,7 @@ const Jeu = () => {
 
     return (
         <div>
+            <IsAdmin/>
             <div>
                 <h1>
                     Liste des jeux

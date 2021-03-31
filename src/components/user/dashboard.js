@@ -2,11 +2,15 @@ import React, { useEffect, useState,useCallback} from 'react';
 import Button from '@material-ui/core/Button'
 import  {useHistory} from "react-router-dom"
 import {requestToBack} from "../../utils/utils_functions";
+import {useAuthUser} from "react-auth-kit";
 
 
 const Dashboard = () => {
 
     const [response,setResponse] = useState("")
+    const auth = useAuthUser()
+    let isAdmin = auth().superuser
+
 
     useEffect(() => {
         async function fetchData() {
@@ -24,11 +28,23 @@ const Dashboard = () => {
 
     },[]);
 
-    const history = useHistory();
-
     return (
         <div className="App">
             <p>{response}</p>
+            {isAdmin === "true"? (
+                    <AdminButton/>
+                    ) : (
+                    <p>Test</p>
+                )}
+        </div>
+    );
+
+}
+
+const AdminButton = () => {
+    const history = useHistory();
+    return(
+        <div>
             <Button variant="contained" color="primary"  onClick={() => history.push('/festival')}>
                 Les festivals
             </Button>
@@ -42,8 +58,7 @@ const Dashboard = () => {
                 Jeux
             </Button>
         </div>
-    );
+    )
 
 }
-
 export default Dashboard;
