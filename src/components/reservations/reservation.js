@@ -8,6 +8,7 @@ import {IsAdmin, renameKey, requestToBack} from "../../utils/utils_functions";
 import {Checkbox, FormControlLabel} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import {EtatReservation} from "./EtatReservation";
+import StatutPriseContact from "../suivi/suivi_exposants/StatutPriseContact";
 
 const Reservation = () => {
     const classes = useStylesTableValueColor();
@@ -15,6 +16,7 @@ const Reservation = () => {
 
     const history = useHistory();
     const [reservation,setReservation] = useState()
+    const [statuts,setStatuts] = useState([])
 
     const preventDefault = (event) => event.preventDefault();
     const [trig,setTrig] = useState([])
@@ -26,19 +28,40 @@ const Reservation = () => {
     useEffect(() => {
 
         async function fetchData() {
-            const responseReservation = await requestToBack('GET',null,`/reservation/`+id,authHeader())
+
+            const [responseReservation, reponseStatuts] = await Promise.all([
+                await requestToBack('GET',null,`/reservation/`+id,authHeader()),
+                await requestToBack('GET',null,`/priseContact/statutsPriseContact/`,authHeader())
+            ]);
 
             const bodyReservation = await responseReservation[0]
             const reserv = bodyReservation.message
-            console.log(reserv)
 
             reserv.id = reserv.id_reservation
             delete reserv.id_reservation
+
             if (responseReservation[1] !== 200) {
                 console.log(responseReservation[1])
             }
             else {
                 setReservation(reserv)
+
+            }
+
+            const bodyStatuts = await reponseStatuts[0]
+            const list_statuts = bodyStatuts.message
+            if (reponseStatuts[1] !== 200) {
+                console.log(reponseStatuts[1])
+            }
+            else {
+                 let list = list_statuts.rows.filter(s => {
+                    let val = s.unnest
+                    if(val === 'Présence confirmée' || val === 'Présent : Liste jeux demandée' || val === 'Présent : Liste jeux reçue') {
+                        return s
+                    }
+
+                })
+                setStatuts(list)
 
             }
 
@@ -59,12 +82,17 @@ const Reservation = () => {
                 }
 
             </h1>
+            {reservation &&
             <div>
-                {reservation && <EtatReservation row={reservation} setTrig={setTrig} />}
+                <div>
+                    <EtatReservation row={reservation} setTrig={setTrig} />
+                </div>
+                <div>
+                    {statuts && <StatutPriseContact row = {reservation} setTrig={setTrig} statuts={statuts} id={reservation.id_societe}/>}
+
+                </div>
             </div>
-
-
-
+            }
         </div>
     )
 }
