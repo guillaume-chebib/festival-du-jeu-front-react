@@ -9,7 +9,7 @@ import Connexion from "./connexion";
 import Organisateur from "./organisateur/organisateur"
 import AjoutOrganisateur from "./organisateur/ajoutOrganisateur"
 import { PrivateRoute } from 'react-auth-kit'
-import Zone from "./zones/zone"
+import Zones from "./public/zones/zone"
 import PrivateComponent from "./privateComponent";
 import Societe from "./societes/societe";
 import Dashboard from "./user/dashboard";
@@ -18,6 +18,8 @@ import SuiviReservations from "./suivi/suivi_reservations/suivi_reservations"
 
 import JeuxReserves from "./jeux_reserves/jeuxReserves";
 import Reservation from "./reservations/reservation"
+import ListJeux from "./public/jeuxReserves/listJeux";
+import Editeurs from "./public/editeurs/editeur";
 
 
 
@@ -35,9 +37,11 @@ const Routes = () => (
         <PrivateRoute exact path="/organisateur" loginPath={'/login'} component={Organisateur}/>
         <PrivateRoute exact path="/organisateur/ajout" loginPath={'/login'} component={AjoutOrganisateur}/>
         <PrivateRoute component={PrivateComponent} path={'/privateRoute'} loginPath={'/login'} exact/>
-        <PrivateRoute exact path="/festival/:id/zone"  loginPath={'/login'} component={Zone}/>
         <PrivateRoute exact path="/societe"  loginPath={'/login'} component={Societe}/>
         <PrivateRoute loginPath={'/login'} exact path="/dashboard" component={Dashboard}/>
+        <Route exact path="/public/zone" component={Zones}/>
+        <Route exact path="/public/jeu" component={ListJeux}/>
+        <Route exact path="/public/editeur" component={Editeurs}/>
     </Switch>
 )
 

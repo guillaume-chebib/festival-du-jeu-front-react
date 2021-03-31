@@ -4,6 +4,8 @@ import {useHistory, useParams} from "react-router-dom";
 import {CellParams, DataGrid} from '@material-ui/data-grid';
 import useStylesTableValueColor from "../table/styles";
 import {useAuthHeader} from 'react-auth-kit'
+import {IsAdmin, renameKey, requestToBack} from "../../utils/utils_functions";
+import {Checkbox, FormControlLabel} from "@material-ui/core";
 import {renameKey, requestToBack} from "../../utils/utils_functions";
 import {
     Accordion,
@@ -95,6 +97,7 @@ const Reservation = () => {
 
     return (
         <div>
+            <IsAdmin/>
             <h1>
                 Réservation de : {
                     reservation && (reservation.nom_societe)
