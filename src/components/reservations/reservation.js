@@ -13,6 +13,8 @@ import {EtatReservation} from "./EtatReservation";
 import StatutPriseContact from "../suivi/suivi_exposants/StatutPriseContact";
 import EspaceReservation from "./EspaceReservation";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import {Comment} from "@material-ui/icons";
+import {CommentaireReservation} from "./commentairesReservation";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -122,6 +124,15 @@ const Reservation = () => {
                         </AccordionSummary>
                         <AccordionDetails>
                             <EspaceReservation setTrig={setTrig} reservation={reservation}/>
+                        </AccordionDetails>
+                    </Accordion>
+
+                    <Accordion>
+                        <AccordionSummary>
+                            <Typography className={classes.heading}>Commentaires</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <CommentaireReservation row={reservation} setTrig={setTrig}/>
                         </AccordionDetails>
                     </Accordion>
                 </div>

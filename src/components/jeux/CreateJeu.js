@@ -36,7 +36,7 @@ const CreateJeu = ({setTrig,editeurs}) => {
 
         const body = await response[0]
         if (response[1] !== 200) {
-            setReponse(<Alert severity="error">{body.message}</Alert>)
+            setReponse(<Alert severity="error">Jeu n'a pa pu être ajouté</Alert>)
         }
         else {
             setReponse(<Alert severity="success">Jeu crée avec succes ! </Alert>)
@@ -50,6 +50,7 @@ const CreateJeu = ({setTrig,editeurs}) => {
         <div>
             <Button onClick={handleClickOpenCreate} variant="contained" color="primary">Ajouter un jeu </Button>
             <ModalJeu titre="Créer jeu" editeurs = {editeurs} row={jeu} setRow={setJeu} onClose={handleCloseCreate} onUpdate={handleCreate} open={openCreate}/>
+            {reponse}
         </div>
 
     )
