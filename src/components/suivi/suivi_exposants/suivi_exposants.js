@@ -3,7 +3,7 @@ import {useHistory, useParams} from "react-router-dom";
 
 import {CellParams, DataGrid} from '@material-ui/data-grid';
 import useStylesTableValueColor from "../../table/styles";
-import {renameKey, requestToBack} from "../../../utils/utils_functions"
+import {IsAdmin, renameKey, requestToBack} from "../../../utils/utils_functions"
 import {useAuthHeader} from 'react-auth-kit'
 import ListeContact from "./ListeContact";
 
@@ -61,7 +61,7 @@ const SuiviExposants = () => {
         { field : 'statut_prise_contact', headerName: 'Statut prise de contact', flex: 1,
             renderCell: (params) =>{
                 return (
-                    <StatutPriseContact row = {params.row} setTrig={setTrig} statuts={statuts} />
+                    <StatutPriseContact row = {params.row} setTrig={setTrig} statuts={statuts} id={params.row.id} />
 
                 )
 
@@ -115,6 +115,7 @@ const SuiviExposants = () => {
 
     return (
         <div>
+            <IsAdmin/>
             <div>
                 <h1>
                     Suivi des éditeurs
