@@ -130,27 +130,27 @@ const Festivals = ({body}) => {
         { field: 'Espace 1', headerName: 'Espace 1',flex:0.9,renderCell: (params) =>
                 (
                     <div>
-                        <Typography> Prix m²: {params.row.espaces.rows[0].prix_surface_espace}</Typography>
-                        <Typography>Nombre tables: {params.row.espaces.rows[0].nb_table_espace}</Typography>
-                        <Typography>Prix tables: {params.row.espaces.rows[0].prix_table_espace}</Typography>
+                        <Typography> Prix m²: {params.row.espaces[0].prix_surface_espace}</Typography>
+                        <Typography>Nombre tables: {params.row.espaces[0].nb_table_espace}</Typography>
+                        <Typography>Prix tables: {params.row.espaces[0].prix_table_espace}</Typography>
                     </div>
                 ),
         },
         { field: 'Espace 2', headerName: 'Espace 2',flex:0.9,renderCell: (params) =>
                 (
                     <div>
-                        <Typography> Prix m²: {params.row.espaces.rows[1].prix_surface_espace}</Typography>
-                        <Typography>Nombre tables: {params.row.espaces.rows[1].nb_table_espace}</Typography>
-                        <Typography>Prix tables: {params.row.espaces.rows[1].prix_table_espace}</Typography>
+                        <Typography> Prix m²: {params.row.espaces[1].prix_surface_espace}</Typography>
+                        <Typography>Nombre tables: {params.row.espaces[1].nb_table_espace}</Typography>
+                        <Typography>Prix tables: {params.row.espaces[1].prix_table_espace}</Typography>
                     </div>
                 ),
         },
         { field: 'Espace 3', headerName: 'Espace 3',flex:0.9,renderCell: (params) =>
                 (
                     <div>
-                        <Typography> Prix m²: {params.row.espaces.rows[2].prix_surface_espace}</Typography>
-                        <Typography>Nombre tables: {params.row.espaces.rows[2].nb_table_espace}</Typography>
-                        <Typography>Prix tables: {params.row.espaces.rows[2].prix_table_espace}</Typography>
+                        <Typography> Prix m²: {params.row.espaces[2].prix_surface_espace}</Typography>
+                        <Typography>Nombre tables: {params.row.espaces[2].nb_table_espace}</Typography>
+                        <Typography>Prix tables: {params.row.espaces[2].prix_table_espace}</Typography>
                     </div>
                 ),
         },
@@ -184,7 +184,7 @@ const Festivals = ({body}) => {
 
             festivals_d.forEach(obj => renameKey(obj, 'id_festival', 'id'));
             const updatedJson = JSON.stringify(festivals_d);
-
+            console.log(festivals_d)
             setFestivals(festivals_d)
             festivals_d.forEach((festival) => {
                 if(festival.est_courant_festival ===true){
