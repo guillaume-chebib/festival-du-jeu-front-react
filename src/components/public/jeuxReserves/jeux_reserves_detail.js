@@ -8,7 +8,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-import Zone from "./zone";
+import Zone from "../zones/zone";
 import {DataGrid} from "@material-ui/data-grid";
 import {useHistory} from "react-router-dom";
 import Checkbox from "@material-ui/core/Checkbox";
@@ -70,7 +70,7 @@ const columns = [
     { field: 'proto_jeu', headerName: 'Avant 1ère ?', hide: false },
 ]
 
-export const JeuxReservesZone = ({jeux}) => {
+export const JeuxReservesDetail = ({jeux}) => {
     const classes = useStyles();
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
@@ -155,4 +155,5 @@ export const JeuxReservesZone = ({jeux}) => {
     );
 }
 
-export default JeuxReservesZone
+export default JeuxReservesDetail
+

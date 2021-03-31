@@ -11,8 +11,9 @@ import TextField from '@material-ui/core/TextField';
 import Grid from "@material-ui/core/Grid";
 import Switch from "@material-ui/core/Switch";
 import {renameKey, requestToBack} from "../../utils/utils_functions";
-import {Checkbox, makeStyles, MenuItem, Select} from "@material-ui/core";
+import {Checkbox, FormControlLabel, makeStyles, MenuItem, Select} from "@material-ui/core";
 import {useAuthHeader} from "react-auth-kit";
+import Typography from "@material-ui/core/Typography";
 
 export default function ModalJeu({open,editeurs,est_create,titre,row,setRow,message,onUpdate,onClose}) {
 
@@ -163,30 +164,37 @@ export default function ModalJeu({open,editeurs,est_create,titre,row,setRow,mess
                                 }))}
                             />
                         </Grid>
-                        <Grid item xs={12} sm={3}>
-                            <Checkbox
-                                checked={row.proto_jeu}
-                                onChange={handleChange}
-                                name="proto_jeu"
-                                inputProps={{ 'aria-label': 'secondary checkbox' }}
+                        <Grid item xs={12} sm={2}>
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        checked={row.proto_jeu}
+                                        onChange={handleChange}
+                                        name="proto_jeu"
+                                        inputProps={{ 'aria-label': 'secondary checkbox' }}
+                                    />
+                                }
+                                labelPlacement="top"
+                                label={<Typography variant="body2" color="textSecondary">Proto ?</Typography>}
+
                             />
                         </Grid>
-                        <Grid item xs={12} sm={3}>
+                        <Grid item xs={12} sm={4}>
 
-                            <Select
-                                labelId="demo-simple-select-filled-label"
-                                id="id_editeur_jeu"
+                            <TextField
+                                id="outlined-select-currency"
+                                select
+                                required
+                                fullWidth
+                                label="Choisir un editeur"
                                 value={row.id_editeur_jeu}
                                 onChange={handleChangeEditeur}
+                                variant="outlined"
                             >
-                                {/*{console.log(row.id_societe_jeu)}*/}
-
                                 {
-                                    editeurs.map(e => <MenuItem value={e.id_societe}>{e.id_societe}</MenuItem>
-
-                                    )
+                                    editeurs.map(e => <MenuItem value={e.id_societe}>{e.nom_societe}</MenuItem>)
                                 }
-                            </Select>
+                            </TextField>
                         </Grid>
 
                     </Grid>

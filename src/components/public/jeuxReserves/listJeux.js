@@ -7,13 +7,14 @@ import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import DirectionsIcon from '@material-ui/icons/Directions';
-import useStylesTableValueColor from "../table/styles";
+import useStylesTableValueColor from "../../table/styles";
 import {useHistory} from "react-router-dom";
 import {useAuthHeader} from "react-auth-kit";
-import {Checkbox} from "@material-ui/core";
-import UpdateDeleteJeu from "../jeux/UpdateDeleteJeu";
-import {renameKey, requestToBack} from "../../utils/utils_functions";
-import CreateJeu from "../jeux/CreateJeu";
+import HelpOutlineRoundedIcon from '@material-ui/icons/HelpOutlineRounded';
+import {Checkbox, Tooltip} from "@material-ui/core";
+import UpdateDeleteJeu from "../../jeux/UpdateDeleteJeu";
+import {renameKey, requestToBack} from "../../../utils/utils_functions";
+import CreateJeu from "../../jeux/CreateJeu";
 import {DataGrid} from "@material-ui/data-grid";
 
 const useStyles = makeStyles((theme) => ({
@@ -73,7 +74,7 @@ export default function ListJeux() {
         async function fetchData() {
             const responseJeu = await requestToBack('GET',null,`/public/festival/jeu`,authHeader())
             const bodyJeu = await responseJeu[0]
-            const jeux = bodyJeu.message
+            const jeux = bodyJeu
 
             if (responseJeu[1] !== 200) {
                 console.log(responseJeu[1])
@@ -92,9 +93,13 @@ export default function ListJeux() {
     return (
         <div>
             <div>
-                <h1>
+                <h1 style={{display : "inline-block", margin : "20px"}}>
                     Liste des jeux
                 </h1>
+
+                <Tooltip title="Pour filtrer les jeux : Cliquez sur les options d'une colonne > Filter" arrow placement="right">
+                    <HelpOutlineRoundedIcon/>
+                </Tooltip>
 
             </div>
 
@@ -117,19 +122,3 @@ export default function ListJeux() {
     )
 }
 
-export default function Search(onUpdate) {
-    const classes = useStyles();
-
-    return (
-        <Paper component="form" className={classes.root}>
-            <InputBase
-                className={classes.input}
-                placeholder="Rechercher ..."
-                inputProps={{ 'aria-label': 'search google maps' }}
-            />
-            <IconButton type="submit" onChange={onUpdate} className={classes.iconButton} aria-label="search">
-                <SearchIcon />
-            </IconButton>
-        </Paper>
-    );
-}
