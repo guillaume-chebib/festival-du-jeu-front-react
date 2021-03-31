@@ -61,7 +61,7 @@ const SuiviExposants = () => {
         { field : 'statut_prise_contact', headerName: 'Statut prise de contact', flex: 1,
             renderCell: (params) =>{
                 return (
-                    <StatutPriseContact row = {params.row} setTrig={setTrig} statuts={statuts} />
+                    <StatutPriseContact row = {params.row} setTrig={setTrig} statuts={statuts} id={params.row.id} />
 
                 )
 
