@@ -47,7 +47,7 @@ export default function ListJeux() {
 
 
     const columns = [
-        { field: 'id', headerName: 'ID', hide: false },
+        { field: 'id', headerName: 'ID', hide: true },
         { field : 'titre_jeu', headerName: 'Titre du jeu', flex: 1,type: 'string'},
         { field : 'min_joueur_jeu', headerName: 'Joueur minimum', flex: 1, type: 'number'},
         { field : 'max_joueur_jeu', headerName: 'Joueur maximum', flex: 1, type: 'number'},

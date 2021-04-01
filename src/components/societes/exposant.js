@@ -31,7 +31,7 @@ const Exposant = ({setTrig, trig}) => {
 
 
     const columns = [
-        { field: 'id', headerName: 'ID', hide: false },
+        { field: 'id', headerName: 'ID', hide: true },
         { field : 'nom_societe', headerName: "Nom de l'exposant", flex: 1,type: 'string'},
         {
             field: 'est_inactif_societe',

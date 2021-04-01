@@ -2,23 +2,16 @@ import React, { useEffect, useState} from 'react';
 import {useHistory} from "react-router-dom";
 
 import {CellParams, DataGrid} from '@material-ui/data-grid';
-import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
-import EditIcon from '@material-ui/icons/Edit';
-import Switch from '@material-ui/core/Switch';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Button from "@material-ui/core/Button";
-
 import useStylesTableValueColor from "../table/styles";
 import {IsAdmin, renameKey, requestToBack} from "../../utils/utils_functions"
 import UpdateDeleteJeu from "./UpdateDeleteJeu";
 import {useAuthHeader} from 'react-auth-kit'
 import CreateJeu from "./CreateJeu";
 import {Checkbox} from "@material-ui/core";
+import LinkIcon from '@material-ui/icons/Link';
+import {themeFestival} from "../styles/themes";
+import Fab from "@material-ui/core/Fab";
+import {ThemeProvider} from "@material-ui/core/styles";
 
 
 
@@ -37,7 +30,7 @@ const Jeu = () => {
 
 
     const columns = [
-        { field: 'id', headerName: 'ID', hide: false },
+        { field: 'id', headerName: 'ID', hide: true },
         { field : 'titre_jeu', headerName: 'Titre du jeu', flex: 1,type: 'string'},
         { field : 'min_joueur_jeu', headerName: 'Joueur minimum', flex: 1, type: 'number'},
         { field : 'max_joueur_jeu', headerName: 'Joueur maximum', flex: 1, type: 'number'},
@@ -54,11 +47,22 @@ const Jeu = () => {
 
             }
         },
-        { field : 'url_consignes_jeu', headerName: 'Règles du jeu', flex: 1},
-        { field : '', headerName: '', flex: 1,
+        { field : 'url_consignes_jeu', headerName: 'Règles', flex: 1,
+            renderCell:(params) =>
+            {   if(params.row.url_consignes_jeu !== null) {
+                    return (
+                        <ThemeProvider theme={themeFestival}>
+                            <Fab size="small" color="primary" aria-label="edit" href={params.row.url_consignes_jeu} target="_blank">
+                                <LinkIcon/>
+                            </Fab>
+                        </ThemeProvider>
+                    )
+                }
+            }
+        },
+        { field : '', headerName: 'Update', flex: 1,
             renderCell:(params) =>
             {
-
                 return <UpdateDeleteJeu row = {params.row} setTrig={setTrig} editeurs = {editeurs}/>
             }
         },
@@ -81,7 +85,6 @@ const Jeu = () => {
             }
             else {
                 jeux.forEach(obj => renameKey(obj, 'id_jeu', 'id'));
-                const updatedJson = JSON.stringify(jeux);
                 setJeux(jeux)
             }
 

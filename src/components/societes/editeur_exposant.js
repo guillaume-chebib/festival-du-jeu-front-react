@@ -34,7 +34,7 @@ const EditeurExposant = ({setTrig,trig}) => {
 
 
     const columns = [
-        { field: 'id', headerName: 'ID', hide: false },
+        { field: 'id', headerName: 'ID', hide: true },
         { field : 'nom_societe', headerName: "Nom de l'editeur", flex: 1,type: 'string'},
         {field: 'numero_rue_editeur', headerName: 'NumeroRue', hide: true},
         {field: 'rue_editeur', headerName: 'Rue', hide: true},

@@ -6,9 +6,12 @@ import useStylesTableValueColor from "../../table/styles";
 import {useAuthHeader} from 'react-auth-kit'
 import {IsAdmin, renameKey, requestToBack} from "../../../utils/utils_functions";
 import DateFactureReservation from "./DateFactureReservation";
-import {TextField} from "@material-ui/core";
+import {Fab, TextField} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import {EtatReservation} from "../../reservations/EtatReservation";
+import {ThemeProvider} from "@material-ui/core/styles";
+import {themeFestival} from "../../styles/themes";
+import LinkIcon from "@material-ui/icons/Link";
 
 const SuiviReservations = ({id_festival}) => {
     const {id} = useParams()
@@ -31,7 +34,7 @@ const SuiviReservations = ({id_festival}) => {
     const preventDefault = (event) => event.preventDefault();
 
     const columns = [
-        { field: 'id', headerName: 'ID', hide: false },
+        { field: 'id', headerName: 'ID', hide: true },
         { field : 'nom_societe', headerName: 'Nom de la société', flex: 1,type: 'string',
             renderCell: (params) => {
                 return (
@@ -72,24 +75,6 @@ const SuiviReservations = ({id_festival}) => {
 
             }
         },
-        { field : 'reduction_reservation', headerName: 'Réduction', flex: 1
-            // ,
-            // renderCell: (params) =>{
-            //     return <TextField
-            //         id="reduction_reservation"
-            //         label="Standard"
-            //         type="number"
-            //         value={params.row.reduction_reservation}
-            //         InputProps={{
-            //             disableUnderline: true,
-            //         }}
-            //         onChange={(event => {
-            //             params.row.reduction_reservation = event.target.value
-            //             handleChange(params.row)
-            //         })}
-            //     />//TODO Plutot prix total
-            // }
-        },
         { field : 'date_envoi_facture', headerName: 'Date envoi facture', flex: 1,
             renderCell: (params) =>{
                 return <DateFactureReservation row = {params.row} setTrig={setTrig} id={1} disabled={params.row.date_paye_facture !== null}/>
@@ -100,6 +85,20 @@ const SuiviReservations = ({id_festival}) => {
                 return <DateFactureReservation row = {params.row} setTrig={setTrig} id={2}/>
             }
         },
+        { field : 'reservation', headerName: 'Reservation', flex: 1,
+            renderCell: (params) =>{
+                return (
+                    <ThemeProvider theme={themeFestival}>
+                        <Fab size="small" color="primary" aria-label="edit" href={"/reservation/"+params.row.id}>
+                            <LinkIcon/>
+                        </Fab>
+                    </ThemeProvider>
+                )
+            }
+        },
+        { field : 'prix_total_reservation', headerName: 'Prix total', flex: 1},
+
+
     ]
 
 
