@@ -4,11 +4,11 @@ import {useAuthHeader} from "react-auth-kit";
 import DatePickerComponent from "../DatePickerComponent";
 
 
-const DateContact = ({row,id,disabled,setTrig}) => {
+const DateContact = ({row, id, disabled, setTrig}) => {
     const authHeader = useAuthHeader()
 
     let val
-    switch (id){
+    switch (id) {
         case 1:
             val = row.premier_prise_contact
             break
@@ -23,7 +23,7 @@ const DateContact = ({row,id,disabled,setTrig}) => {
     // const [selectedDate, setSelectedDate] = React.useState(val);
     const handleDateChange = async (date) => {
         console.log(row)
-        switch (id){
+        switch (id) {
             case 1:
                 row.premier_prise_contact = date
                 break
@@ -35,7 +35,7 @@ const DateContact = ({row,id,disabled,setTrig}) => {
                 break
         }
         console.log(row)
-        const response = await requestToBack('PUT',row,`/societe/${row.id}/priseContact/festival/${row.id_festival_prise_contact}`,authHeader())
+        const response = await requestToBack('PUT', row, `/societe/${row.id}/priseContact/festival/${row.id_festival_prise_contact}`, authHeader())
         // const body = await response[0]
 
         if (response[1] !== 200) {
@@ -49,7 +49,6 @@ const DateContact = ({row,id,disabled,setTrig}) => {
                                 disabled={disabled}
                                 handleDateChange={handleDateChange}
     />
-
 
 
 }

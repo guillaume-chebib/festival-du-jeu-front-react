@@ -11,51 +11,51 @@ import TableBody from "@material-ui/core/TableBody";
 
 const Contact = () => {
     const authHeader = useAuthHeader()
-    const [contacts,setContacts] = useState([])
+    const [contacts, setContacts] = useState([])
 
     useEffect(
         async () => {
-            const response = await requestToBack('GET',null,`/contact`,authHeader())
+            const response = await requestToBack('GET', null, `/contact`, authHeader())
 
             const body = await response[0]
             if (response[1] !== 200) {
                 setContacts("Impossible de fetch")
-            }
-            else {
+            } else {
                 setContacts(body.message)
             }
 
-        },[]);
+        }, []);
 
     return (
         <div>
             <IsAdmin/>
             <TableContainer component={Paper}>
-            <Table aria-label="simple table">
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Nom</TableCell>
-                        <TableCell>Prénom</TableCell>
-                        <TableCell>Email</TableCell>
-                        <TableCell>Telephones</TableCell>
-                        <TableCell>Fonction</TableCell>
-                        <TableCell>Est principal ?</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {contacts.map((row) => (
-                        <TableRow key={row.nom_contact}>
-                            <TableCell>{row.nom_contact}</TableCell>
-                            <TableCell>{row.prenom_contact}</TableCell>
-                            <TableCell>{row.email_contact}</TableCell>
-                            <TableCell>Fixe : {row.telephone_fixe_contact}<br/> Portable :{row.telephone_portable_contact}</TableCell>
-                            <TableCell>{row.fonction_contact}</TableCell>
-                            <TableCell>{row.est_principal_contact}</TableCell>
+                <Table aria-label="simple table">
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Nom</TableCell>
+                            <TableCell>Prénom</TableCell>
+                            <TableCell>Email</TableCell>
+                            <TableCell>Telephones</TableCell>
+                            <TableCell>Fonction</TableCell>
+                            <TableCell>Est principal ?</TableCell>
                         </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+                    </TableHead>
+                    <TableBody>
+                        {contacts.map((row) => (
+                            <TableRow key={row.nom_contact}>
+                                <TableCell>{row.nom_contact}</TableCell>
+                                <TableCell>{row.prenom_contact}</TableCell>
+                                <TableCell>{row.email_contact}</TableCell>
+                                <TableCell>Fixe : {row.telephone_fixe_contact}<br/> Portable
+                                    :{row.telephone_portable_contact}</TableCell>
+                                <TableCell>{row.fonction_contact}</TableCell>
+                                <TableCell>{row.est_principal_contact}</TableCell>
+                            </TableRow>
+                        ))}
+                    </TableBody>
+                </Table>
+            </TableContainer>
         </div>
     )
 }

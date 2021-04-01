@@ -25,19 +25,19 @@ import {ThemeProvider} from "@material-ui/core/styles";
 
 const App = () => {
 
-  return (
-      <div className="App">
-          <AuthProvider authStorageType = {'cookie'}
-                        authStorageName={'_auth_t'}
-                        authTimeStorageName={'_auth_time'}
-                        stateStorageName={'_auth_state'}
-                        cookieDomain={window.location.hostname}
-                        cookieSecure={window.location.protocol === "https:"}
-                        refreshTokenName={'_refresh_t'}>
-              <AppNav/>
-          </AuthProvider>
-      </div>
-  );
+    return (
+        <div className="App">
+            <AuthProvider authStorageType={'cookie'}
+                          authStorageName={'_auth_t'}
+                          authTimeStorageName={'_auth_time'}
+                          stateStorageName={'_auth_state'}
+                          cookieDomain={window.location.hostname}
+                          cookieSecure={window.location.protocol === "https:"}
+                          refreshTokenName={'_refresh_t'}>
+                <AppNav/>
+            </AuthProvider>
+        </div>
+    );
 
 }
 
@@ -55,10 +55,10 @@ const AppNav = () => {
         setOpen(false);
     };
 
-    return(
+    return (
         <Router>
             <div className={classes.root}>
-                <CssBaseline />
+                <CssBaseline/>
                 <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
                     <Toolbar className={classes.toolbar}>
                         <IconButton
@@ -68,9 +68,9 @@ const AppNav = () => {
                             onClick={handleDrawerOpen}
                             className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
                         >
-                            <MenuIcon />
+                            <MenuIcon/>
                         </IconButton>
-                        <img src="images/logo_seul_festival.png" alt="logo" className={classes.logo} />
+                        <img src="images/logo_seul_festival.png" alt="logo" className={classes.logo}/>
 
                         <ThemeProvider theme={themeResponsive}>
                             <Typography variant="caption" color="inherit" noWrap className={classes.title}>
@@ -79,25 +79,25 @@ const AppNav = () => {
                         </ThemeProvider>
 
 
-                        <IconButton name="home" color="inherit" component={ Link } to="/">
-                            <HomeIcon fontSize={"large"} />
+                        <IconButton name="home" color="inherit" component={Link} to="/">
+                            <HomeIcon fontSize={"large"}/>
                         </IconButton>
 
                         {isAuthenticated() &&
-                        <IconButton name="dashboard" color="inherit" component={ Link } to="/dashboard">
-                            <AccountCircleIcon fontSize={"large"} />
+                        <IconButton name="dashboard" color="inherit" component={Link} to="/dashboard">
+                            <AccountCircleIcon fontSize={"large"}/>
                         </IconButton>
 
                         }
 
 
                         {isAuthenticated() ? (
-                            <IconButton name="home" color="inherit" component={ Link } to="/" onClick={signOut}>
-                                <ExitToAppIcon fontSize={"large"} />
+                            <IconButton name="home" color="inherit" component={Link} to="/" onClick={signOut}>
+                                <ExitToAppIcon fontSize={"large"}/>
                             </IconButton>
                         ) : (
-                            <IconButton name="home" color="inherit" component={ Link } to="/login">
-                                <LockIcon fontSize={"large"} />
+                            <IconButton name="home" color="inherit" component={Link} to="/login">
+                                <LockIcon fontSize={"large"}/>
                             </IconButton>
                         )}
 
@@ -112,20 +112,20 @@ const AppNav = () => {
                 >
                     <div className={classes.toolbarIcon}>
                         <IconButton onClick={handleDrawerClose}>
-                            <ChevronLeftIcon />
+                            <ChevronLeftIcon/>
                         </IconButton>
                     </div>
                     {isAuthenticated() &&
                     <Divider/>
                     }
                     {isAuthenticated() &&
-                        <MainListItems/>
+                    <MainListItems/>
                     }
                     <Divider/>
                     <List>{publicListItems}</List>
                 </Drawer>
                 <main className={classes.content}>
-                    <div className={classes.appBarSpacer} />
+                    <div className={classes.appBarSpacer}/>
                     <Container maxWidth="lg" className={classes.container}>
                         <Routes/>
                     </Container>

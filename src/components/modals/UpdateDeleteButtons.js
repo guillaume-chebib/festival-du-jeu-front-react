@@ -6,7 +6,7 @@ import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 
 
-export const UpdateDeleteButtons = ({onClickOpenEdit,onClickOpenDelete}) => {
+export const UpdateDeleteButtons = ({onClickOpenEdit, onClickOpenDelete}) => {
 
     return (
         <div>
@@ -15,7 +15,7 @@ export const UpdateDeleteButtons = ({onClickOpenEdit,onClickOpenDelete}) => {
                     <EditIcon/>
                 </Fab>
                 <Fab size="small" color="secondary" aria-label="delete" onClick={onClickOpenDelete}>
-                    <DeleteIcon />
+                    <DeleteIcon/>
                 </Fab>
             </ThemeProvider>
         </div>

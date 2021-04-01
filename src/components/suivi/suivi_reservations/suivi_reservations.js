@@ -19,12 +19,12 @@ const SuiviReservations = ({id_festival}) => {
     const classes = useStylesTableValueColor();
 
     const history = useHistory();
-    const [reservations,setReservations] = useState([])
-    const [trig,setTrig] = useState([])
+    const [reservations, setReservations] = useState([])
+    const [trig, setTrig] = useState([])
     const authHeader = useAuthHeader()
 
     const handleChange = async (row) => {
-        const response = await requestToBack('PUT',row,`/reservation/${row.id}`,authHeader())
+        const response = await requestToBack('PUT', row, `/reservation/${row.id}`, authHeader())
         const body = await response[0]
         if (response[1] !== 200) {
             console.log("erreur serveur")
@@ -34,27 +34,29 @@ const SuiviReservations = ({id_festival}) => {
     const preventDefault = (event) => event.preventDefault();
 
     const columns = [
-        { field: 'id', headerName: 'ID', hide: true },
-        { field : 'nom_societe', headerName: 'Nom de la société', flex: 1,type: 'string',
+        {field: 'id', headerName: 'ID', hide: true},
+        {
+            field: 'nom_societe', headerName: 'Nom de la société', flex: 1, type: 'string',
             renderCell: (params) => {
                 return (
-                        <Button
-                            onClick={event => {
-                                history.push("/reservation/"+params.row.id);
-                            }}
-                            color="primary"
-                        >
-                            {params.row.nom_societe}
-                        </Button>
+                    <Button
+                        onClick={event => {
+                            history.push("/reservation/" + params.row.id);
+                        }}
+                        color="primary"
+                    >
+                        {params.row.nom_societe}
+                    </Button>
 
                 )
             }
         },
-        { field : 'commentaire_reservation', headerName: 'Commentaire', flex: 2
+        {
+            field: 'commentaire_reservation', headerName: 'Commentaire', flex: 2
             ,
-            renderCell: (params) =>{
+            renderCell: (params) => {
                 return <TextField
-                    id="commentaire"
+                    id={"commentaire" + params.row.id}
                     label="Standard"
                     value={params.row.commentaire_reservation}
                     InputProps={{
@@ -67,36 +69,41 @@ const SuiviReservations = ({id_festival}) => {
                 />
             }
         },
-        { field : 'checkbox', headerName: 'Suivi', flex: 4,
-            renderCell: (params) =>{
-                return(
+        {
+            field: 'checkbox', headerName: 'Suivi', flex: 4,
+            renderCell: (params) => {
+                return (
                     <EtatReservation row={params.row} setTrig={setTrig}/>
                 )
 
             }
         },
-        { field : 'date_envoi_facture', headerName: 'Date envoi facture', flex: 1,
-            renderCell: (params) =>{
-                return <DateFactureReservation row = {params.row} setTrig={setTrig} id={1} disabled={params.row.date_paye_facture !== null}/>
+        {
+            field: 'date_envoi_facture', headerName: 'Date envoi facture', flex: 1,
+            renderCell: (params) => {
+                return <DateFactureReservation row={params.row} setTrig={setTrig} id={1}
+                                               disabled={params.row.date_paye_facture !== null}/>
             }
         },
-        { field : 'date_paye_facture', headerName: 'Date facture paye', flex: 1,
-            renderCell: (params) =>{
-                return <DateFactureReservation row = {params.row} setTrig={setTrig} id={2}/>
+        {
+            field: 'date_paye_facture', headerName: 'Date facture paye', flex: 1,
+            renderCell: (params) => {
+                return <DateFactureReservation row={params.row} setTrig={setTrig} id={2}/>
             }
         },
-        { field : 'reservation', headerName: 'Reservation', flex: 1,
-            renderCell: (params) =>{
+        {
+            field: 'reservation', headerName: 'Reservation', flex: 1,
+            renderCell: (params) => {
                 return (
                     <ThemeProvider theme={themeFestival}>
-                        <Fab size="small" color="primary" aria-label="edit" href={"/reservation/"+params.row.id}>
+                        <Fab size="small" color="primary" aria-label="edit" href={"/reservation/" + params.row.id}>
                             <LinkIcon/>
                         </Fab>
                     </ThemeProvider>
                 )
             }
         },
-        { field : 'prix_total_reservation', headerName: 'Prix total', flex: 1},
+        {field: 'prix_total_reservation', headerName: 'Prix total', flex: 1},
 
 
     ]
@@ -106,10 +113,10 @@ const SuiviReservations = ({id_festival}) => {
 
         async function fetchData() {
             let responseReservation;
-            if(id === undefined){
-                responseReservation = await requestToBack('GET',null,`/festival/${id_festival}/reservation`,authHeader())
+            if (id === undefined) {
+                responseReservation = await requestToBack('GET', null, `/festival/${id_festival}/reservation`, authHeader())
             } else {
-                responseReservation = await requestToBack('GET',null,`/festival/${id}/reservation`,authHeader())
+                responseReservation = await requestToBack('GET', null, `/festival/${id}/reservation`, authHeader())
             }
 
 
@@ -118,8 +125,7 @@ const SuiviReservations = ({id_festival}) => {
 
             if (responseReservation[1] !== 200) {
                 console.log(responseReservation[1])
-            }
-            else {
+            } else {
                 listesReservations.forEach(obj => renameKey(obj, 'id_reservation', 'id'));
                 setReservations(listesReservations)
             }
@@ -127,7 +133,7 @@ const SuiviReservations = ({id_festival}) => {
 
         fetchData();
 
-    },[trig]);
+    }, [trig]);
 
 
     return (
@@ -141,7 +147,7 @@ const SuiviReservations = ({id_festival}) => {
             </div>
 
             <div style={{paddingTop: '2em'}}>
-                <div style={{ height: 400, width: '100%' }}>
+                <div style={{height: 400, width: '100%'}}>
                     <DataGrid sortModel={[
                         {
 
@@ -152,7 +158,7 @@ const SuiviReservations = ({id_festival}) => {
                     ]}
                               className={classes.root}
                               rows={reservations}
-                              {...reservations} columns={columns} pageSize={5} />
+                              {...reservations} columns={columns} pageSize={5}/>
                 </div>
             </div>
         </div>

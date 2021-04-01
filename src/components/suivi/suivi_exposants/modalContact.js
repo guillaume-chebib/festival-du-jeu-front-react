@@ -4,7 +4,7 @@ import Button from "@material-ui/core/Button";
 import React from "react";
 import {Checkbox, FormControlLabel} from "@material-ui/core";
 
-const ModalContact = ({row,setContact,onUpdate}) =>  {
+const ModalContact = ({row, setContact, onUpdate}) => {
 
     const handleChangePrincipal = () => {
         setContact(prevState => ({
@@ -27,7 +27,7 @@ const ModalContact = ({row,setContact,onUpdate}) =>  {
                         id="prenom"
                         label="Prénom"
                         autoFocus
-                        onChange={e =>  setContact(prevState => ({
+                        onChange={e => setContact(prevState => ({
                             ...prevState,
                             prenom_contact: e.target.value
                         }))}
@@ -61,7 +61,7 @@ const ModalContact = ({row,setContact,onUpdate}) =>  {
                         id="email"
                         label="Email"
                         autoFocus
-                        onChange={e =>  setContact(prevState => ({
+                        onChange={e => setContact(prevState => ({
                             ...prevState,
                             email_contact: e.target.value
                         }))}
@@ -78,7 +78,7 @@ const ModalContact = ({row,setContact,onUpdate}) =>  {
                         id="tel_fixe"
                         label="Telephone fixe"
                         autoFocus
-                        onChange={e =>  setContact(prevState => ({
+                        onChange={e => setContact(prevState => ({
                             ...prevState,
                             telephone_fixe_contact: e.target.value
                         }))}
@@ -95,7 +95,7 @@ const ModalContact = ({row,setContact,onUpdate}) =>  {
                         id="tel_portable"
                         label="Telephone portable"
                         autoFocus
-                        onChange={e =>  setContact(prevState => ({
+                        onChange={e => setContact(prevState => ({
                             ...prevState,
                             telephone_portable_contact: e.target.value
                         }))}
@@ -112,7 +112,7 @@ const ModalContact = ({row,setContact,onUpdate}) =>  {
                         id="fonction"
                         label="Fonction"
                         autoFocus
-                        onChange={e =>  setContact(prevState => ({
+                        onChange={e => setContact(prevState => ({
                             ...prevState,
                             fonction_contact: e.target.value
                         }))}
@@ -124,13 +124,13 @@ const ModalContact = ({row,setContact,onUpdate}) =>  {
                         control={<Checkbox
                             checked={row.est_principal_contact}
                             onChange={handleChangePrincipal}
-                            inputProps={{ 'aria-label': 'primary checkbox' }}
+                            inputProps={{'aria-label': 'primary checkbox'}}
                         />}
                         label="Est principal ?"
                     />
                 </Grid>
             </Grid>
-            <Button onClick={onUpdate}  color="primary" autoFocus>
+            <Button onClick={onUpdate} color="primary" autoFocus>
                 Valider
             </Button>
         </div>

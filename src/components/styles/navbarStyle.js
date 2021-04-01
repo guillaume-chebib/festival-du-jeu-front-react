@@ -26,7 +26,7 @@ export const MainListItems = () => {
     const classes = useStyles1();
     const [open, setOpen] = useState(false);
     const authHeader = useAuthHeader()
-    const [festival,setFestival] = useState([{id_festival: 0}])
+    const [festival, setFestival] = useState([{id_festival: 0}])
 
     const handleClick = async () => {
         setOpen(!open);
@@ -34,99 +34,101 @@ export const MainListItems = () => {
     };
 
     async function fetchData() {
-        const response = await requestToBack('GET',null,`/festival/courant`,authHeader())
+        const response = await requestToBack('GET', null, `/festival/courant`, authHeader())
         const body = await response[0]
-        const festival= body.message
+        const festival = body.message
         setFestival(festival)
 
     }
 
     useEffect(() => {
         console.log(festival)
-    },[festival])
+    }, [festival])
 
 
-    return(
-    <List>
+    return (
+        <List>
 
-        <ListItem button component={Link} to="/festival">
-            <ListItemIcon>
-                <DashboardIcon/>
-            </ListItemIcon>
-            <ListItemText primary="Les festivals"/>
-        </ListItem>
-        <ListItem button component={Link} to="/organisateur">
-            <ListItemIcon>
-                <PeopleIcon/>
-            </ListItemIcon>
-            <ListItemText primary="Organisateurs"/>
-        </ListItem>
-        <ListItem button component={Link} to="/jeu">
-            <ListItemIcon>
-                <VideogameAssetIcon/>
-            </ListItemIcon>
-            <ListItemText primary="Jeux"/>
-        </ListItem>
-        <ListItem button component={Link} to="/reservation">
-            <ListItemIcon>
-                <ShoppingCartIcon/>
-            </ListItemIcon>
-            <ListItemText primary="Reservations"/>
-        </ListItem>
-        <ListItem button component={Link} to="/societe">
-            <ListItemIcon>
-                <BusinessIcon/>
-            </ListItemIcon>
-            <ListItemText primary="Societes"/>
-        </ListItem>
+            <ListItem button component={Link} to="/festival">
+                <ListItemIcon>
+                    <DashboardIcon/>
+                </ListItemIcon>
+                <ListItemText primary="Les festivals"/>
+            </ListItem>
+            <ListItem button component={Link} to="/organisateur">
+                <ListItemIcon>
+                    <PeopleIcon/>
+                </ListItemIcon>
+                <ListItemText primary="Organisateurs"/>
+            </ListItem>
+            <ListItem button component={Link} to="/jeu">
+                <ListItemIcon>
+                    <VideogameAssetIcon/>
+                </ListItemIcon>
+                <ListItemText primary="Jeux"/>
+            </ListItem>
+            <ListItem button component={Link} to="/reservation">
+                <ListItemIcon>
+                    <ShoppingCartIcon/>
+                </ListItemIcon>
+                <ListItemText primary="Reservations"/>
+            </ListItem>
+            <ListItem button component={Link} to="/societe">
+                <ListItemIcon>
+                    <BusinessIcon/>
+                </ListItemIcon>
+                <ListItemText primary="Societes"/>
+            </ListItem>
 
-        <ListItem button onClick={handleClick}>
-            <ListItemIcon>
-                <ImportContactsIcon/>
-            </ListItemIcon>
-            <ListItemText primary="Suivis"/>
-            {open ? <ExpandLess /> : <ExpandMore />}
-        </ListItem>
-        <Collapse in={open} timeout="auto" unmountOnExit>
-            <List component="div" disablePadding>
-                <ListItem button className={classes.nested} component={Link} to={`/festival/${festival[0].id_festival}/exposants`}>
-                    <ListItemIcon>
-                        <GroupIcon/>
-                    </ListItemIcon>
-                    <ListItemText primary="Suivi exposants"/>
-                </ListItem>
-                <ListItem button className={classes.nested} component={Link} to={`/festival/${festival[0].id_festival}/reservations`}>
-                    <ListItemIcon>
-                        <EventIcon/>
-                    </ListItemIcon>
-                    <ListItemText primary="Suivi reservations"/>
-                </ListItem>
-            </List>
-        </Collapse>
+            <ListItem button onClick={handleClick}>
+                <ListItemIcon>
+                    <ImportContactsIcon/>
+                </ListItemIcon>
+                <ListItemText primary="Suivis"/>
+                {open ? <ExpandLess/> : <ExpandMore/>}
+            </ListItem>
+            <Collapse in={open} timeout="auto" unmountOnExit>
+                <List component="div" disablePadding>
+                    <ListItem button className={classes.nested} component={Link}
+                              to={`/festival/${festival[0].id_festival}/exposants`}>
+                        <ListItemIcon>
+                            <GroupIcon/>
+                        </ListItemIcon>
+                        <ListItemText primary="Suivi exposants"/>
+                    </ListItem>
+                    <ListItem button className={classes.nested} component={Link}
+                              to={`/festival/${festival[0].id_festival}/reservations`}>
+                        <ListItemIcon>
+                            <EventIcon/>
+                        </ListItemIcon>
+                        <ListItemText primary="Suivi reservations"/>
+                    </ListItem>
+                </List>
+            </Collapse>
 
 
-    </List>)
+        </List>)
 }
 
 export const publicListItems = (
     <div>
-        <ListItem button component={ Link } to="/public/jeu">
+        <ListItem button component={Link} to="/public/jeu">
             <ListItemIcon>
-                <VideogameAssetIcon />
+                <VideogameAssetIcon/>
             </ListItemIcon>
-            <ListItemText primary="Jeux du festival" />
+            <ListItemText primary="Jeux du festival"/>
         </ListItem>
-        <ListItem button component={ Link } to="/public/zone">
+        <ListItem button component={Link} to="/public/zone">
             <ListItemIcon>
-                <AdjustIcon />
+                <AdjustIcon/>
             </ListItemIcon>
-            <ListItemText primary="Zones du festival" />
+            <ListItemText primary="Zones du festival"/>
         </ListItem>
-        <ListItem button component={ Link } to="/public/editeur">
+        <ListItem button component={Link} to="/public/editeur">
             <ListItemIcon>
                 <BusinessIcon/>
             </ListItemIcon>
-            <ListItemText primary="Les éditeurs" />
+            <ListItemText primary="Les éditeurs"/>
         </ListItem>
     </div>
 );
@@ -139,7 +141,7 @@ export const useStyles1 = makeStyles((theme) => ({
     },
     logo: {
         maxWidth: 45,
-        marginRight : 10
+        marginRight: 10
     },
     toolbar: {
         paddingRight: 24, // keep right padding when drawer closed

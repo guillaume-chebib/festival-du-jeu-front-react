@@ -11,12 +11,12 @@ import {Checkbox, Fade, FormControlLabel, makeStyles, MenuItem} from "@material-
 import {useAuthHeader} from "react-auth-kit";
 import Typography from "@material-ui/core/Typography";
 
-export default function ModalJeuReserve({open,zones,titre,row,setRow,jeux,onUpdate,onClose}) {
+export default function ModalJeuReserve({open, zones, titre, row, setRow, jeux, onUpdate, onClose}) {
 
     const authHeader = useAuthHeader()
     const [jeu, setJeu] = useState()
     const [zone, setZone] = useState()
-    const [allZones,setZones] = useState(zones)
+    const [allZones, setZones] = useState(zones)
 
     const useStyles = makeStyles((theme) => ({
         formControl: {
@@ -43,8 +43,8 @@ export default function ModalJeuReserve({open,zones,titre,row,setRow,jeux,onUpda
     jeux.map((j) => {
         json = json.concat(
             {
-                "id_jeu" : j.id_jeu,
-                "titre_jeu" : j.titre_jeu
+                "id_jeu": j.id_jeu,
+                "titre_jeu": j.titre_jeu
             })
     })
 
@@ -56,7 +56,7 @@ export default function ModalJeuReserve({open,zones,titre,row,setRow,jeux,onUpda
         // })
         // console.log("OUI")
         // console.log(json)
-    },[]);
+    }, []);
 
 
     return (
@@ -73,7 +73,7 @@ export default function ModalJeuReserve({open,zones,titre,row,setRow,jeux,onUpda
                     <DialogContentText id="alert-dialog-description">
                     </DialogContentText>
                     <Grid container spacing={2}>
-                        <Grid item xs={12} >
+                        <Grid item xs={12}>
                             {/*<Autocomplete*/}
                             {/*    disablePortal*/}
                             {/*    id="combo-box-demo"*/}
@@ -88,7 +88,7 @@ export default function ModalJeuReserve({open,zones,titre,row,setRow,jeux,onUpda
                                 fullWidth
                                 label="Jeu à ajouter"
                                 value={jeu}
-                                onChange={e =>  setRow(prevState => ({
+                                onChange={e => setRow(prevState => ({
                                     ...prevState,
                                     id_jeu_jeu_reserve: e.target.value
                                 }))}
@@ -106,14 +106,14 @@ export default function ModalJeuReserve({open,zones,titre,row,setRow,jeux,onUpda
                                 variant="outlined"
                                 defaultValue={row.quantite_jeu_reserve}
                                 type={"number"}
-                                inputProps={{ min: "1", max: "30"}}
+                                inputProps={{min: "1", max: "30"}}
                                 required
                                 fullWidth
                                 id="quantite_jeu_reserve"
                                 label="Quantité"
                                 name="quantite_jeu_reserve"
                                 autoComplete="quantite_jeu_reserve"
-                                onChange={e =>  setRow(prevState => ({
+                                onChange={e => setRow(prevState => ({
                                     ...prevState,
                                     quantite_jeu_reserve: e.target.value
                                 }))}
@@ -126,18 +126,18 @@ export default function ModalJeuReserve({open,zones,titre,row,setRow,jeux,onUpda
                                 fullWidth
                                 required
                                 type={"number"}
-                                inputProps={{ min: "0", max: "10", step: "0.5" }}
+                                inputProps={{min: "0", max: "10", step: "0.5"}}
                                 id="nb_table_jeu_reserve"
                                 label="Nombre de table à utiliser"
                                 name="nb_table_jeu_reserve"
                                 autoComplete="nb_table_jeu_reserve"
-                                onChange={e =>  setRow(prevState => ({
+                                onChange={e => setRow(prevState => ({
                                     ...prevState,
                                     nb_table_jeu_reserve: e.target.value
                                 }))}
                             />
                         </Grid>
-                        <Grid item xs={12} >
+                        <Grid item xs={12}>
                             <TextField
                                 id="outlined-select-currency"
                                 select
@@ -145,7 +145,7 @@ export default function ModalJeuReserve({open,zones,titre,row,setRow,jeux,onUpda
                                 fullWidth
                                 label="Placer le jeu sur une zone"
                                 value={zone}
-                                onChange={e =>  setRow(prevState => ({
+                                onChange={e => setRow(prevState => ({
                                     ...prevState,
                                     id_zone_jeu_reserve: e.target.value
                                 }))}
@@ -163,12 +163,12 @@ export default function ModalJeuReserve({open,zones,titre,row,setRow,jeux,onUpda
                                 control={
                                     <Checkbox
                                         checked={row.tombola_jeu_reserve}
-                                        onClickCapture={e =>  setRow(prevState => ({
+                                        onClickCapture={e => setRow(prevState => ({
                                             ...prevState,
                                             tombola_jeu_reserve: e.target.checked
                                         }))}
 
-                                        inputProps={{ 'aria-label': 'primary checkbox' }}
+                                        inputProps={{'aria-label': 'primary checkbox'}}
                                     />
                                 }
                                 labelPlacement="top"
@@ -181,12 +181,12 @@ export default function ModalJeuReserve({open,zones,titre,row,setRow,jeux,onUpda
                                 control={
                                     <Checkbox
                                         checked={row.dotation_jeu_reserve}
-                                        onClickCapture={e =>  setRow(prevState => ({
+                                        onClickCapture={e => setRow(prevState => ({
                                             ...prevState,
                                             dotation_jeu_reserve: e.target.checked
                                         }))}
 
-                                        inputProps={{ 'aria-label': 'primary checkbox' }}
+                                        inputProps={{'aria-label': 'primary checkbox'}}
                                     />
                                 }
                                 labelPlacement="top"
@@ -199,11 +199,11 @@ export default function ModalJeuReserve({open,zones,titre,row,setRow,jeux,onUpda
                                 control={
                                     <Checkbox
                                         checked={row.place_plan_jeu_reserve}
-                                        onClickCapture={e =>  setRow(prevState => ({
+                                        onClickCapture={e => setRow(prevState => ({
                                             ...prevState,
                                             place_plan_jeu_reserve: e.target.checked
                                         }))}
-                                        inputProps={{ 'aria-label': 'primary checkbox' }}
+                                        inputProps={{'aria-label': 'primary checkbox'}}
                                     />
                                 }
                                 labelPlacement="top"
@@ -216,12 +216,12 @@ export default function ModalJeuReserve({open,zones,titre,row,setRow,jeux,onUpda
                                 control={
                                     <Checkbox
                                         checked={row.recu_jeu_reserve}
-                                        onClickCapture={e =>  setRow(prevState => ({
+                                        onClickCapture={e => setRow(prevState => ({
                                             ...prevState,
                                             recu_jeu_reserve: e.target.checked
                                         }))}
 
-                                        inputProps={{ 'aria-label': 'primary checkbox' }}
+                                        inputProps={{'aria-label': 'primary checkbox'}}
                                     />
                                 }
                                 labelPlacement="top"
@@ -234,40 +234,40 @@ export default function ModalJeuReserve({open,zones,titre,row,setRow,jeux,onUpda
                                 control={
                                     <Checkbox
                                         checked={row.a_renvoyer_jeu_reserve}
-                                        onChange={e =>  setRow(prevState => ({
+                                        onChange={e => setRow(prevState => ({
                                             ...prevState,
                                             a_renvoyer_jeu_reserve: e.target.checked
                                         }))}
 
-                                        inputProps={{ 'aria-label': 'primary checkbox' }}
+                                        inputProps={{'aria-label': 'primary checkbox'}}
                                     />
                                 }
                                 labelPlacement="top"
                                 label={<Typography variant="body2" color="textSecondary">A renvoyer ?</Typography>}
 
                             />
-                        <Fade in={row.a_renvoyer_jeu_reserve}>
-                            <Grid container spacing={2}>
-                                <Grid item xs={12} sm={3}>
-                                    <TextField
-                                        variant="outlined"
-                                        defaultValue={row.montant_renvoi_jeu_reserve}
-                                        fullWidth
-                                        required
-                                        type={"number"}
-                                        inputProps={{ min: "0", max: "10", step: "0.01" }}
-                                        id="montant_renvoi_jeu_reserve"
-                                        label="Montant du renvoi"
-                                        name="montant_renvoi_jeu_reserve"
-                                        autoComplete="montant_renvoi_jeu_reserve"
-                                        onChange={e =>  setRow(prevState => ({
-                                            ...prevState,
-                                            nb_table_jeu_reserve: e.target.value
-                                        }))}
-                                    />
+                            <Fade in={row.a_renvoyer_jeu_reserve}>
+                                <Grid container spacing={2}>
+                                    <Grid item xs={12} sm={3}>
+                                        <TextField
+                                            variant="outlined"
+                                            defaultValue={row.montant_renvoi_jeu_reserve}
+                                            fullWidth
+                                            required
+                                            type={"number"}
+                                            inputProps={{min: "0", max: "10", step: "0.01"}}
+                                            id="montant_renvoi_jeu_reserve"
+                                            label="Montant du renvoi"
+                                            name="montant_renvoi_jeu_reserve"
+                                            autoComplete="montant_renvoi_jeu_reserve"
+                                            onChange={e => setRow(prevState => ({
+                                                ...prevState,
+                                                nb_table_jeu_reserve: e.target.value
+                                            }))}
+                                        />
+                                    </Grid>
                                 </Grid>
-                            </Grid>
-                        </Fade>
+                            </Fade>
                         </Grid>
                     </Grid>
                 </DialogContent>
@@ -275,7 +275,7 @@ export default function ModalJeuReserve({open,zones,titre,row,setRow,jeux,onUpda
                     <Button color="primary" onClick={onClose}>
                         Annuler
                     </Button>
-                    <Button onClick={onUpdate}  color="primary" autoFocus>
+                    <Button onClick={onUpdate} color="primary" autoFocus>
                         Oui
                     </Button>
                 </DialogActions>

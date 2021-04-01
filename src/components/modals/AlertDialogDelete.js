@@ -6,7 +6,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 
-export default function AlertDialogDelete({open,titre,message,onDelete,onClose}) {
+export default function AlertDialogDelete({open, titre, message, onDelete, onClose}) {
     return (
         <div>
 
@@ -26,7 +26,7 @@ export default function AlertDialogDelete({open,titre,message,onDelete,onClose})
                     <Button onClick={onClose} color="primary">
                         Non
                     </Button>
-                    <Button onClick={onDelete}  color="primary" autoFocus>
+                    <Button onClick={onDelete} color="primary" autoFocus>
                         Oui
                     </Button>
                 </DialogActions>

@@ -19,7 +19,7 @@ const UpdateZone = ({row, setRow, setTrig, zones, onUpdate}) => {
     }
 
     const handleChangeZone = async () => {
-        const response = await requestToBack('PUT',row,`/reservation/${row.id_reservation_jeu_reserve}/jeuReserve/${row.id}`,authHeader())
+        const response = await requestToBack('PUT', row, `/reservation/${row.id_reservation_jeu_reserve}/jeuReserve/${row.id}`, authHeader())
         const body = await response[0]
         if (response[1] !== 200) {
             console.log("erreur serveur")
@@ -37,7 +37,8 @@ const UpdateZone = ({row, setRow, setTrig, zones, onUpdate}) => {
                 <DialogTitle id="customized-dialog-title" onClose={handleCloseDialog}>
                     Modifier la zone
                 </DialogTitle>
-                <ModalZone row={row} setRow={setRow} zones={zones} onClose={handleCloseDialog} onUpdate={handleChangeZone}/>
+                <ModalZone row={row} setRow={setRow} zones={zones} onClose={handleCloseDialog}
+                           onUpdate={handleChangeZone}/>
             </Dialog>
         </div>
     )
@@ -45,34 +46,37 @@ const UpdateZone = ({row, setRow, setTrig, zones, onUpdate}) => {
 
 const ModalZone = ({row, setRow, zones, onClose, onUpdate}) => {
 
-        return (<div>
-            <DialogContent>
-                <TextField
-                    id="outlined-select-currency"
-                    select
-                    required
-                    fullWidth
-                    label="Zones"
-                    value={row.id_zone_jeu_reserve}
-                    onChange={(e) => {row.id_zone_jeu_reserve = e.target.value}}
-                    variant="outlined"
-                >
-                    {zones.map((option) => (
-                        <MenuItem key={option.zone.id_zone} selected={row.id_zone_jeu_reserve===option.zone.id_zone} value={option.zone.id_zone}>
-                            {option.zone.nom_zone}
-                        </MenuItem>
-                    ))}
-                </TextField>
-            </DialogContent>
-            <DialogActions>
-                <Button color="primary" onClick={onClose}>
-                    Annuler
-                </Button>
-                <Button onClick={onUpdate}  color="primary" autoFocus>
-                    Oui
-                </Button>
-            </DialogActions>
-        </div>)
+    return (<div>
+        <DialogContent>
+            <TextField
+                id="outlined-select-currency"
+                select
+                required
+                fullWidth
+                label="Zones"
+                value={row.id_zone_jeu_reserve}
+                onChange={(e) => {
+                    row.id_zone_jeu_reserve = e.target.value
+                }}
+                variant="outlined"
+            >
+                {zones.map((option) => (
+                    <MenuItem key={option.zone.id_zone} selected={row.id_zone_jeu_reserve === option.zone.id_zone}
+                              value={option.zone.id_zone}>
+                        {option.zone.nom_zone}
+                    </MenuItem>
+                ))}
+            </TextField>
+        </DialogContent>
+        <DialogActions>
+            <Button color="primary" onClick={onClose}>
+                Annuler
+            </Button>
+            <Button onClick={onUpdate} color="primary" autoFocus>
+                Oui
+            </Button>
+        </DialogActions>
+    </div>)
 
 }
 export default UpdateZone

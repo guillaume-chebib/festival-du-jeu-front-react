@@ -31,10 +31,10 @@ const useStyles = makeStyles((theme) => ({
 const nomRegex = "^[0-9]*$";
 const nomAdrRegex = "^[^0-9]*$";
 
-const ModalSociete = ({titre,row,setRow,onClose,onUpdate,open}) =>  {
+const ModalSociete = ({titre, row, setRow, onClose, onUpdate, open}) => {
     const inputRef = useRef("form");
     const classes = useStyles();
-    const [nameError,setNameError] = React.useState("")
+    const [nameError, setNameError] = React.useState("")
 
     const handleChangeEditeur = () => {
         setRow(prevState => ({
@@ -58,7 +58,7 @@ const ModalSociete = ({titre,row,setRow,onClose,onUpdate,open}) =>  {
     };
 
     const onChangeNom = (e) => {
-        if(!e.target.value.match(nomRegex)){
+        if (!e.target.value.match(nomRegex)) {
             setNameError("")
         } else {
             setNameError("Le nom doit contenir des caractères")
@@ -66,7 +66,7 @@ const ModalSociete = ({titre,row,setRow,onClose,onUpdate,open}) =>  {
     }
 
     const onChangeNomAdresse = (e) => {
-        if(!e.target.value.match(nomAdrRegex)){
+        if (!e.target.value.match(nomAdrRegex)) {
             setNameError("")
         } else {
             setNameError("Le champs ne doit pas contenir de nombres")
@@ -116,7 +116,7 @@ const ModalSociete = ({titre,row,setRow,onClose,onUpdate,open}) =>  {
                                     control={<Checkbox
                                         checked={row.est_exposant_societe}
                                         onChange={handleChangeExposant}
-                                        inputProps={{ 'aria-label': 'primary checkbox' }}
+                                        inputProps={{'aria-label': 'primary checkbox'}}
                                     />}
                                     label="Est exposant ?"
                                 />
@@ -128,7 +128,7 @@ const ModalSociete = ({titre,row,setRow,onClose,onUpdate,open}) =>  {
                                     control={<Checkbox
                                         checked={row.est_inactif_societe}
                                         onChange={handleChangeInactif}
-                                        inputProps={{ 'aria-label': 'primary checkbox' }}
+                                        inputProps={{'aria-label': 'primary checkbox'}}
                                     />}
                                     label="Est inactif ?"
                                 />
@@ -140,7 +140,7 @@ const ModalSociete = ({titre,row,setRow,onClose,onUpdate,open}) =>  {
                                     control={<Checkbox
                                         checked={row.est_editeur_societe}
                                         onChange={handleChangeEditeur}
-                                        inputProps={{ 'aria-label': 'primary checkbox' }}
+                                        inputProps={{'aria-label': 'primary checkbox'}}
                                     />}
                                     label="Est editeur ?"
                                 />
@@ -158,7 +158,7 @@ const ModalSociete = ({titre,row,setRow,onClose,onUpdate,open}) =>  {
                                                     id="numero"
                                                     label="Numero de rue"
                                                     autoFocus
-                                                    onChange={e =>  setRow(prevState => ({
+                                                    onChange={e => setRow(prevState => ({
                                                         ...prevState,
                                                         numero_rue_editeur: e.target.value
                                                     }))}
@@ -197,7 +197,7 @@ const ModalSociete = ({titre,row,setRow,onClose,onUpdate,open}) =>  {
                                                     id="code_postal"
                                                     label="Code postal"
                                                     autoFocus
-                                                    onChange={e =>  setRow(prevState => ({
+                                                    onChange={e => setRow(prevState => ({
                                                         ...prevState,
                                                         code_postal_editeur: e.target.value
                                                     }))}

@@ -5,11 +5,11 @@ import {UpdateDeleteButtons} from "../modals/UpdateDeleteButtons";
 import {requestToBack} from "../../utils/utils_functions";
 import {useAuthHeader} from "react-auth-kit";
 
-const UpdateDeleteJeu = ({row,setTrig,editeurs}) => {
+const UpdateDeleteJeu = ({row, setTrig, editeurs}) => {
 
     const [openDelete, setOpenDelete] = useState(false);
     const [openEdit, setOpenEdit] = useState(false);
-    const [jeu,setJeu] = useState(row);
+    const [jeu, setJeu] = useState(row);
     const authHeader = useAuthHeader()
 
 
@@ -30,7 +30,7 @@ const UpdateDeleteJeu = ({row,setTrig,editeurs}) => {
     };
 
     const handleDelete = async () => {
-        const response = await requestToBack('DELETE',row,`/jeu/${row.id}`,authHeader())
+        const response = await requestToBack('DELETE', row, `/jeu/${row.id}`, authHeader())
         const body = await response[0]
         if (response[1] !== 200) {
             console.log("erreur serveur")
@@ -42,7 +42,7 @@ const UpdateDeleteJeu = ({row,setTrig,editeurs}) => {
 
     const handleEdit = async () => {
 
-        const response = await requestToBack('PUT',jeu,`/jeu/${row.id}`,authHeader())
+        const response = await requestToBack('PUT', jeu, `/jeu/${row.id}`, authHeader())
         const body = await response[0]
 
         if (response[1] !== 200) {
@@ -56,10 +56,12 @@ const UpdateDeleteJeu = ({row,setTrig,editeurs}) => {
     return (
         <div>
 
-            <UpdateDeleteButtons onClickOpenDelete={handleClickOpenDelete} onClickOpenEdit={handleClickOpenEdit} />
+            <UpdateDeleteButtons onClickOpenDelete={handleClickOpenDelete} onClickOpenEdit={handleClickOpenEdit}/>
 
-            <ModalJeu titre="Editer jeu" editeurs = {editeurs} row={jeu} setRow={setJeu} onClose={handleCloseEdit} onUpdate={handleEdit} open={openEdit}/>
-            <AlertDialogDelete titre="Supprimer jeu" message={"Etes vous sur de vouloir supprimer : "+row.id} onClose={handleCloseDelete} onDelete={handleDelete} open={openDelete}/>
+            <ModalJeu titre="Editer jeu" editeurs={editeurs} row={jeu} setRow={setJeu} onClose={handleCloseEdit}
+                      onUpdate={handleEdit} open={openEdit}/>
+            <AlertDialogDelete titre="Supprimer jeu" message={"Etes vous sur de vouloir supprimer : " + row.id}
+                               onClose={handleCloseDelete} onDelete={handleDelete} open={openDelete}/>
         </div>
 
     )

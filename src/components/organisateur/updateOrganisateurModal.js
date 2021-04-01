@@ -8,7 +8,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 import React from "react";
 
-const UpdateOrganisateurModal = ({open,titre,row,setRow,onUpdate,onClose}) =>  {
+const UpdateOrganisateurModal = ({open, titre, row, setRow, onUpdate, onClose}) => {
     return (
         <div>
 
@@ -34,7 +34,7 @@ const UpdateOrganisateurModal = ({open,titre,row,setRow,onUpdate,onClose}) =>  {
                                 id="prenom"
                                 label="Prenom"
                                 autoFocus
-                                onChange={e =>  setRow(prevState => ({
+                                onChange={e => setRow(prevState => ({
                                     ...prevState,
                                     prenom_organisateur: e.target.value
                                 }))}
@@ -51,7 +51,7 @@ const UpdateOrganisateurModal = ({open,titre,row,setRow,onUpdate,onClose}) =>  {
                                 label="Nom"
                                 name="nom"
                                 autoComplete="nom"
-                                onChange={e =>  setRow(prevState => ({
+                                onChange={e => setRow(prevState => ({
                                     ...prevState,
                                     nom_organisateur: e.target.value
                                 }))}
@@ -67,7 +67,7 @@ const UpdateOrganisateurModal = ({open,titre,row,setRow,onUpdate,onClose}) =>  {
                                 label="Adresse mail"
                                 name="mail"
                                 autoComplete="mail"
-                                onChange={e =>  setRow(prevState => ({
+                                onChange={e => setRow(prevState => ({
                                     ...prevState,
                                     email_organisateur: e.target.value
                                 }))}
@@ -83,7 +83,7 @@ const UpdateOrganisateurModal = ({open,titre,row,setRow,onUpdate,onClose}) =>  {
                                 type="password"
                                 id="motdepasse"
                                 autoComplete="current-password"
-                                onChange={e =>  setRow(prevState => ({
+                                onChange={e => setRow(prevState => ({
                                     ...prevState,
                                     mot_de_passe_organisateur: e.target.value
                                 }))}
@@ -95,7 +95,7 @@ const UpdateOrganisateurModal = ({open,titre,row,setRow,onUpdate,onClose}) =>  {
                     <Button color="primary" onClick={onClose} color="primary">
                         Annuler
                     </Button>
-                    <Button onClick={onUpdate}  color="primary" autoFocus>
+                    <Button onClick={onUpdate} color="primary" autoFocus>
                         Oui
                     </Button>
                 </DialogActions>

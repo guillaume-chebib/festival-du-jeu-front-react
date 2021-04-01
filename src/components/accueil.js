@@ -14,7 +14,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
-        minHeight:355
+        minHeight: 355
     },
     overlay: {
         position: 'absolute',
@@ -40,16 +40,16 @@ export default function Accueil() {
 
     const post = {
         title: 'Bienvenue au Festival du jeu',
-        description:"",
+        description: "",
         image: 'images/Festival_bande.png',
         imgText: 'main image description',
     };
 
     return (
         <>
-        <Paper className={classes.mainFeaturedPost} style={{ backgroundImage: `url(${post.image})` }}>
-            {<img style={{ display: 'none' }} src={post.image} alt={post.imageText} />}
-        </Paper>
+            <Paper className={classes.mainFeaturedPost} style={{backgroundImage: `url(${post.image})`}}>
+                {<img style={{display: 'none'}} src={post.image} alt={post.imageText}/>}
+            </Paper>
             <ProductValues/>
         </>
     );

@@ -6,20 +6,19 @@ import SuiviReservations from "../suivi/suivi_reservations/suivi_reservations";
 const RedirectReservation = () => {
     const authHeader = useAuthHeader()
 
-    const [festival,setFestival] = useState()
-    const [trig,setTrig] = useState([])
+    const [festival, setFestival] = useState()
+    const [trig, setTrig] = useState([])
 
 
     useEffect(() => {
 
         async function fetchData() {
-            const response = await requestToBack('GET',null,`/festival/courant`,authHeader())
+            const response = await requestToBack('GET', null, `/festival/courant`, authHeader())
 
             const body = await response[0].message[0]
             if (response[1] !== 200) {
                 console.log(response[1])
-            }
-            else {
+            } else {
                 setFestival(body)
             }
 
@@ -27,13 +26,13 @@ const RedirectReservation = () => {
 
         fetchData();
 
-    },[trig]);
+    }, [trig]);
 
 
     return (
         <div>
             {festival &&
-                <SuiviReservations id_festival={festival.id_festival}/>
+            <SuiviReservations id_festival={festival.id_festival}/>
             }
         </div>
     )

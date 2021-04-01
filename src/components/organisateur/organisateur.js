@@ -10,22 +10,22 @@ import {IsAdmin, requestToBack} from "../../utils/utils_functions";
 const Organisateur = () => {
 
     const history = useHistory();
-    const [organisateurs,setOrganisateurs] = useState([])
-    const [trig,setTrig] = useState([])
+    const [organisateurs, setOrganisateurs] = useState([])
+    const [trig, setTrig] = useState([])
     const styles = useStylesThemeFestival()
     const authHeader = useAuthHeader()
 
 
     const columns = [
-        { field: 'id', headerName: 'ID', hide: true},
-        {field: 'nom_organisateur', headerName: 'Nom', flex:0.5},
+        {field: 'id', headerName: 'ID', hide: true},
+        {field: 'nom_organisateur', headerName: 'Nom', flex: 0.5},
         {field: 'prenom_organisateur', headerName: 'Prenom', flex: 0.5},
         {field: 'email_organisateur', headerName: 'Adresse Mail', flex: 1},
         {
             field: "",
             headerName: "",
             sortable: false,
-            flex:1,
+            flex: 1,
             disableClickEventBubbling: true,
             renderCell: (params) => {
 
@@ -35,7 +35,7 @@ const Organisateur = () => {
     ]
 
 
-    function renameKey ( obj, oldKey, newKey ) { //permet de renommer les colonnes
+    function renameKey(obj, oldKey, newKey) { //permet de renommer les colonnes
         obj[newKey] = obj[oldKey];
         delete obj[oldKey];
     }
@@ -43,11 +43,10 @@ const Organisateur = () => {
     useEffect(() => {
         async function fetchData() {
 
-            const response = await requestToBack('GET',null,`/organisateur`,authHeader())
-            if(response[1] !== 200){
+            const response = await requestToBack('GET', null, `/organisateur`, authHeader())
+            if (response[1] !== 200) {
 
-            }
-            else {
+            } else {
                 const body = response[0]
                 const organisateur = body.message
                 if (organisateur !== undefined) {
@@ -60,7 +59,7 @@ const Organisateur = () => {
 
         fetchData();
 
-    },[trig]);
+    }, [trig]);
 
 
     return (
@@ -70,7 +69,7 @@ const Organisateur = () => {
                 Ajouter un organisateur
             </Button>
             <div style={{paddingTop: '2em'}}>
-                <div style={{ height: 400, width: '100%' }}>
+                <div style={{height: 400, width: '100%'}}>
                     <DataGrid sortModel={[
                         {
 
@@ -80,7 +79,7 @@ const Organisateur = () => {
                         },
                     ]}
                               rows={organisateurs}
-                              {...organisateurs} columns={columns} pageSize={5} />
+                              {...organisateurs} columns={columns} pageSize={5}/>
 
                 </div>
             </div>

@@ -4,7 +4,7 @@ import DateFnsUtils from '@date-io/date-fns';
 import {KeyboardDatePicker, MuiPickersUtilsProvider,} from '@material-ui/pickers';
 
 
-const DatePickerComponent = ({val,id,disabled,handleDateChange}) => {
+const DatePickerComponent = ({val, id, disabled, handleDateChange}) => {
     const name_id = 'date-picker-inline-' + id
     return (
         <MuiPickersUtilsProvider utils={DateFnsUtils}>

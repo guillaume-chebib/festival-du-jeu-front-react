@@ -8,15 +8,15 @@ import Button from "@material-ui/core/Button";
 const CreateSociete = ({setTrig}) => {
 
     const [openCreate, setOpenCreate] = useState(false);
-    const [reponse,setReponse] = useState()
-    const [societe,setSociete] = useState({
-        nom_societe : null,
-        est_exposant_societe : false,
-        numero_rue_editeur : null,
-        rue_editeur : null,
-        est_editeur_societe : false,
-        est_inactif_societe : false,
-        ville_editeur : null,
+    const [reponse, setReponse] = useState()
+    const [societe, setSociete] = useState({
+        nom_societe: null,
+        est_exposant_societe: false,
+        numero_rue_editeur: null,
+        rue_editeur: null,
+        est_editeur_societe: false,
+        est_inactif_societe: false,
+        ville_editeur: null,
         code_postal_editeur: null
     });
 
@@ -33,22 +33,21 @@ const CreateSociete = ({setTrig}) => {
     const handleCreate = async () => {
 
         // e.preventDefault();
-        const response = await requestToBack('POST',{
-            nom_societe : societe.nom_societe,
-            est_exposant_societe : societe.est_exposant_societe,
-            numero_rue_editeur : societe.numero_rue_editeur,
-            rue_editeur : societe.rue_editeur,
-            est_editeur_societe : societe.est_editeur_societe,
-            est_inactif_societe : societe.est_inactif_societe,
-            ville_editeur : societe.ville_editeur,
+        const response = await requestToBack('POST', {
+            nom_societe: societe.nom_societe,
+            est_exposant_societe: societe.est_exposant_societe,
+            numero_rue_editeur: societe.numero_rue_editeur,
+            rue_editeur: societe.rue_editeur,
+            est_editeur_societe: societe.est_editeur_societe,
+            est_inactif_societe: societe.est_inactif_societe,
+            ville_editeur: societe.ville_editeur,
             code_postal_editeur: societe.code_postal_editeur,
-        },`/societe`,authHeader())
+        }, `/societe`, authHeader())
 
         const body = await response[0]
         if (response[1] !== 200) {
             setReponse(<Alert severity="error">{body.message}</Alert>)
-        }
-        else {
+        } else {
             setReponse(<Alert severity="success">Société créée avec succes ! </Alert>)
         }
         setTrig(societe)
@@ -59,7 +58,8 @@ const CreateSociete = ({setTrig}) => {
     return (
         <div>
             <Button onClick={handleClickOpenCreate} variant="contained" color="primary">Ajouter une société </Button>
-            <ModalSociete titre="Créer une société" row={societe} setRow={setSociete} onClose={handleCloseCreate} onUpdate={handleCreate} open={openCreate}/>
+            <ModalSociete titre="Créer une société" row={societe} setRow={setSociete} onClose={handleCloseCreate}
+                          onUpdate={handleCreate} open={openCreate}/>
         </div>
 
     )

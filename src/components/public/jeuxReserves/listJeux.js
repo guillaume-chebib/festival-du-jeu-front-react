@@ -30,31 +30,30 @@ const useStyles = makeStyles((theme) => ({
 export default function ListJeux() {
 
     const history = useHistory();
-    const [jeux,setJeux] = useState([])
-    const [trig,setTrig] = useState([])
+    const [jeux, setJeux] = useState([])
+    const [trig, setTrig] = useState([])
     const authHeader = useAuthHeader()
 
 
-
     const columns = [
-        { field: 'id', headerName: 'ID', hide: true },
-        { field : 'titre_jeu', headerName: 'Titre du jeu', flex: 1,type: 'string'},
-        { field : 'min_joueur_jeu', headerName: 'Joueur minimum', flex: 1, type: 'number'},
-        { field : 'max_joueur_jeu', headerName: 'Joueur maximum', flex: 1, type: 'number'},
-        { field : 'age_min_jeu', headerName: 'Age requis', flex: 1, type: 'number'},
-        { field : 'duree_jeu', headerName: 'Durée(en min)', flex: 1, type: 'number'},
-        { field : 'nom_societe', headerName: 'Editeur', flex: 1, type: 'string'},
-        { field: 'Prototype', headerName: 'Prototype', flex: 1,
-            renderCell: (params) =>
-            {
+        {field: 'id', headerName: 'ID', hide: true},
+        {field: 'titre_jeu', headerName: 'Titre du jeu', flex: 1, type: 'string'},
+        {field: 'min_joueur_jeu', headerName: 'Joueur minimum', flex: 1, type: 'number'},
+        {field: 'max_joueur_jeu', headerName: 'Joueur maximum', flex: 1, type: 'number'},
+        {field: 'age_min_jeu', headerName: 'Age requis', flex: 1, type: 'number'},
+        {field: 'duree_jeu', headerName: 'Durée(en min)', flex: 1, type: 'number'},
+        {field: 'nom_societe', headerName: 'Editeur', flex: 1, type: 'string'},
+        {
+            field: 'Prototype', headerName: 'Prototype', flex: 1,
+            renderCell: (params) => {
                 return <Checkbox
                     checked={params.row.proto_jeu}
-                    inputProps={{ 'aria-label': 'primary checkbox' }}
+                    inputProps={{'aria-label': 'primary checkbox'}}
                 />
 
             }
         },
-        { field : 'url_consignes_jeu', headerName: 'Règles du jeu', flex: 1},
+        {field: 'url_consignes_jeu', headerName: 'Règles du jeu', flex: 1},
 
     ]
 
@@ -62,14 +61,13 @@ export default function ListJeux() {
     useEffect(() => {
 
         async function fetchData() {
-            const responseJeu = await requestToBack('GET',null,`/public/festival/jeu`,authHeader())
+            const responseJeu = await requestToBack('GET', null, `/public/festival/jeu`, authHeader())
             const bodyJeu = await responseJeu[0]
             const jeux = bodyJeu
 
             if (responseJeu[1] !== 200) {
                 console.log(responseJeu[1])
-            }
-            else {
+            } else {
                 jeux.forEach(obj => renameKey(obj, 'id_jeu', 'id'));
                 setJeux(jeux)
             }
@@ -78,23 +76,24 @@ export default function ListJeux() {
 
         fetchData();
 
-    },[trig]);
+    }, [trig]);
 
     return (
         <div>
             <div>
-                <h1 style={{display : "inline-block", margin : "20px"}}>
+                <h1 style={{display: "inline-block", margin: "20px"}}>
                     Liste des jeux
                 </h1>
 
-                <Tooltip title="Pour filtrer les jeux : Cliquez sur les options d'une colonne > Filter" arrow placement="right">
+                <Tooltip title="Pour filtrer les jeux : Cliquez sur les options d'une colonne > Filter" arrow
+                         placement="right">
                     <HelpOutlineRoundedIcon/>
                 </Tooltip>
 
             </div>
 
             <div style={{paddingTop: '2em'}}>
-                <div style={{ height: 400, width: '100%' }}>
+                <div style={{height: 400, width: '100%'}}>
                     <DataGrid sortModel={[
                         {
 
@@ -104,7 +103,7 @@ export default function ListJeux() {
                         },
                     ]}
                               rows={jeux}
-                              {...jeux} columns={columns} pageSize={15} />
+                              {...jeux} columns={columns} pageSize={15}/>
                 </div>
             </div>
         </div>

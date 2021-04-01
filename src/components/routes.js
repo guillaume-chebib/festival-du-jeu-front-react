@@ -31,20 +31,21 @@ const Routes = () => (
         <PrivateRoute exact path="/contact" loginPath={'/login'} component={Contact}/>
         <PrivateRoute exact path="/jeu" loginPath={'/login'} component={Jeu}/>
         <PrivateRoute exact path="/festival/:id/exposants" loginPath={'/login'} component={SuiviExposants}/>
-        <PrivateRoute exact path="/festival/:id/reservation/:id_reservation/jeuxReserves" loginPath={'/login'} component={JeuxReserves}/>
+        <PrivateRoute exact path="/festival/:id/reservation/:id_reservation/jeuxReserves" loginPath={'/login'}
+                      component={JeuxReserves}/>
         <PrivateRoute exact path="/festival/:id/reservations" loginPath={'/login'} component={SuiviReservations}/>
         <PrivateRoute exact path="/reservation/:id" loginPath={'/login'} component={Reservation}/>
         <Route exact path="/login" component={Connexion}/>
         <PrivateRoute exact path="/organisateur" loginPath={'/login'} component={Organisateur}/>
         <PrivateRoute exact path="/organisateur/ajout" loginPath={'/login'} component={AjoutOrganisateur}/>
         <PrivateRoute component={PrivateComponent} path={'/privateRoute'} loginPath={'/login'} exact/>
-        <PrivateRoute exact path="/societe"  loginPath={'/login'} component={Societe}/>
+        <PrivateRoute exact path="/societe" loginPath={'/login'} component={Societe}/>
         <PrivateRoute loginPath={'/login'} exact path="/dashboard" component={Dashboard}/>
         <Route exact path="/public/zone" component={Zones}/>
         <Route exact path="/public/jeu" component={ListJeux}/>
         <Route exact path="/public/editeur" component={Editeurs}/>
         <Route path="*">
-                <Redirect to="/" />
+            <Redirect to="/"/>
         </Route>
     </Switch>
 )

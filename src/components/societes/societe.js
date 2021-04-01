@@ -13,7 +13,7 @@ import CreateSociete from "./createSociete";
 import {IsAdmin} from "../../utils/utils_functions";
 
 function TabPanel(props) {
-    const { children, value, index, ...other } = props;
+    const {children, value, index, ...other} = props;
 
     return (
         <div
@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Societe() {
     const classes = useStyles();
     const [value, setValue] = React.useState(0);
-    const [trig,setTrig] = useState([])
+    const [trig, setTrig] = useState([])
 
     const handleChange = (event, newValue) => {
         event.preventDefault()

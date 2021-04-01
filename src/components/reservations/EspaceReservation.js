@@ -12,12 +12,11 @@ import Paper from '@material-ui/core/Paper';
 import {TextField} from "@material-ui/core";
 
 
-const EspaceReservation = ({setTrig,reservation}) => {
+const EspaceReservation = ({setTrig, reservation}) => {
     const classes = useStylesTableValueColor();
 
     const authHeader = useAuthHeader()
-    const [espaces,setEspaces] = useState()
-
+    const [espaces, setEspaces] = useState()
 
 
     useEffect(() => {
@@ -27,16 +26,17 @@ const EspaceReservation = ({setTrig,reservation}) => {
 
         fetchData();
 
-    },[]);
+    }, []);
 
     function subtotal(items) {
         // return items.map(({ price }) => price).reduce((sum, i) => sum + i, 0);
         return 0;
     }
+
     const invoiceSubtotal = subtotal(reservation);
 
     const handlePutAllocation = async (espace) => {
-        const response = await requestToBack('PUT',espace,`/reservation/${reservation.id}/allocation_espace/${espace.id_espace}`,authHeader())
+        const response = await requestToBack('PUT', espace, `/reservation/${reservation.id}/allocation_espace/${espace.id_espace}`, authHeader())
         const body = await response[0]
         if (response[1] !== 200) {
             console.log("erreur serveur")
@@ -48,7 +48,7 @@ const EspaceReservation = ({setTrig,reservation}) => {
         let sommePrix = 0
         espaces.map(e => sommePrix += calculPrixRemise(e))
         reservation.prix_total_reservation = sommePrix + reservation.reduction_reservation
-        const response = await requestToBack('PUT',reservation,`/reservation/${reservation.id_reservation}`,authHeader())
+        const response = await requestToBack('PUT', reservation, `/reservation/${reservation.id_reservation}`, authHeader())
         const body = await response[0]
         if (response[1] !== 200) {
             console.log("erreur serveur")
@@ -60,10 +60,10 @@ const EspaceReservation = ({setTrig,reservation}) => {
     const calculPrix = (row) => {
         const prix_table = (row.nb_table_allocation_espace * row.prix_table_espace)
         const prix_m2 = (row.m2_allocation_espace * row.prix_table_espace)
-        return  prix_table + prix_m2
+        return prix_table + prix_m2
     }
     const calculPrixRemise = (row) => {
-        return  calculPrix(row) - row.remise_allocation_espace
+        return calculPrix(row) - row.remise_allocation_espace
     }
 
     return (
@@ -131,7 +131,7 @@ const EspaceReservation = ({setTrig,reservation}) => {
                                 <TextField
                                     type="number"
                                     defaultValue={reservation.reduction_reservation}
-                                    onChange={async(event) => {
+                                    onChange={async (event) => {
                                         reservation.reduction_reservation = (event.target.value === "" ? 0 : event.target.value)
                                         handleChange(reservation)
                                         setTrig(reservation)
@@ -139,7 +139,7 @@ const EspaceReservation = ({setTrig,reservation}) => {
                                 />
                             </TableCell>
                         </TableRow>
-                        <TableRow  style={{backgroundColor:'red'}}>
+                        <TableRow style={{backgroundColor: 'red'}}>
                             <TableCell colSpan={5}>Total</TableCell>
                             <TableCell>
                                 {reservation.prix_total_reservation}

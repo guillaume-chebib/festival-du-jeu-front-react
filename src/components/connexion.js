@@ -20,37 +20,37 @@ const Connexion = () => {
     const signIn = useSignIn()
 
     const classes = useStyles();
-    const [logged,setLogged] = useState()
+    const [logged, setLogged] = useState()
     const [formData, setFormData] = useState({mail: '', password: ''})
 
     const onSubmit = async (e) => {
         e.preventDefault();
 
-        const response = await requestToBack('POST',formData,`/login`,null)
+        const response = await requestToBack('POST', formData, `/login`, null)
 
         const body = await response[0]
         if (response[1] !== 200) {
-            setLogged(<Alert severity="error">Combinaison identifant/mot de passe non reconnue, veuillez reesayer</Alert>)
-        }
-        else {
+            setLogged(<Alert severity="error">Combinaison identifant/mot de passe non reconnue, veuillez
+                reesayer</Alert>)
+        } else {
 
-            if(body.token !== undefined) {
+            if (body.token !== undefined) {
                 var decode1 = await jwt(body.token)
                 if (signIn({
                     token: body.token,
                     tokenType: 'Bearer',    // Token type set as Bearer
-                    authState: { uid: decode1.id.toString() , superuser: decode1.superuser.toString() },
+                    authState: {uid: decode1.id.toString(), superuser: decode1.superuser.toString()},
                     expiresIn: 60  // Token Expriration time, in minutes
                 })) {
-                    setLogged(<Redirect to="/dashboard" /> )
+                    setLogged(<Redirect to="/dashboard"/>)
 
                 } else {
                     // Else, there must be some error. So, throw an error
                     setLogged(<Alert severity="error">Une erreur est survenue, veuillez reesayer</Alert>)
                 }
-            }
-            else{
-                setLogged(<Alert severity="error">Combinaison identifant/mot de passe non reconnue, veuillez reesayer</Alert>)
+            } else {
+                setLogged(<Alert severity="error">Combinaison identifant/mot de passe non reconnue, veuillez
+                    reesayer</Alert>)
             }
         }
 
@@ -60,17 +60,17 @@ const Connexion = () => {
         <div>
 
             <Container component="main" maxWidth="xs">
-                <CssBaseline />
+                <CssBaseline/>
                 <div className={classes.paper}>
                     <Avatar className={classes.avatar}>
-                        <LockOutlinedIcon />
+                        <LockOutlinedIcon/>
                     </Avatar>
                     <Typography component="h1" variant="h5">
                         Connexion
                     </Typography>
                     <form className={classes.form} noValidate onSubmit={onSubmit}>
                         <TextField
-                            onChange={(e)=>setFormData({...formData, mail: e.target.value})}
+                            onChange={(e) => setFormData({...formData, mail: e.target.value})}
                             variant="outlined"
                             margin="normal"
                             required
@@ -82,7 +82,7 @@ const Connexion = () => {
                             autoFocus
                         />
                         <TextField
-                            onChange={(e)=>setFormData({...formData, password: e.target.value})}
+                            onChange={(e) => setFormData({...formData, password: e.target.value})}
                             variant="outlined"
                             margin="normal"
                             required
@@ -129,7 +129,6 @@ const useStyles = makeStyles((theme) => ({
         margin: theme.spacing(3, 0, 2),
     },
 }));
-
 
 
 export default Connexion

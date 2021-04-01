@@ -4,11 +4,11 @@ import {useAuthHeader} from "react-auth-kit";
 import DatePickerComponent from "../DatePickerComponent";
 
 
-const DateFactureReservation = ({row,id,disabled,setTrig}) => {
+const DateFactureReservation = ({row, id, disabled, setTrig}) => {
     const authHeader = useAuthHeader()
 
     let val
-    switch (id){
+    switch (id) {
         case 1:
             val = row.date_envoi_facture
             break
@@ -18,7 +18,7 @@ const DateFactureReservation = ({row,id,disabled,setTrig}) => {
     }
 
     const handleDateChange = async (date) => {
-        switch (id){
+        switch (id) {
             case 1:
                 row.date_envoi_facture = date
                 break
@@ -28,7 +28,7 @@ const DateFactureReservation = ({row,id,disabled,setTrig}) => {
         }
 
         console.log(row)
-        const response = await requestToBack('PUT',row,`/reservation/${row.id}/date`,authHeader())
+        const response = await requestToBack('PUT', row, `/reservation/${row.id}/date`, authHeader())
         const body = await response[0]
 
         if (response[1] !== 200) {
@@ -43,7 +43,6 @@ const DateFactureReservation = ({row,id,disabled,setTrig}) => {
                                 disabled={disabled}
                                 handleDateChange={handleDateChange}
     />
-
 
 
 }

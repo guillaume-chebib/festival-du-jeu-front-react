@@ -33,7 +33,7 @@ export default function SuccessFailSnackbars(title, isSuccess) {
     };
 
     let message;
-    if(isSuccess){
+    if (isSuccess) {
         message = <Alert onClose={handleClose} severity="success">
             {title} ajouté avec succès !
         </Alert>;

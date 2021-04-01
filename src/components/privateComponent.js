@@ -8,7 +8,6 @@ const PrivateComponent = () => {
     const authHeader = useAuthHeader()
 
 
-
     return (
         <div className="App">
             <p>{`Bonjour, votre id: ${auth().uid}, votre statut est superuser: ${auth().superuser}`}</p>

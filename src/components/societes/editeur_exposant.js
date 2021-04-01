@@ -12,26 +12,27 @@ import ListeContact from "../suivi/suivi_exposants/ListeContact";
 
 
 function getFullAdresse(params) {
-    return `${params.getValue('numero_rue_editeur')+', ' || ''} ${
+    return `${params.getValue('numero_rue_editeur') + ', ' || ''} ${
         params.getValue('rue_editeur') || ''} \n ${params.getValue('code_postal_editeur') || ''} ${params.getValue('ville_editeur') || ''}`;
 }
 
-const EditeurExposant = ({setTrig,trig}) => {
+const EditeurExposant = ({setTrig, trig}) => {
 
     const classes = useStylesTableValueColor();
     const authHeader = useAuthHeader()
     const history = useHistory();
-    const [exposants,setExposants] = useState([])
+    const [exposants, setExposants] = useState([])
 
 
     const columns = [
-        { field: 'id', headerName: 'ID', hide: true },
-        { field : 'nom_societe', headerName: "Nom de l'editeur", flex: 1,type: 'string'},
+        {field: 'id', headerName: 'ID', hide: true},
+        {field: 'nom_societe', headerName: "Nom de l'editeur", flex: 1, type: 'string'},
         {field: 'numero_rue_editeur', headerName: 'NumeroRue', hide: true},
         {field: 'rue_editeur', headerName: 'Rue', hide: true},
         {field: 'code_postal_editeur', headerName: 'CP', hide: true},
         {field: 'ville_editeur', headerName: 'Ville', hide: true},
-        { field: 'adresse', headerName: 'Adresse', flex: 1,
+        {
+            field: 'adresse', headerName: 'Adresse', flex: 1,
             valueGetter: getFullAdresse,
             sortComparator: (v1, v2, cellParams1, cellParams2) =>
                 getFullAdresse(cellParams1).localeCompare(getFullAdresse(cellParams2)),
@@ -39,8 +40,7 @@ const EditeurExposant = ({setTrig,trig}) => {
         {
             field: 'est_inactif_societe',
             headerName: 'Inactif ?',
-            renderCell: (params) =>
-            {
+            renderCell: (params) => {
                 return <Switch
                     checked={params.row.est_inactif_societe}
                     disabled
@@ -50,16 +50,17 @@ const EditeurExposant = ({setTrig,trig}) => {
 
             },
         },
-        { field : '', headerName: '', flex: 1,
-            renderCell:(params) =>
-            {
+        {
+            field: '', headerName: '', flex: 1,
+            renderCell: (params) => {
 
-                return <UpdateDeleteSociete row = {params.row} setTrig={setTrig} editeurs = {exposants}/>
+                return <UpdateDeleteSociete row={params.row} setTrig={setTrig} editeurs={exposants}/>
             }
         },
-        { field : 'Contacts', headerName: 'Contacts', flex: 1,
-            renderCell: (params) =>{
-                return <ListeContact row = {params.row} setTrig={setTrig} isEdit={true}/>
+        {
+            field: 'Contacts', headerName: 'Contacts', flex: 1,
+            renderCell: (params) => {
+                return <ListeContact row={params.row} setTrig={setTrig} isEdit={true}/>
             }
         },
     ]
@@ -67,14 +68,13 @@ const EditeurExposant = ({setTrig,trig}) => {
 
     useEffect(() => {
         async function fetchData() {
-            const response = await requestToBack('GET',null,`/societe/editeurExposant`,authHeader())
+            const response = await requestToBack('GET', null, `/societe/editeurExposant`, authHeader())
 
             const body = await response[0]
             const exposants = body.message
             if (response[1] !== 200) {
                 setExposants("Impossible de fetch")
-            }
-            else {
+            } else {
                 exposants.forEach(obj => renameKey(obj, 'id_societe', 'id'));
                 setExposants(exposants)
             }
@@ -83,13 +83,12 @@ const EditeurExposant = ({setTrig,trig}) => {
 
         fetchData();
 
-    },[trig]);
-
+    }, [trig]);
 
 
     return (
         <div style={{paddingTop: '2em'}}>
-            <div style={{ height: 400, width: '100%' }}>
+            <div style={{height: 400, width: '100%'}}>
                 <DataGrid sortModel={[
                     {
 
@@ -100,7 +99,7 @@ const EditeurExposant = ({setTrig,trig}) => {
                 ]}
                           className={classes.root}
                           rows={exposants}
-                          {...exposants} columns={columns} pageSize={5} />
+                          {...exposants} columns={columns} pageSize={5}/>
             </div>
         </div>
     )

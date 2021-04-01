@@ -11,7 +11,7 @@ import AlertDialogDelete from "../../modals/AlertDialogDelete";
 
 const EditContact = ({row, setTrig}) => {
     const authHeader = useAuthHeader()
-    const [reponse,setReponse] = useState()
+    const [reponse, setReponse] = useState()
     const [contact, setContact] = useState(row)
     const [openDelete, setOpenDelete] = useState(false);
     const [openDialog, setOpenDialog] = useState(false);
@@ -25,7 +25,7 @@ const EditContact = ({row, setTrig}) => {
 
     const handleEdit = async () => {
 
-        const response = await requestToBack('PUT',contact,`/contact/${contact.id_contact}`,authHeader())
+        const response = await requestToBack('PUT', contact, `/contact/${contact.id_contact}`, authHeader())
         const body = await response[0]
 
         if (response[1] !== 200) {
@@ -44,7 +44,7 @@ const EditContact = ({row, setTrig}) => {
     };
 
     const handleDelete = async () => {
-        const response = await requestToBack('DELETE',row,`/contact/${contact.id_contact}`,authHeader())
+        const response = await requestToBack('DELETE', row, `/contact/${contact.id_contact}`, authHeader())
         const body = await response[0]
         if (response[1] !== 200) {
             console.log("erreur serveur")
@@ -57,22 +57,22 @@ const EditContact = ({row, setTrig}) => {
 
     return (<div>
 
-            <IconButton onClick={handleOpenDialog} aria-label="edit">
-                <EditIcon fontSize="small"/>
-            </IconButton>
-            <Dialog onClose={handleCloseDialog} open={openDialog}>
-                <DialogTitle id="customized-dialog-title" onClose={handleCloseDialog}>
-                    Modifier
-                </DialogTitle>
-                <ModalContact row={contact} setContact={setContact} onUpdate={handleEdit} open={openDialog}/>
-            </Dialog>
+        <IconButton onClick={handleOpenDialog} aria-label="edit">
+            <EditIcon fontSize="small"/>
+        </IconButton>
+        <Dialog onClose={handleCloseDialog} open={openDialog}>
+            <DialogTitle id="customized-dialog-title" onClose={handleCloseDialog}>
+                Modifier
+            </DialogTitle>
+            <ModalContact row={contact} setContact={setContact} onUpdate={handleEdit} open={openDialog}/>
+        </Dialog>
 
-            <IconButton onClick={handleClickOpenDelete} aria-label="delete">
-                <DeleteIcon fontSize="small"/>
-            </IconButton>
-            <AlertDialogDelete titre="Supprimer contact"
-                               message={"Etes vous sur de vouloir supprimer : " + contact.id_contact}
-                               onClose={handleCloseDelete} onDelete={handleDelete} open={openDelete}/>
+        <IconButton onClick={handleClickOpenDelete} aria-label="delete">
+            <DeleteIcon fontSize="small"/>
+        </IconButton>
+        <AlertDialogDelete titre="Supprimer contact"
+                           message={"Etes vous sur de vouloir supprimer : " + contact.id_contact}
+                           onClose={handleCloseDelete} onDelete={handleDelete} open={openDelete}/>
 
 
     </div>)

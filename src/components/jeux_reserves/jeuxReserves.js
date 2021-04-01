@@ -19,13 +19,13 @@ const JeuxReserves = ({reservation}) => {
     const classes = useStylesTableValueColor();
 
     const history = useHistory();
-    const [jeux,setJeux] = useState([])
+    const [jeux, setJeux] = useState([])
     const [jeu, setJeu] = useState()
-    const [jeuxEditeur,setJeuxEditeur] = useState([])
-    const [allJeux,setAllJeux] = useState([])
-    const [zones,setZones] = useState([])
+    const [jeuxEditeur, setJeuxEditeur] = useState([])
+    const [allJeux, setAllJeux] = useState([])
+    const [zones, setZones] = useState([])
     const [zone, setZone] = useState()
-    const [trig,setTrig] = useState([])
+    const [trig, setTrig] = useState([])
     const authHeader = useAuthHeader()
     const [openDialog, setOpenDialog] = useState(false);
     const [openDelete, setOpenDelete] = useState(false);
@@ -38,7 +38,7 @@ const JeuxReserves = ({reservation}) => {
     }
 
     const handleChange = async (row) => {
-        const response = await requestToBack('PUT',row,`/reservation/${reservation.id}/jeuReserve/${row.id}`,authHeader())
+        const response = await requestToBack('PUT', row, `/reservation/${reservation.id}/jeuReserve/${row.id}`, authHeader())
         const body = await response[0]
         if (response[1] !== 200) {
             console.log("erreur serveur")
@@ -56,7 +56,7 @@ const JeuxReserves = ({reservation}) => {
     };
 
     const handleDelete = async () => {
-        const response = await requestToBack('DELETE',jeu,`jeuReserve/${jeu.id_jeu_jeu_reserve}/reservation/${jeu.id_reservation_jeu_reserve}`,authHeader())
+        const response = await requestToBack('DELETE', jeu, `jeuReserve/${jeu.id_jeu_jeu_reserve}/reservation/${jeu.id_reservation_jeu_reserve}`, authHeader())
         const body = await response[0]
         if (response[1] !== 200) {
             console.log("erreur serveur")
@@ -67,58 +67,63 @@ const JeuxReserves = ({reservation}) => {
     }
 
     const columns = [
-        { field: 'id', headerName: 'ID', flex:0.4,hide: false },
-        { field : 'titre_jeu', headerName: 'Titre du jeu', flex: 1,type: 'string'},
-        {field: 'zones', headerName: 'Emplacement zone', flex: 3,
-            renderCell: (params) =>{
-            return(
-                <div style={{textAlign : "center"}}>
-                    <IsAdmin/>
-                    <div>
-                    <TextField
-                        id="outlined-select-currency"
-                        select
-                        required
-                        disabled
-                        style={{display: "inline-block", width : '100%'}}
-                        fullWidth
-                        label="Zones"
-                        value={params.row.nom_zone}
-                        //onChange={(e) => {setZone(e.target.value)}}
-
-                    >
-                        {zones.map((option) => (
-                            <MenuItem key={option.zone.id_zone} selected={params.row.id_zone_jeu_reserve===option.zone.id_zone} value={option.zone.nom_zone}>
-                                {option.zone.nom_zone}
-                            </MenuItem>
-                        ))}
-                    </TextField>
-                    <div style={{width : '18%', display: "inline-block"}}>
-                        <UpdateZone row={params.row} setRow={setJeu} setTrig={setTrig} zones={zones}/>
-                    </div>
-                </div>
-            </div>
-            )
-    }},
-        { field : 'quantite_jeu_reserve', headerName: 'Quantité', flex: 1, type: 'float'},
-        { field : 'nb_table_jeu_reserve', headerName: 'Nb table', flex: 1, type: 'number'},
-        { field : '', headerName: 'Dotation', flex: 1,
-            renderCell: (params) =>
-            {
+        {field: 'id', headerName: 'ID', flex: 0.4, hide: false},
+        {field: 'titre_jeu', headerName: 'Titre du jeu', flex: 1, type: 'string'},
+        {
+            field: 'zones', headerName: 'Emplacement zone', flex: 3,
+            renderCell: (params) => {
                 return (
-                <Checkbox
-                    checked={params.row.dotation_jeu_reserve}
-                    onClickCapture={(event => {
-                        params.row.dotation_jeu_reserve = event.target.checked
-                        handleChange(params.row)
-                    })}// a cause du bug datagrid
-                    onChange={handleChange}
+                    <div style={{textAlign: "center"}}>
+                        <IsAdmin/>
+                        <div>
+                            <TextField
+                                id="outlined-select-currency"
+                                select
+                                required
+                                disabled
+                                style={{display: "inline-block", width: '100%'}}
+                                fullWidth
+                                label="Zones"
+                                value={params.row.nom_zone}
+                                //onChange={(e) => {setZone(e.target.value)}}
 
-                    inputProps={{ 'aria-label': 'primary checkbox' }}
-                />)
-            }},
-        { field : 'tombola_jeu_reserve', headerName: 'Tombola', flex: 1, renderCell: (params) =>
-            {
+                            >
+                                {zones.map((option) => (
+                                    <MenuItem key={option.zone.id_zone}
+                                              selected={params.row.id_zone_jeu_reserve === option.zone.id_zone}
+                                              value={option.zone.nom_zone}>
+                                        {option.zone.nom_zone}
+                                    </MenuItem>
+                                ))}
+                            </TextField>
+                            <div style={{width: '18%', display: "inline-block"}}>
+                                <UpdateZone row={params.row} setRow={setJeu} setTrig={setTrig} zones={zones}/>
+                            </div>
+                        </div>
+                    </div>
+                )
+            }
+        },
+        {field: 'quantite_jeu_reserve', headerName: 'Quantité', flex: 1, type: 'float'},
+        {field: 'nb_table_jeu_reserve', headerName: 'Nb table', flex: 1, type: 'number'},
+        {
+            field: '', headerName: 'Dotation', flex: 1,
+            renderCell: (params) => {
+                return (
+                    <Checkbox
+                        checked={params.row.dotation_jeu_reserve}
+                        onClickCapture={(event => {
+                            params.row.dotation_jeu_reserve = event.target.checked
+                            handleChange(params.row)
+                        })}// a cause du bug datagrid
+                        onChange={handleChange}
+
+                        inputProps={{'aria-label': 'primary checkbox'}}
+                    />)
+            }
+        },
+        {
+            field: 'tombola_jeu_reserve', headerName: 'Tombola', flex: 1, renderCell: (params) => {
                 return (
                     <Checkbox
                         checked={params.row.tombola_jeu_reserve}
@@ -128,43 +133,46 @@ const JeuxReserves = ({reservation}) => {
                         })}// a cause du bug datagrid
                         onChange={handleChange}
 
-                        inputProps={{ 'aria-label': 'primary checkbox' }}
+                        inputProps={{'aria-label': 'primary checkbox'}}
                     />
                 )
-            }},
-        { field : 'place_plan_jeu_reserve', headerName: 'Placé ?', flex: 1,
-            renderCell: (params) =>
-            {
+            }
+        },
+        {
+            field: 'place_plan_jeu_reserve', headerName: 'Placé ?', flex: 1,
+            renderCell: (params) => {
                 return (
                     <Checkbox
-                                checked={params.row.place_plan_jeu_reserve}
-                                onClickCapture={(event => {
-                                    params.row.place_plan_jeu_reserve = event.target.checked
-                                    handleChange(params.row)
-                                })}// a cause du bug datagrid
-                                onChange={handleChange}
+                        checked={params.row.place_plan_jeu_reserve}
+                        onClickCapture={(event => {
+                            params.row.place_plan_jeu_reserve = event.target.checked
+                            handleChange(params.row)
+                        })}// a cause du bug datagrid
+                        onChange={handleChange}
 
-                                inputProps={{ 'aria-label': 'primary checkbox' }}
-                            />)
-            }},
-        { field : 'recu_jeu_reserve', headerName: 'Reçu ?', flex: 1,
-            renderCell: (params) =>
-            {
+                        inputProps={{'aria-label': 'primary checkbox'}}
+                    />)
+            }
+        },
+        {
+            field: 'recu_jeu_reserve', headerName: 'Reçu ?', flex: 1,
+            renderCell: (params) => {
                 return (
                     <Checkbox
-                                checked={params.row.recu_jeu_reserve}
-                                onClickCapture={(event => {
-                                    params.row.recu_jeu_reserve = event.target.checked
-                                    handleChange(params.row)
-                                })}// a cause du bug datagrid
-                                onChange={handleChange}
+                        checked={params.row.recu_jeu_reserve}
+                        onClickCapture={(event => {
+                            params.row.recu_jeu_reserve = event.target.checked
+                            handleChange(params.row)
+                        })}// a cause du bug datagrid
+                        onChange={handleChange}
 
-                                inputProps={{ 'aria-label': 'primary checkbox' }}
-                            />)
-            }},
-        { field : 'a_renvoyer_jeu_reserve', headerName: 'A renvoyer ?', flex: 1,
-            renderCell: (params) =>
-            {
+                        inputProps={{'aria-label': 'primary checkbox'}}
+                    />)
+            }
+        },
+        {
+            field: 'a_renvoyer_jeu_reserve', headerName: 'A renvoyer ?', flex: 1,
+            renderCell: (params) => {
                 return (
                     <Checkbox
                         checked={params.row.a_renvoyer_jeu_reserve}
@@ -174,12 +182,13 @@ const JeuxReserves = ({reservation}) => {
                         })}// a cause du bug datagrid
                         onChange={handleChange}
 
-                        inputProps={{ 'aria-label': 'primary checkbox' }}
+                        inputProps={{'aria-label': 'primary checkbox'}}
                     />)
-            }},
-        { field : 'est_renvoye_jeu_reserve', headerName: 'Est renvoyé?', flex: 1,
-            renderCell: (params) =>
-            {
+            }
+        },
+        {
+            field: 'est_renvoye_jeu_reserve', headerName: 'Est renvoyé?', flex: 1,
+            renderCell: (params) => {
                 return (
                     <Checkbox
                         checked={params.row.est_renvoye_jeu_reserve}
@@ -189,19 +198,21 @@ const JeuxReserves = ({reservation}) => {
                         })}// a cause du bug datagrid
                         onChange={handleChange}
 
-                        inputProps={{ 'aria-label': 'primary checkbox' }}
+                        inputProps={{'aria-label': 'primary checkbox'}}
                     />)
-            }},
-        { field : 'montant_renvoi_jeu_reserve', headerName: 'Montant du renvoi', flex: 1, type: 'float'},
-        { field : 'supprimer', headerName: '', flex: 1,
-            renderCell: (params) =>
-            {
+            }
+        },
+        {field: 'montant_renvoi_jeu_reserve', headerName: 'Montant du renvoi', flex: 1, type: 'float'},
+        {
+            field: 'supprimer', headerName: '', flex: 1,
+            renderCell: (params) => {
                 return (
                     <div>
                         <DeleteJeuReserve setTrig={setTrig} row={params.row}/>
                     </div>
                 )
-            }},
+            }
+        },
 
     ]
 
@@ -209,20 +220,19 @@ const JeuxReserves = ({reservation}) => {
     useEffect(() => {
 
         async function fetchData() {
-            console.log("idFEst ",reservation)
+            console.log("idFEst ", reservation)
             const [responseJeu, responseZone, responseJeuxEditeur, responseAllJeux] = await Promise.all([
-                await requestToBack('GET',null,`/reservation/${reservation.id}/jeuxReserves`,authHeader()),
-                await requestToBack('GET',null,`/festival/${reservation.id_festival}/zone`,authHeader()),
-                await requestToBack('GET',null,`/jeu/editeur/${reservation.id_societe}`,authHeader()),
-                await requestToBack('GET',null,`/jeu`,authHeader()),
+                await requestToBack('GET', null, `/reservation/${reservation.id}/jeuxReserves`, authHeader()),
+                await requestToBack('GET', null, `/festival/${reservation.id_festival}/zone`, authHeader()),
+                await requestToBack('GET', null, `/jeu/editeur/${reservation.id_societe}`, authHeader()),
+                await requestToBack('GET', null, `/jeu`, authHeader()),
             ]);
             const bodyJeu = await responseJeu[0]
             const jeux = bodyJeu.message
 
             if (responseJeu[1] !== 200) {
                 console.log(responseJeu[1])
-            }
-            else {
+            } else {
                 jeux.forEach(obj => renameKey(obj, 'id_jeu_jeu_reserve', 'id'));
                 const updatedJson = JSON.stringify(jeux);
                 setJeux(jeux)
@@ -232,8 +242,7 @@ const JeuxReserves = ({reservation}) => {
             const list_zones = bodyZones.message
             if (responseZone[1] !== 200) {
                 console.log(responseZone[1])
-            }
-            else {
+            } else {
                 setZones(list_zones)
             }
 
@@ -241,8 +250,7 @@ const JeuxReserves = ({reservation}) => {
             const list_jeux = bodyJeuxEditeur.message
             if (responseJeuxEditeur[1] !== 200) {
                 console.log(responseJeuxEditeur[1])
-            }
-            else {
+            } else {
                 setJeuxEditeur(list_jeux)
             }
 
@@ -250,8 +258,7 @@ const JeuxReserves = ({reservation}) => {
             const all_jeux = bodyAllJeux.message
             if (responseAllJeux[1] !== 200) {
                 console.log(responseAllJeux[1])
-            }
-            else {
+            } else {
                 setAllJeux(all_jeux)
             }
 
@@ -259,13 +266,15 @@ const JeuxReserves = ({reservation}) => {
 
         fetchData();
 
-    },[trig]);
+    }, [trig]);
 
     let create
-    if(reservation.est_editeur_societe){
-        create = <CreateJeuReserve setTrig={setTrig} zones = {zones} jeux={jeuxEditeur} id_reservation={reservation.id} id_societe={reservation.id_societe_reservation}/>
+    if (reservation.est_editeur_societe) {
+        create = <CreateJeuReserve setTrig={setTrig} zones={zones} jeux={jeuxEditeur} id_reservation={reservation.id}
+                                   id_societe={reservation.id_societe_reservation}/>
     } else {
-        create = <CreateJeuReserve setTrig={setTrig} zones = {zones} jeux={allJeux} id_reservation={reservation.id} id_societe={reservation.id_societe_reservation}/>
+        create = <CreateJeuReserve setTrig={setTrig} zones={zones} jeux={allJeux} id_reservation={reservation.id}
+                                   id_societe={reservation.id_societe_reservation}/>
     }
 
     return (
@@ -279,7 +288,7 @@ const JeuxReserves = ({reservation}) => {
             </div>
 
             <div style={{paddingTop: '2em'}}>
-                <div style={{ height: 400, width: '100%' }}>
+                <div style={{height: 400, width: '100%'}}>
                     <DataGrid sortModel={[
                         {
 
@@ -290,7 +299,7 @@ const JeuxReserves = ({reservation}) => {
                     ]}
                               className={classes.root}
                               rows={jeux}
-                              {...jeux} columns={columns} pageSize={5} />
+                              {...jeux} columns={columns} pageSize={5}/>
                 </div>
             </div>
         </div>

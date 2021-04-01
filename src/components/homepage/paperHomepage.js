@@ -28,11 +28,11 @@ const styles = (theme) => ({
     title: {
         marginTop: theme.spacing(5),
         marginBottom: theme.spacing(5),
-        fontFamily : 'Roboto',
+        fontFamily: 'Roboto',
         textAlign: 'center'
     },
     text: {
-        fontFamily : 'Work Sans',
+        fontFamily: 'Work Sans',
         textAlign: 'center'
     },
 
@@ -44,7 +44,7 @@ const styles = (theme) => ({
 });
 
 const ProductValues = (props) => {
-    const { classes } = props;
+    const {classes} = props;
 
     return (
         <section className={classes.root}>
@@ -78,7 +78,7 @@ const ProductValues = (props) => {
                                 Retrouvez des éditeurs rénommés !
                             </Typography>
                             <Typography variant="h5" className={classes.text}>
-                               De nombreux exposants seront présents parmis lesquels des éditeurs celèbres,
+                                De nombreux exposants seront présents parmis lesquels des éditeurs celèbres,
                                 vous pouvez déjà acceder à la liste via l'onglet "les editeurs"
                             </Typography>
                         </div>
@@ -104,7 +104,6 @@ const ProductValues = (props) => {
         </section>
     );
 }
-
 
 
 export default withStyles(styles)(ProductValues);

@@ -8,11 +8,11 @@ import AddContact from "./addContact";
 import EditContact from "./editContact";
 
 
-const ListeContact = ({row,setTrig,isEdit}) => {
+const ListeContact = ({row, setTrig, isEdit}) => {
     // TODO Trigger a rajouté pour mettre a jour
     // TODO Message si il y a rien
     const [openListeContact, setListeContact] = useState(false);
-    const [societe,setSociete] = useState(row);
+    const [societe, setSociete] = useState(row);
 
     const authHeader = useAuthHeader()
 
@@ -38,11 +38,11 @@ const ListeContact = ({row,setTrig,isEdit}) => {
                     {societe.contacts.map((c) => (
                         <ListItem key={c.nom_contact}>
                             <ListItemAvatar>
-                                <Avatar >
-                                    <PersonIcon />
+                                <Avatar>
+                                    <PersonIcon/>
                                 </Avatar>
                             </ListItemAvatar>
-                            <ListItemText primary={c.nom_contact} secondary={c.prenom_contact} />
+                            <ListItemText primary={c.nom_contact} secondary={c.prenom_contact}/>
                             {/*<ListItemText primary={"Email"} secondary={c.email_contact} />*/}
                             {/*<ListItemText primary={"Fixe : " + c.telephone_fixe_contact} secondary={"Portable : "+ c.telephone_fixe_contact}/>*/}
                             {/*<ListItemText primary={"Fonction"} secondary={c.fonction_contact}/>*/}

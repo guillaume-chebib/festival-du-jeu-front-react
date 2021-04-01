@@ -7,16 +7,17 @@ export const FacturationReservation = ({row, setTrig}) => {
 
     return (
         <div>
-            <div style={{display : "inline-block", margin: '20px'}}>
+            <div style={{display: "inline-block", margin: '20px'}}>
                 <FormControlLabel
-                    control={<DateFactureReservation row = {row} setTrig={setTrig} id={1} disabled={row.date_paye_facture !== null}/>}
+                    control={<DateFactureReservation row={row} setTrig={setTrig} id={1}
+                                                     disabled={row.date_paye_facture !== null}/>}
                     label="Facture envoyé ?"
                     labelPlacement={"top"}
                 />
             </div>
-            <div style={{display : "inline-block", margin: '20px'}}>
+            <div style={{display: "inline-block", margin: '20px'}}>
                 <FormControlLabel
-                    control={<DateFactureReservation row = {row} setTrig={setTrig} id={2}/>}
+                    control={<DateFactureReservation row={row} setTrig={setTrig} id={2}/>}
                     label="Facture payé ?"
                     labelPlacement={"top"}
                 />

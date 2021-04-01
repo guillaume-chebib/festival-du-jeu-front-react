@@ -11,7 +11,7 @@ import AlertDialogDelete from "../../modals/AlertDialogDelete";
 
 const UpdateDeleteJeuReserve = ({row, setTrig}) => {
     const authHeader = useAuthHeader()
-    const [reponse,setReponse] = useState()
+    const [reponse, setReponse] = useState()
     const [contact, setContact] = useState(row)
     const [openDelete, setOpenDelete] = useState(false);
     const [openDialog, setOpenDialog] = useState(false);
@@ -25,7 +25,7 @@ const UpdateDeleteJeuReserve = ({row, setTrig}) => {
 
     const handleEdit = async () => {
 
-        const response = await requestToBack('PUT',contact,`/contact/${contact.id_contact}`,authHeader())
+        const response = await requestToBack('PUT', contact, `/contact/${contact.id_contact}`, authHeader())
         const body = await response[0]
 
         if (response[1] !== 200) {
@@ -45,7 +45,7 @@ const UpdateDeleteJeuReserve = ({row, setTrig}) => {
 
     const handleDelete = async () => {
 
-        const response = await requestToBack('DELETE',row,`/contact/${contact.id_contact}`,authHeader())
+        const response = await requestToBack('DELETE', row, `/contact/${contact.id_contact}`, authHeader())
         const body = await response[0]
         if (response[1] !== 200) {
             console.log("erreur serveur")

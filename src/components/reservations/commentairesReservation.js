@@ -9,11 +9,11 @@ import CloseIcon from '@material-ui/icons/Close';
 
 export const CommentaireReservation = ({row, setTrig}) => {
     const authHeader = useAuthHeader()
-    const [isEdit,setIsEdit] = useState(false)
-    const [newComment,setNewComment] = useState(row.commentaire_reservation)
+    const [isEdit, setIsEdit] = useState(false)
+    const [newComment, setNewComment] = useState(row.commentaire_reservation)
 
     const handleChange = async (row) => {
-        const response = await requestToBack('PUT',row,`/reservation/${row.id_reservation}`,authHeader())
+        const response = await requestToBack('PUT', row, `/reservation/${row.id_reservation}`, authHeader())
         const body = await response[0]
         if (response[1] !== 200) {
             console.log("erreur serveur")
@@ -38,7 +38,7 @@ export const CommentaireReservation = ({row, setTrig}) => {
     }
 
     let icon, close;
-    if(isEdit){
+    if (isEdit) {
         icon = <DoneIcon onClick={handleChangeComment}/>
         close = <CloseIcon onClick={handleCloseComment}/>
     } else {
@@ -60,7 +60,6 @@ export const CommentaireReservation = ({row, setTrig}) => {
             {icon}{close}
         </div>
     )
-
 
 
 }
