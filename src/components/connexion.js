@@ -34,7 +34,7 @@ const Connexion = () => {
             setLogged(<Alert severity="error">Combinaison identifant/mot de passe non reconnue, veuillez reesayer</Alert>)
         }
         else {
-            console.log(body)
+
             if(body.token !== undefined) {
                 var decode1 = await jwt(body.token)
                 if (signIn({

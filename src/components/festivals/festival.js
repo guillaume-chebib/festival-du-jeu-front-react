@@ -88,8 +88,6 @@ const Festivals = ({body}) => {
                             festivalActif.est_courant_festival = true
                         }
                     })
-                    console.log(festivalPlusActif)
-                    console.log(festivalActif)
 
 
                     const [response, response1] = await Promise.all([

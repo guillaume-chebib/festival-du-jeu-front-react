@@ -40,7 +40,6 @@ const Zones = () => {
             const response = await requestToBack('GET',null,`/public/festival/zone`,authHeader())
 
             const zones = await response[0]
-            console.log("ZONE : "+zones)
             if (response[1] !== 200) {
                 setZones("Impossible de fetch")
             }

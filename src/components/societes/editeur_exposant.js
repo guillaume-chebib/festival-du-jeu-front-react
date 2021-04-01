@@ -84,7 +84,6 @@ const EditeurExposant = ({setTrig,trig}) => {
                 setExposants("Impossible de fetch")
             }
             else {
-                console.log("EXPO"+exposants)
                 exposants.forEach(obj => renameKey(obj, 'id_societe', 'id'));
                 setExposants(exposants)
             }

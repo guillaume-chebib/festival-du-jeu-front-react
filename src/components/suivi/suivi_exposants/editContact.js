@@ -62,7 +62,6 @@ const EditContact = ({row, setTrig}) => {
     };
 
     const handleDelete = async () => {
-        console.log("CONTACT : "+contact.id_contact + "SOCIETE "+ row.id)
         const response = await requestToBack('DELETE',row,`/contact/${contact.id_contact}`,authHeader())
         const body = await response[0]
         if (response[1] !== 200) {

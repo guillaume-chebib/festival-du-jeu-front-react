@@ -16,7 +16,6 @@ const RedirectReservation = () => {
             const response = await requestToBack('GET',null,`/festival/courant`,authHeader())
 
             const body = await response[0].message[0]
-            console.log("FEST "+ body)
             if (response[1] !== 200) {
                 console.log(response[1])
             }
