@@ -33,6 +33,11 @@ const EspaceReservation = ({setTrig,reservation}) => {
         fetchData();
 
     },[]);
+    function subtotal(items) {
+        // return items.map(({ price }) => price).reduce((sum, i) => sum + i, 0);
+        return 0;
+    }
+    const invoiceSubtotal = subtotal(reservation);
 
     return (
         <div>
@@ -58,9 +63,18 @@ const EspaceReservation = ({setTrig,reservation}) => {
                                 <TableCell>0</TableCell>
                                 <TableCell>{row.remise_allocation_espace}</TableCell>
                                 <TableCell>0</TableCell>
-
                             </TableRow>
                         ))}
+                        <TableRow>
+                            <TableCell colSpan={3}>Supplément</TableCell>
+                            <TableCell>0</TableCell>
+                            <TableCell>0</TableCell>
+                            <TableCell>{(invoiceSubtotal)}</TableCell>
+                        </TableRow>
+                        <TableRow  style={{backgroundColor:'red'}}>
+                            <TableCell colSpan={5}>Total</TableCell>
+                            <TableCell>{(invoiceSubtotal)}</TableCell>
+                        </TableRow>
                     </TableBody>
                 </Table>
             </TableContainer>
