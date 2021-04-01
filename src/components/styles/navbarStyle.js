@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -8,49 +8,108 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import PeopleIcon from '@material-ui/icons/People';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import BusinessIcon from '@material-ui/icons/Business';
-import AssignmentIcon from '@material-ui/icons/Assignment';
+import EventIcon from '@material-ui/icons/Event';
 import {makeStyles} from "@material-ui/core/styles";
 import {Link} from "react-router-dom";
 import VideogameAssetIcon from '@material-ui/icons/VideogameAsset';
 import AdjustIcon from '@material-ui/icons/Adjust';
+import ImportContactsIcon from '@material-ui/icons/ImportContacts';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+import StarBorder from '@material-ui/icons/StarBorder';
+import Collapse from '@material-ui/core/Collapse';
+import List from '@material-ui/core/List';
+import {requestToBack} from "../../utils/utils_functions";
+import {useAuthHeader} from "react-auth-kit";
+import GroupIcon from '@material-ui/icons/Group';
 
-export const mainListItems = (
-    <div>
 
-        <ListItem button component={ Link } to="/festival">
+export const MainListItems = () => {
+
+    const classes = useStyles1();
+    const [open, setOpen] = useState(false);
+    const authHeader = useAuthHeader()
+    const [festival,setFestival] = useState("")
+
+    const handleClick = async () => {
+        setOpen(!open);
+        await fetchData()
+    };
+
+    async function fetchData() {
+        const response = await requestToBack('GET',null,`/festival/courant`,authHeader())
+        const body = await response[0]
+        const festival= body.message
+        setFestival(festival)
+
+    }
+
+    useEffect(() => {
+        console.log(festival)
+    },[festival])
+
+
+    return(
+    <List>
+
+        <ListItem button component={Link} to="/festival">
             <ListItemIcon>
-                <DashboardIcon />
+                <DashboardIcon/>
             </ListItemIcon>
-            <ListItemText primary="Les festivals" />
+            <ListItemText primary="Les festivals"/>
         </ListItem>
-        <ListItem button component={ Link } to="/organisateur">
+        <ListItem button component={Link} to="/organisateur">
             <ListItemIcon>
-                <PeopleIcon />
+                <PeopleIcon/>
             </ListItemIcon>
-            <ListItemText primary="Organisateurs" />
+            <ListItemText primary="Organisateurs"/>
         </ListItem>
-        <ListItem button component={ Link } to="/jeu">
+        <ListItem button component={Link} to="/jeu">
             <ListItemIcon>
-                <VideogameAssetIcon />
+                <VideogameAssetIcon/>
             </ListItemIcon>
-            <ListItemText primary="Jeux" />
+            <ListItemText primary="Jeux"/>
         </ListItem>
-        <ListItem button component={ Link } to="/reservation">
+        <ListItem button component={Link} to="/reservation">
             <ListItemIcon>
-                <ShoppingCartIcon />
+                <ShoppingCartIcon/>
             </ListItemIcon>
-            <ListItemText primary="Reservations" />
+            <ListItemText primary="Reservations"/>
         </ListItem>
-        <ListItem button component={ Link } to="/societe">
+        <ListItem button component={Link} to="/societe">
             <ListItemIcon>
                 <BusinessIcon/>
             </ListItemIcon>
-            <ListItemText primary="Societes" />
+            <ListItemText primary="Societes"/>
         </ListItem>
 
+        <ListItem button onClick={handleClick}>
+            <ListItemIcon>
+                <ImportContactsIcon/>
+            </ListItemIcon>
+            <ListItemText primary="Suivis"/>
+            {open ? <ExpandLess /> : <ExpandMore />}
+        </ListItem>
+        <Collapse in={open} timeout="auto" unmountOnExit>
+            <List component="div" disablePadding>
+                <ListItem button className={classes.nested} component={Link} to={`/festival/${festival[0].id_festival}/exposants`}>
+                    <ListItemIcon>
+                        <GroupIcon/>
+                    </ListItemIcon>
+                    <ListItemText primary="Suivi exposants"/>
+                </ListItem>
+                <ListItem button className={classes.nested} component={Link} to={`/festival/${festival[0].id_festival}/reservations`}>
+                    <ListItemIcon>
+                        <EventIcon/>
+                    </ListItemIcon>
+                    <ListItemText primary="Suivi reservations"/>
+                </ListItem>
+            </List>
+        </Collapse>
 
-    </div>
-);
+
+    </List>)
+}
 
 export const publicListItems = (
     <div>
@@ -157,5 +216,8 @@ export const useStyles1 = makeStyles((theme) => ({
     },
     fixedHeight: {
         height: 240,
+    },
+    nested: {
+        paddingLeft: theme.spacing(4),
     },
 }));
