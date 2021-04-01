@@ -154,7 +154,10 @@ export default function ModalJeu({open, editeurs, est_create, titre, row, setRow
                                 defaultValue={row}
                                 onChange={(event, newValue) => {
                                     JSON.stringify(newValue, null, ' ')
-                                    handleChangeEditeur(newValue.id_societe)
+                                    if(newValue !== undefined){
+                                        handleChangeEditeur(newValue.id_societe)
+                                    }
+
                                 }}
                                 renderInput={
                                     (params) => <TextField {...params} label="Editeur" variant="outlined" />

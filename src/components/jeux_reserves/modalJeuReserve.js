@@ -10,6 +10,7 @@ import Grid from "@material-ui/core/Grid";
 import {Checkbox, Fade, FormControlLabel, makeStyles, MenuItem} from "@material-ui/core";
 import {useAuthHeader} from "react-auth-kit";
 import Typography from "@material-ui/core/Typography";
+import {Autocomplete} from "@material-ui/lab";
 
 export default function ModalJeuReserve({open, zones, titre, row, setRow, jeux, onUpdate, onClose}) {
 
@@ -74,32 +75,27 @@ export default function ModalJeuReserve({open, zones, titre, row, setRow, jeux, 
                     </DialogContentText>
                     <Grid container spacing={2}>
                         <Grid item xs={12}>
-                            {/*<Autocomplete*/}
-                            {/*    disablePortal*/}
-                            {/*    id="combo-box-demo"*/}
-                            {/*    options={json}*/}
-                            {/*    style={{ width: 300 }}*/}
-                            {/*    renderInput={(params) => <TextField {...params} label="Jeux" />}*/}
-                            {/*/>*/}
-                            <TextField
-                                id="outlined-select-currency"
-                                select
-                                required
-                                fullWidth
-                                label="Jeu à ajouter"
-                                value={jeu}
-                                onChange={e => setRow(prevState => ({
-                                    ...prevState,
-                                    id_jeu_jeu_reserve: e.target.value
-                                }))}
-                                variant="outlined"
-                            >
-                                {jeux.map((option) => (
-                                    <MenuItem key={option.id_jeu} value={option.id_jeu}>
-                                        {option.titre_jeu}
-                                    </MenuItem>
-                                ))}
-                            </TextField>
+                            <Autocomplete
+                                id="combo-box-demo"
+                                options={jeux}
+                                getOptionLabel={(option) => option.titre_jeu}
+                                style={{ width: 300 }}
+                                defaultValue={row}
+                                onChange={(event, newValue) => {
+                                    JSON.stringify(newValue, null, ' ')
+                                    if(newValue !== undefined){
+                                        setRow(prevState => ({
+                                            ...prevState,
+                                            id_jeu_jeu_reserve: newValue.id_jeu
+                                        }))
+                                    }
+
+                                }}
+                                renderInput={
+                                    (params) => <TextField {...params} label="Jeux" variant="outlined" />
+                                }
+                            />
+
                         </Grid>
                         <Grid item xs={12} sm={6}>
                             <TextField
