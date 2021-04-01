@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
 import {themeResponsive} from "./table/styles";
 import {ThemeProvider} from '@material-ui/core/styles'
+import ProductValues from "./homepage/paperHomepage";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -19,6 +20,7 @@ const useStyles = makeStyles((theme) => ({
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'center',
+        minHeight:355
     },
     overlay: {
         position: 'absolute',
@@ -43,10 +45,9 @@ export default function Accueil() {
 
 
     const post = {
-        title: 'Festival du jeu',
-        description:
-            "Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.",
-        image: 'https://source.unsplash.com/random',
+        title: 'Bienvenue au Festival du jeu',
+        description:"",
+        image: 'images/Festival_bande.png',
         imgText: 'main image description',
     };
 
@@ -54,20 +55,8 @@ export default function Accueil() {
         <>
         <Paper className={classes.mainFeaturedPost} style={{ backgroundImage: `url(${post.image})` }}>
             {<img style={{ display: 'none' }} src={post.image} alt={post.imageText} />}
-            <div className={classes.overlay} />
-            <Grid container>
-                <Grid item md={6}>
-                    <div className={classes.mainFeaturedPostContent}>
-                        <Typography component="h1" variant="h3" color="inherit" gutterBottom>
-                            {post.title}
-                        </Typography>
-                        <Typography variant="h5" color="inherit" paragraph>
-                            {post.description}
-                        </Typography>
-                    </div>
-                </Grid>
-            </Grid>
         </Paper>
+            <ProductValues/>
         </>
     );
 }
