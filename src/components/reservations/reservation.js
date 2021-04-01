@@ -27,7 +27,6 @@ const Reservation = () => {
 
     const [reservation, setReservation] = useState()
     const [statuts, setStatuts] = useState([])
-
     const [trig, setTrig] = useState([])
 
 
