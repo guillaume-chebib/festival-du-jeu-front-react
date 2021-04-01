@@ -82,7 +82,6 @@ const JeuxReserves = ({reservation}) => {
             console.log("erreur serveur")
         }
 
-        console.log(body.message)
         setTrig(jeu)
         setOpenDelete(false);
     }
@@ -275,7 +274,6 @@ const JeuxReserves = ({reservation}) => {
             else {
                 setAllJeux(all_jeux)
             }
-
 
         }
 

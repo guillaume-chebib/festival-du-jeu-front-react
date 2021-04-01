@@ -70,10 +70,10 @@ const AppNav = () => {
                         >
                             <MenuIcon />
                         </IconButton>
-                        <img src="../images/logo_seul_festival.png" alt="logo" className={classes.logo} />
+                        <img src="images/logo_seul_festival.png" alt="logo" className={classes.logo} />
 
                         <ThemeProvider theme={themeResponsive}>
-                            <Typography variant="h6" color="inherit" noWrap className={classes.title}>
+                            <Typography variant="caption" color="inherit" noWrap className={classes.title}>
                                 Festival du jeu
                             </Typography>
                         </ThemeProvider>
