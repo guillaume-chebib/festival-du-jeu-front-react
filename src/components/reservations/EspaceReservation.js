@@ -44,18 +44,24 @@ const EspaceReservation = ({setTrig,reservation}) => {
         if (response[1] !== 200) {
             console.log("erreur serveur")
         }
+        handleChange(reservation)
+    };
+
+    const handleChange = async (reservation) => {
+        let sommePrix = 0
+        espaces.map(e => sommePrix += calculPrix(e))
+        reservation.prix_total_reservation = sommePrix + reservation.reduction_reservation
+        const response = await requestToBack('PUT',reservation,`/reservation/${reservation.id_reservation}`,authHeader())
+        const body = await response[0]
+        if (response[1] !== 200) {
+            console.log("erreur serveur")
+        }
         setTrig(reservation)
+
     };
 
     const calculPrix = (row) => {
         return (row.nb_table_allocation_espace * row.prix_table_espace) - row.remise_allocation_espace
-    }
-    const calculPrixTotal = () => {
-
-        let sommePrix = 0
-        espaces.map(e => sommePrix += calculPrix(e))
-        return sommePrix + reservation.reduction_reservation
-
     }
 
     return (
@@ -79,6 +85,7 @@ const EspaceReservation = ({setTrig,reservation}) => {
                                 <TableCell>{row.nom_espace}</TableCell>
                                 <TableCell>
                                     <TextField
+                                        type="number"
                                         defaultValue={row.nb_table_allocation_espace}
                                         onChange={(event => {
                                             row.nb_table_allocation_espace = (event.target.value === "" ? 0 : event.target.value)
@@ -88,6 +95,7 @@ const EspaceReservation = ({setTrig,reservation}) => {
                                 </TableCell>
                                 <TableCell>
                                     <TextField
+                                        type="number"
                                         defaultValue={row.m2_allocation_espace}
                                         onChange={(event => {
                                             row.m2_allocation_espace = (event.target.value === "" ? 0 : event.target.value)
@@ -101,6 +109,7 @@ const EspaceReservation = ({setTrig,reservation}) => {
                                 </TableCell>
                                 <TableCell>
                                     <TextField
+                                        type="number"
                                         defaultValue={row.remise_allocation_espace}
                                         onChange={(event => {
                                             row.remise_allocation_espace = (event.target.value === "" ? 0 : event.target.value)
@@ -118,14 +127,11 @@ const EspaceReservation = ({setTrig,reservation}) => {
                             <TableCell colSpan={5}>Supplément</TableCell>
                             <TableCell>
                                 <TextField
+                                    type="number"
                                     defaultValue={reservation.reduction_reservation}
                                     onChange={async(event) => {
                                         reservation.reduction_reservation = (event.target.value === "" ? 0 : event.target.value)
-                                        const response = await requestToBack('PUT',reservation,`/reservation/${reservation.id_reservation}`,authHeader())
-                                        const body = await response[0]
-                                        if (response[1] !== 200) {
-                                            console.log("erreur serveur")
-                                        }
+                                        handleChange(reservation)
                                         setTrig(reservation)
                                     }}
                                 />
@@ -134,7 +140,7 @@ const EspaceReservation = ({setTrig,reservation}) => {
                         <TableRow  style={{backgroundColor:'red'}}>
                             <TableCell colSpan={5}>Total</TableCell>
                             <TableCell>
-                                {calculPrixTotal()}
+                                {reservation.prix_total_reservation}
                             </TableCell>
                         </TableRow>
                     </TableBody>
