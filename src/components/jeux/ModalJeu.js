@@ -10,6 +10,7 @@ import Grid from "@material-ui/core/Grid";
 import {Checkbox, FormControlLabel, makeStyles, MenuItem} from "@material-ui/core";
 import {useAuthHeader} from "react-auth-kit";
 import Typography from "@material-ui/core/Typography";
+import {Autocomplete} from "@material-ui/lab";
 
 export default function ModalJeu({open, editeurs, est_create, titre, row, setRow, message, onUpdate, onClose}) {
 
@@ -36,10 +37,10 @@ export default function ModalJeu({open, editeurs, est_create, titre, row, setRow
     const classes = useStyles();
 
 
-    const handleChangeEditeur = (event) => {
+    const handleChangeEditeur = (id_societe) => {
         setRow(prevState => ({
             ...prevState,
-            id_editeur_jeu: event.target.value
+            id_editeur_jeu: id_societe
         }))
 
     };
@@ -65,7 +66,7 @@ export default function ModalJeu({open, editeurs, est_create, titre, row, setRow
                     <DialogContentText id="alert-dialog-description">
                     </DialogContentText>
                     <Grid container spacing={2}>
-                        <Grid item xs={12}>
+                        <Grid item xs={12} sm={8}>
                             <TextField
                                 autoComplete="nom du jeu"
                                 defaultValue={row.titre_jeu}
@@ -80,6 +81,21 @@ export default function ModalJeu({open, editeurs, est_create, titre, row, setRow
                                     ...prevState,
                                     titre_jeu: e.target.value
                                 }))}
+
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={2}>
+                            <FormControlLabel
+                                control={
+                                    <Checkbox
+                                        checked={row.proto_jeu}
+                                        onChange={handleChange}
+                                        name="proto_jeu"
+                                        inputProps={{'aria-label': 'secondary checkbox'}}
+                                    />
+                                }
+                                labelPlacement="top"
+                                label={<Typography variant="body2" color="textSecondary">Proto ?</Typography>}
 
                             />
                         </Grid>
@@ -114,7 +130,7 @@ export default function ModalJeu({open, editeurs, est_create, titre, row, setRow
                                 }))}
                             />
                         </Grid>
-                        <Grid item xs={12} sm={6}>
+                        <Grid item xs={12} sm={5}>
                             <TextField
                                 variant="outlined"
                                 defaultValue={row.age_min_jeu}
@@ -127,6 +143,25 @@ export default function ModalJeu({open, editeurs, est_create, titre, row, setRow
                                     ...prevState,
                                     age_min_jeu: e.target.value
                                 }))}
+                            />
+                        </Grid>
+                        <Grid item xs={12} sm={5}>
+                            <Autocomplete
+                                id="combo-box-demo"
+                                options={editeurs}
+                                getOptionLabel={(option) => option.nom_societe}
+                                style={{ width: 300 }}
+                                defaultValue={row}
+                                onChange={(event, newValue) => {
+                                    JSON.stringify(newValue, null, ' ')
+                                    if(newValue !== undefined){
+                                        handleChangeEditeur(newValue.id_societe)
+                                    }
+
+                                }}
+                                renderInput={
+                                    (params) => <TextField {...params} label="Editeur" variant="outlined" />
+                                }
                             />
                         </Grid>
                         <Grid item xs={12} sm={6}>
@@ -159,38 +194,8 @@ export default function ModalJeu({open, editeurs, est_create, titre, row, setRow
                                 }))}
                             />
                         </Grid>
-                        <Grid item xs={12} sm={2}>
-                            <FormControlLabel
-                                control={
-                                    <Checkbox
-                                        checked={row.proto_jeu}
-                                        onChange={handleChange}
-                                        name="proto_jeu"
-                                        inputProps={{'aria-label': 'secondary checkbox'}}
-                                    />
-                                }
-                                labelPlacement="top"
-                                label={<Typography variant="body2" color="textSecondary">Proto ?</Typography>}
 
-                            />
-                        </Grid>
-                        <Grid item xs={12} sm={4}>
 
-                            <TextField
-                                id="outlined-select-currency"
-                                select
-                                required
-                                fullWidth
-                                label="Choisir un editeur"
-                                value={row.id_editeur_jeu}
-                                onChange={handleChangeEditeur}
-                                variant="outlined"
-                            >
-                                {
-                                    editeurs.map(e => <MenuItem value={e.id_societe}>{e.nom_societe}</MenuItem>)
-                                }
-                            </TextField>
-                        </Grid>
 
                     </Grid>
                 </DialogContent>
