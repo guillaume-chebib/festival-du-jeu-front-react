@@ -31,7 +31,6 @@ const SuiviReservations = ({id_festival}) => {
         }
 
     };
-    const preventDefault = (event) => event.preventDefault();
 
     const columns = [
         {field: 'id', headerName: 'ID', hide: true},
@@ -53,21 +52,6 @@ const SuiviReservations = ({id_festival}) => {
         },
         {
             field: 'commentaire_reservation', headerName: 'Commentaire', flex: 2
-            ,
-            renderCell: (params) => {
-                return <TextField
-                    id={"commentaire" + params.row.id}
-                    label="Standard"
-                    value={params.row.commentaire_reservation}
-                    InputProps={{
-                        disableUnderline: true,
-                    }}
-                    onChange={(event => {
-                        params.row.commentaire_reservation = event.target.value
-                        handleChange(params.row)
-                    })}
-                />
-            }
         },
         {
             field: 'checkbox', headerName: 'Suivi', flex: 4,
