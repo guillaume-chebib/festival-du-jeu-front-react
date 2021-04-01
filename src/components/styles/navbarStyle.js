@@ -29,7 +29,7 @@ export const MainListItems = () => {
     const classes = useStyles1();
     const [open, setOpen] = useState(false);
     const authHeader = useAuthHeader()
-    const [festival,setFestival] = useState("")
+    const [festival,setFestival] = useState([{id_festival: 0}])
 
     const handleClick = async () => {
         setOpen(!open);
