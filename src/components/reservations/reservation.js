@@ -146,7 +146,6 @@ const Reservation = () => {
                         </AccordionDetails>
                     </Accordion>
                 </div>
-                <EspaceReservation setTrig={setTrig} reservation={reservation}/>
 
             </div>
             }

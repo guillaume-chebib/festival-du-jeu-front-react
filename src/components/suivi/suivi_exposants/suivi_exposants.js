@@ -9,6 +9,8 @@ import ListeContact from "./ListeContact";
 
 import DateContact from "./DateContact";
 import StatutPriseContact from "./StatutPriseContact";
+import Button from "@material-ui/core/Button";
+import suivi_reservations from "../suivi_reservations/suivi_reservations";
 
 
 
@@ -22,17 +24,15 @@ const SuiviExposants = () => {
     const history = useHistory();
     const [editeurs,setEditeurs] = useState([])
     const [statuts,setStatuts] = useState([])
+    const [reservations,setReservations] = useState([])
     const [trig,setTrig] = useState([])
     const authHeader = useAuthHeader()
 
-    const [openCreate, setOpenCreate] = useState(false);
-    const handleClickOpenCreate = () => {
-        setOpenCreate(true);
-    };
 
-    const handleCloseCreate = () => {
-        setOpenCreate(false);
-    };
+    const existeReservation = (id_societe) => {
+        return  reservations.filter(r => r.id_societe === id_societe)
+    }
+
 
 
 
@@ -72,6 +72,56 @@ const SuiviExposants = () => {
                 return <ListeContact row = {params.row} setTrig={setTrig} isEdit={false} />
             }
         },
+        { field : 'Reservation', headerName: 'Reservation', flex: 1,
+            renderCell: (params) =>{
+                const reserv = existeReservation(params.row.id)
+                if(reserv.length !== 0){ // S'il il y a une reservation pour cette prise de contact
+                    return (
+                        <Button
+                            onClick={event => {
+                                console.log(reserv[0])
+                                history.push("/reservation/"+reserv[0].id_reservation);
+                            }}
+                            color="primary"
+                            variant="contained"
+                        >
+                            Réservation
+                        </Button>
+                    )
+                }else{
+                    return (
+                        <Button
+                            onClick={async (e) =>{
+                                const reservation = {
+                                    id_festival : id, id_societe : params.row.id_societe_prise_contact, besoin_benevol_reservation : false, deplacement_reservation : false,
+                                    apport_jeux_reservation: false , reduction_reservation : 0, cr_envoye_reservation : false
+                                }
+
+                                const  reponse_reserv = await requestToBack('POST',reservation,`/reservation/`,authHeader())
+                                const body = await reponse_reserv[0]
+                                if (reponse_reserv[1] !== 200) {
+                                    console.log(reponse_reserv[1])
+
+                                }else {
+                                    const id_reservation = body.message
+                                    history.push("/reservation/"+id_reservation);
+
+                                }
+
+
+
+                            }
+
+                            }
+                            color="primary"
+                            variant="contained"
+                        >
+                            Création reservation
+                        </Button>
+                    )
+                }
+            }
+        },
 
 
     ]
@@ -80,9 +130,10 @@ const SuiviExposants = () => {
     useEffect(() => {
 
         async function fetchData() {
-            const [responsePriseContact, reponseStatuts] = await Promise.all([
+            const [responsePriseContact, reponseStatuts, reponseReservation] = await Promise.all([
                 await requestToBack('GET',null,`/festival/${id}/prise_contact`,authHeader()),
-                await requestToBack('GET',null,`/priseContact/statutsPriseContact/`,authHeader())
+                await requestToBack('GET',null,`/priseContact/statutsPriseContact/`,authHeader()),
+                await requestToBack('GET',null,`/festival/${id}/reservation`,authHeader())
             ]);
             const bodyEditeursNonInactif = await responsePriseContact[0]
             const editeursNonInactif = bodyEditeursNonInactif.message
@@ -92,7 +143,6 @@ const SuiviExposants = () => {
             }
             else {
                 editeursNonInactif.forEach(obj => renameKey(obj, 'id_societe', 'id'));
-                const updatedJson = JSON.stringify(editeursNonInactif);
                 setEditeurs(editeursNonInactif)
             }
 
@@ -106,6 +156,15 @@ const SuiviExposants = () => {
 
             }
 
+            const bodyReserv = await reponseReservation[0]
+            const list_reservation = bodyReserv.message
+            if (reponseStatuts[1] !== 200) {
+                console.log(reponseStatuts[1])
+            }
+            else {
+                setReservations(list_reservation)
+
+            }
         }
 
         fetchData();
@@ -123,21 +182,24 @@ const SuiviExposants = () => {
 
             </div>
 
-            <div style={{paddingTop: '2em'}}>
-                <div style={{ height: 400, width: '100%' }}>
-                    <DataGrid sortModel={[
-                        {
+            {
+                editeurs && statuts && reservations &&
+                <div style={{paddingTop: '2em'}}>
+                    <div style={{ height: 400, width: '100%' }}>
+                        <DataGrid sortModel={[
+                            {
 
-                            field: 'id',
-                            sort: 'desc',
+                                field: 'id',
+                                sort: 'desc',
 
-                        },
-                    ]}
-                              className={classes.root}
-                              rows={editeurs}
-                              {...editeurs} columns={columns} pageSize={5} />
+                            },
+                        ]}
+                                  className={classes.root}
+                                  rows={editeurs}
+                                  {...editeurs} columns={columns} pageSize={5} />
+                    </div>
                 </div>
-            </div>
+            }
         </div>
 
     )

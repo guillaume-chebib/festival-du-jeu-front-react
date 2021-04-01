@@ -1,16 +1,12 @@
-import React, { useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useHistory, useParams} from "react-router-dom";
 
-import {CellParams, DataGrid} from '@material-ui/data-grid';
+import {DataGrid} from '@material-ui/data-grid';
 import useStylesTableValueColor from "../../table/styles";
 import {useAuthHeader} from 'react-auth-kit'
 import {IsAdmin, renameKey, requestToBack} from "../../../utils/utils_functions";
-import DateContact from "../suivi_exposants/DateContact";
 import DateFactureReservation from "./DateFactureReservation";
-import {CheckBox} from "@material-ui/icons";
-import {Checkbox, FormControlLabel, Link, makeStyles, TextField} from "@material-ui/core";
-import CheckBoxReservation from "./CheckBoxReservation";
-import Typography from "@material-ui/core/Typography";
+import {TextField} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import {EtatReservation} from "../../reservations/EtatReservation";
 

@@ -53,8 +53,8 @@ const EspaceReservation = ({setTrig,reservation}) => {
                 console.log(responseEspaceFestival[1])
             }
             else {
-                list_espace.rows.forEach(obj => renameKey(obj, 'id_espace', 'id'));
-                setEspaces(list_espace.rows)
+                // list_espace.rows.forEach(obj => renameKey(obj, 'id_espace', 'id'));
+                // setEspaces(list_espace.rows)
 
             }
 

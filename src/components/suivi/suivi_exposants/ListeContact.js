@@ -24,6 +24,8 @@ import {CheckBox} from "@material-ui/icons";
 
 
 const ListeContact = ({row,setTrig,isEdit}) => {
+    // TODO Trigger a rajouté pour mettre a jour
+    // TODO Message si il y a rien
     const [openListeContact, setListeContact] = useState(false);
     const [societe,setSociete] = useState(row);
 
@@ -49,7 +51,7 @@ const ListeContact = ({row,setTrig,isEdit}) => {
                 <DialogTitle id="simple-dialog-title">Contacts de {societe.nom_societe}</DialogTitle>
                 <List>
                     {societe.contacts.map((c) => (
-                        <ListItem >
+                        <ListItem key={c.nom_contact}>
                             <ListItemAvatar>
                                 <Avatar >
                                     <PersonIcon />
