@@ -229,6 +229,7 @@ const JeuxReserves = ({reservation}) => {
     useEffect(() => {
 
         async function fetchData() {
+            console.log("idFest "+reservation.id_festival_reservation)
             const [responseJeu, responseZone, responseJeuxEditeur] = await Promise.all([
                 await requestToBack('GET',null,`/reservation/${reservation.id}/jeuxReserves`,authHeader()),
                 await requestToBack('GET',null,`/festival/${reservation.id_festival_reservation}/zone`,authHeader()),
