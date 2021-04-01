@@ -47,7 +47,8 @@ const Reservation = () => {
 
             reserv.id = reserv.id_reservation
             delete reserv.id_reservation
-            console.log(reserv  )
+            console.log("============================================================")
+            console.log(reserv)
             if (responseReservation[1] !== 200) {
                 console.log(responseReservation[1])
             } else {

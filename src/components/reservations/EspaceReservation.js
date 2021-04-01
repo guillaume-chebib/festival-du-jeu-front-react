@@ -39,6 +39,15 @@ const EspaceReservation = ({setTrig,reservation}) => {
     }
     const invoiceSubtotal = subtotal(reservation);
 
+    const handlePutAllocation = async (espace) => {
+        const response = await requestToBack('PUT',espace,`/reservation/${reservation.id}/allocation_espace/${espace.id_espace}`,authHeader())
+        const body = await response[0]
+        if (response[1] !== 200) {
+            console.log("erreur serveur")
+        }
+
+    };
+
     return (
         <div>
             {espaces &&
@@ -58,10 +67,36 @@ const EspaceReservation = ({setTrig,reservation}) => {
                         {espaces.map((row) => (
                             <TableRow key={row.nom_espace}>
                                 <TableCell>{row.nom_espace}</TableCell>
-                                <TableCell>{row.nb_table_allocation_espace}</TableCell>
-                                <TableCell>{row.m2_allocation_espace}</TableCell>
+                                <TableCell>
+                                    <TextField
+                                        defaultValue={row.nb_table_allocation_espace}
+                                        onChange={(event => {
+                                            row.nb_table_allocation_espace = event.target.value
+                                            handlePutAllocation(row)
+                                        })}
+                                    />
+                                </TableCell>
+                                <TableCell>
+                                    <TextField
+                                        defaultValue={row.m2_allocation_espace}
+                                        onChange={(event => {
+                                            row.m2_allocation_espace = event.target.value
+                                            handlePutAllocation(row)
+                                        })}
+                                    />
+
+                                </TableCell>
                                 <TableCell>0</TableCell>
-                                <TableCell>{row.remise_allocation_espace}</TableCell>
+                                <TableCell>
+                                    <TextField
+                                        defaultValue={row.remise_allocation_espace}
+                                        onChange={(event => {
+                                            row.remise_allocation_espace = event.target.value
+                                            handlePutAllocation(row)
+                                        })}
+                                    />
+
+                                </TableCell>
                                 <TableCell>0</TableCell>
                             </TableRow>
                         ))}
