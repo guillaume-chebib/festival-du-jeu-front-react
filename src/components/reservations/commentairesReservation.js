@@ -14,7 +14,6 @@ export const CommentaireReservation = ({row, setTrig}) => {
     const [newComment,setNewComment] = useState(row.commentaire_reservation)
 
     const handleChange = async (row) => {
-        console.log(row)
         const response = await requestToBack('PUT',row,`/reservation/${row.id_reservation}`,authHeader())
         const body = await response[0]
         if (response[1] !== 200) {

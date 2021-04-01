@@ -18,7 +18,6 @@ import Typography from "@material-ui/core/Typography";
 
 export default function ModalJeuReserve({open,zones,titre,row,setRow,jeux,onUpdate,onClose}) {
 
-    console.log("JEUX "+jeux)
     const authHeader = useAuthHeader()
     const [jeu, setJeu] = useState()
     const [zone, setZone] = useState()
@@ -35,9 +34,7 @@ export default function ModalJeuReserve({open,zones,titre,row,setRow,jeux,onUpda
     }));
 
     const classes = useStyles();
-    useEffect(() => {
-        console.log(zones)
-    })
+
 
 
     const handleChangeEditeur = (event) => {
