@@ -139,7 +139,7 @@ const EspaceReservation = ({setTrig, reservation}) => {
                                 />
                             </TableCell>
                         </TableRow>
-                        <TableRow style={{backgroundColor: 'red'}}>
+                        <TableRow style={{backgroundColor: '#739600'}}>
                             <TableCell colSpan={5}>Total</TableCell>
                             <TableCell>
                                 {reservation.prix_total_reservation}
