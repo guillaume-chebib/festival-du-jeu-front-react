@@ -1,6 +1,10 @@
 import React, { useEffect, useState} from 'react';
 import {IsAdmin, requestToBack} from "../../utils/utils_functions"
 import {useAuthHeader} from 'react-auth-kit'
+import LinearProgress from '@material-ui/core/LinearProgress';
+import Box from "@material-ui/core/Box";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 
 
 const Facturation = ({id_festival}) => {
@@ -11,6 +15,7 @@ const Facturation = ({id_festival}) => {
     const [trig, setTrig] = useState([])
 
     useEffect(() => {
+
 
         async function fetchData() {
             const [responseCAPrevu, reponseCAReel] = await Promise.all([
@@ -65,12 +70,34 @@ const Facturation = ({id_festival}) => {
                     CA REEL : {CAReel} €
                 </div>
                 <div>
-                    Pourcentage du CA payé : {pourcentPaye} %
+                    Pourcentage du CA payé :
                 </div>
+                <Box display="flex" alignItems="center">
+                    <Box width="100%" mr={1}>
+                        <BorderLinearProgress variant="determinate" value={pourcentPaye} />
+
+                    </Box>
+                    <Box minWidth={35}>
+                        <Typography variant="body2" color="textSecondary">{`${pourcentPaye
+                        }%`}</Typography>
+                    </Box>
+                </Box>
+
             </div>
         </div>
 
     )
 }
 
+
+const BorderLinearProgress = withStyles((theme) => ({
+    root: {
+        height: 10,
+        borderRadius: 5,
+    },
+    bar: {
+        borderRadius: 5,
+        backgroundColor: '#1a90ff',
+    },
+}))(LinearProgress);
 export default Facturation
