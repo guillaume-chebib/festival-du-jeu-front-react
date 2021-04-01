@@ -31,8 +31,8 @@ const EditContact = ({row, setTrig}) => {
         if (response[1] !== 200) {
             console.log("erreur serveur")
         }
-        setOpenDialog(false);
         setTrig(contact)
+        setOpenDialog(false);
     };
 
     const handleClickOpenDelete = () => {
