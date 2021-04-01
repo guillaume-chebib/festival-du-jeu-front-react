@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React from 'react';
+import {makeStyles} from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -8,9 +8,6 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-import Zone from "../zones/zone";
-import {DataGrid} from "@material-ui/data-grid";
-import {useHistory} from "react-router-dom";
 import Checkbox from "@material-ui/core/Checkbox";
 
 // const columns = [
@@ -61,13 +58,13 @@ const useStyles = makeStyles({
 });
 
 const columns = [
-    { field: 'id_jeu', headerName: 'Id jeu', display: "none" },
-    { field: 'titre_jeu', headerName: 'Titre du jeu' },
-    { field: 'nom_societe', headerName: 'Editeur' },
-    { field: 'min_joueur_jeu', headerName: 'Joueurs', hide: false },
-    { field: 'age_min_jeu', headerName: 'Age min.', hide: false },
-    { field: 'duree_jeu', headerName: 'Durée', hide: false },
-    { field: 'proto_jeu', headerName: 'Avant 1ère ?', hide: false },
+    {field: 'id_jeu', headerName: 'Id jeu', display: "none"},
+    {field: 'titre_jeu', headerName: 'Titre du jeu'},
+    {field: 'nom_societe', headerName: 'Editeur'},
+    {field: 'min_joueur_jeu', headerName: 'Joueurs', hide: false},
+    {field: 'age_min_jeu', headerName: 'Age min.', hide: false},
+    {field: 'duree_jeu', headerName: 'Durée', hide: false},
+    {field: 'proto_jeu', headerName: 'Avant 1ère ?', hide: false},
 ]
 
 export const JeuxReservesDetail = ({jeux}) => {
@@ -96,7 +93,7 @@ export const JeuxReservesDetail = ({jeux}) => {
                                     key={column.field}
                                     hidden={column.hide}
                                     align={column.align}
-                                    style={{ minWidth: column.minWidth, display: column.display}}
+                                    style={{minWidth: column.minWidth, display: column.display}}
                                 >
                                     {column.headerName}
                                 </TableCell>
@@ -105,7 +102,16 @@ export const JeuxReservesDetail = ({jeux}) => {
                     </TableHead>
                     <TableBody>
                         {jeux.map(jeu => {
-                            const {titre_jeu, id_jeu, nom_societe,min_joueur_jeu, max_joueur_jeu, age_min_jeu, duree_jeu, proto_jeu} = jeu
+                            const {
+                                titre_jeu,
+                                id_jeu,
+                                nom_societe,
+                                min_joueur_jeu,
+                                max_joueur_jeu,
+                                age_min_jeu,
+                                duree_jeu,
+                                proto_jeu
+                            } = jeu
 
                             return (
                                 <TableRow>
@@ -123,7 +129,7 @@ export const JeuxReservesDetail = ({jeux}) => {
                                     </TableCell>
                                 </TableRow>
                             )
-                            })
+                        })
                         }
                         {/*{rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {*/}
                         {/*    return (*/}

@@ -1,12 +1,11 @@
 import React, {useState} from "react";
 import AlertDialogDelete from "../modals/AlertDialogDelete";
-import {UpdateDeleteButtons} from "../modals/UpdateDeleteButtons";
 import {requestToBack} from "../../utils/utils_functions";
 import {useAuthHeader} from "react-auth-kit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import IconButton from "@material-ui/core/IconButton";
 
-const DeleteJeuReserve = ({row,setTrig}) => {
+const DeleteJeuReserve = ({row, setTrig}) => {
 
     const [openDelete, setOpenDelete] = useState(false);
     const authHeader = useAuthHeader()
@@ -21,7 +20,7 @@ const DeleteJeuReserve = ({row,setTrig}) => {
     };
 
     const handleDelete = async () => {
-        const response = await requestToBack('DELETE',row,`/jeu/${row.id}`,authHeader())
+        const response = await requestToBack('DELETE', row, `/jeu/${row.id}`, authHeader())
         const body = await response[0]
         if (response[1] !== 200) {
             console.log("erreur serveur")

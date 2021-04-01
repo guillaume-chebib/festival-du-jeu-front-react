@@ -12,11 +12,11 @@ import DialogActions from "@material-ui/core/DialogActions";
 import Grid from "@material-ui/core/Grid";
 
 
-export const AddFestivalModal = ({open,titre,row,setRow,onAdd,onClose}) => {
+export const AddFestivalModal = ({open, titre, row, setRow, onAdd, onClose}) => {
 
     const year = new Date().getFullYear()
 
-    return(
+    return (
         <div>
             <Dialog
                 open={open}
@@ -28,10 +28,11 @@ export const AddFestivalModal = ({open,titre,row,setRow,onAdd,onClose}) => {
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
                     </DialogContentText>
-                    <form noValidate autoComplete="on" onSubmit={onAdd} >
+                    <form noValidate autoComplete="on" onSubmit={onAdd}>
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6}>
-                                <TextField required id="outlined-required" isrequired="true" label="Nom du festival" variant="outlined"
+                                <TextField required id="outlined-required" isrequired="true" label="Nom du festival"
+                                           variant="outlined"
                                            onChange={e => setRow(prevState => ({
                                                ...prevState,
                                                nom_festival: e.target.value
@@ -54,15 +55,15 @@ export const AddFestivalModal = ({open,titre,row,setRow,onAdd,onClose}) => {
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <h4>Espace n°1</h4>
-                            <FormEspace setForm={setRow} value={1} />
+                                <FormEspace setForm={setRow} value={1}/>
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <h4>Espace n°2</h4>
-                            <FormEspace setForm={setRow} value={2}/>
+                                <FormEspace setForm={setRow} value={2}/>
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <h4>Espace n°3</h4>
-                            <FormEspace setForm={setRow} value={3}/>
+                                <FormEspace setForm={setRow} value={3}/>
                             </Grid>
                         </Grid>
                     </form>
@@ -71,7 +72,7 @@ export const AddFestivalModal = ({open,titre,row,setRow,onAdd,onClose}) => {
                     <Button color="primary" onClick={onClose} color="primary">
                         Annuler
                     </Button>
-                    <Button onClick={onAdd}  type="submit" variant="contained" color="secondary" autoFocus>
+                    <Button onClick={onAdd} type="submit" variant="contained" color="secondary" autoFocus>
                         Soumettre
                     </Button>
                 </DialogActions>
@@ -80,7 +81,7 @@ export const AddFestivalModal = ({open,titre,row,setRow,onAdd,onClose}) => {
     )
 }
 
-const FormEspace = ({setForm,value}) => {
+const FormEspace = ({setForm, value}) => {
 
     const setValue_prix_espace = async e => {
         switch (value) {
@@ -134,8 +135,8 @@ const FormEspace = ({setForm,value}) => {
         }
     }
 
-    const setValue_prix_tables_espace = async e =>{
-        switch(value) {
+    const setValue_prix_tables_espace = async e => {
+        switch (value) {
             case 1:
                 setForm(prevState => ({
                     ...prevState,
@@ -159,9 +160,9 @@ const FormEspace = ({setForm,value}) => {
                 break
         }
     }
-    return(
+    return (
         <div>
-            <FormControl >
+            <FormControl>
                 <InputLabel htmlFor="prix-m2">Prix m²</InputLabel>
                 <Input
                     id="prix-m2"
@@ -170,14 +171,14 @@ const FormEspace = ({setForm,value}) => {
 
                 />
             </FormControl>
-            <FormControl >
+            <FormControl>
                 <InputLabel htmlFor="nb-tables">Nb tables</InputLabel>
                 <Input
                     id="nb-tables"
                     onChange={e => setValue_nb_tables_espace(e)}
                 />
             </FormControl>
-            <FormControl >
+            <FormControl>
                 <InputLabel htmlFor="prix-table">Prix table</InputLabel>
                 <Input
                     id="prix-table"

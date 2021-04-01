@@ -32,19 +32,17 @@ const useStyles = makeStyles((theme) => ({
 const Zones = () => {
     const classes = useStyles();
     const authHeader = useAuthHeader()
-    const [zones,setZones] = useState([])
+    const [zones, setZones] = useState([])
     const [trig, setTrig] = useState([])
 
     useEffect(() => {
         async function fetchData() {
-            const response = await requestToBack('GET',null,`/public/festival/zone`,authHeader())
+            const response = await requestToBack('GET', null, `/public/festival/zone`, authHeader())
 
             const zones = await response[0]
-            console.log("ZONE : "+zones)
             if (response[1] !== 200) {
                 setZones("Impossible de fetch")
-            }
-            else {
+            } else {
                 setZones(zones)
             }
 
@@ -53,35 +51,36 @@ const Zones = () => {
 
         fetchData();
 
-    },[trig]);
+    }, [trig]);
 
 
     return (
         <div>
             <h1>Test Zone</h1>
             <div style={{paddingTop: '2em'}}>
-                <div style={{ height: 400, width: '100%' }}>
+                <div style={{height: 400, width: '100%'}}>
                     <div className={classes.root}>
                         <Grid container spacing={2}>
-                        {zones.map(zone => {
-                        const {id_zone, nom_zone} = zone.zone
+                            {zones.map(zone => {
+                                const {id_zone, nom_zone} = zone.zone
 
-                        return (
-                             <Grid item xs={12} sm={6}>
-                                 <Accordion>
-                                        <AccordionSummary
-                                            expandIcon={<ExpandMoreIcon/>}
-                                            aria-controls="panel1a-content"
-                                            id="panel1a-header"
-                                        >
-                                            <Typography className={classes.heading}>{nom_zone}</Typography>
-                                            <Typography className={classes.secondaryHeading}>{zone.jeux.length} jeu(x)</Typography>
-                                        </AccordionSummary>
-                                        <JeuxReservesDetail jeux={zone.jeux}/>
-                                    </Accordion>
-                                </Grid>
+                                return (
+                                    <Grid item xs={12} sm={6}>
+                                        <Accordion>
+                                            <AccordionSummary
+                                                expandIcon={<ExpandMoreIcon/>}
+                                                aria-controls="panel1a-content"
+                                                id="panel1a-header"
+                                            >
+                                                <Typography className={classes.heading}>{nom_zone}</Typography>
+                                                <Typography
+                                                    className={classes.secondaryHeading}>{zone.jeux.length} jeu(x)</Typography>
+                                            </AccordionSummary>
+                                            <JeuxReservesDetail jeux={zone.jeux}/>
+                                        </Accordion>
+                                    </Grid>
                                 )
-                             })}
+                            })}
                         </Grid>
                     </div>
                 </div>

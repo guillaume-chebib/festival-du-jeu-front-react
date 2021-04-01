@@ -1,5 +1,5 @@
 import {Button, TextField} from "@material-ui/core";
-import React, {useState} from "react";
+import React from "react";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Input from "@material-ui/core/Input";
@@ -12,10 +12,10 @@ import DialogActions from "@material-ui/core/DialogActions";
 import Grid from "@material-ui/core/Grid";
 
 
-export const UpdateFestivalModal = ({open,titre,row,setRow,onUpdate,onClose}) => {
+export const UpdateFestivalModal = ({open, titre, row, setRow, onUpdate, onClose}) => {
 
 
-    return(
+    return (
         <div>
             <Dialog
                 open={open}
@@ -27,10 +27,11 @@ export const UpdateFestivalModal = ({open,titre,row,setRow,onUpdate,onClose}) =>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description">
                     </DialogContentText>
-                    <form noValidate autoComplete="on" onSubmit={onUpdate} >
+                    <form noValidate autoComplete="on" onSubmit={onUpdate}>
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6}>
-                                <TextField required id="outlined-required" isrequired="true" label="Nom du festival" variant="outlined"
+                                <TextField required id="outlined-required" isrequired="true" label="Nom du festival"
+                                           variant="outlined"
                                            defaultValue={row.nom_festival}
                                            onChange={e => setRow(prevState => ({
                                                ...prevState,
@@ -54,7 +55,7 @@ export const UpdateFestivalModal = ({open,titre,row,setRow,onUpdate,onClose}) =>
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <h4>Espace n°1</h4>
-                                <FormEspace setForm={setRow} value={1} row={row} />
+                                <FormEspace setForm={setRow} value={1} row={row}/>
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <h4>Espace n°2</h4>
@@ -71,7 +72,7 @@ export const UpdateFestivalModal = ({open,titre,row,setRow,onUpdate,onClose}) =>
                     <Button color="primary" onClick={onClose} color="primary">
                         Annuler
                     </Button>
-                    <Button onClick={onUpdate}  type="submit" variant="contained" color="secondary" autoFocus>
+                    <Button onClick={onUpdate} type="submit" variant="contained" color="secondary" autoFocus>
                         Soumettre
                     </Button>
                 </DialogActions>
@@ -80,7 +81,7 @@ export const UpdateFestivalModal = ({open,titre,row,setRow,onUpdate,onClose}) =>
     )
 }
 
-const FormEspace = ({setForm,value,row}) => {
+const FormEspace = ({setForm, value, row}) => {
 
     const setValue_prix_espace = async e => {
         switch (value) {
@@ -173,7 +174,7 @@ const FormEspace = ({setForm,value,row}) => {
 
         }
     }
-    const defaultValue_nb_tables_espace = ()  => {
+    const defaultValue_nb_tables_espace = () => {
         switch (value) {
             case 1:
                 return row.nb_table_espace_1
@@ -186,8 +187,8 @@ const FormEspace = ({setForm,value,row}) => {
         }
     }
 
-    const defaultValue_prix_tables_espace = ()  =>{
-        switch(value) {
+    const defaultValue_prix_tables_espace = () => {
+        switch (value) {
 
             case 1:
                 return row.prix_table_espace_1
@@ -198,9 +199,9 @@ const FormEspace = ({setForm,value,row}) => {
                 return row.prix_table_espace_3
         }
     }
-    return(
+    return (
         <div>
-            <FormControl >
+            <FormControl>
                 <InputLabel htmlFor="prix-m2">Prix m²</InputLabel>
                 <Input
                     id="prix-m2"
@@ -210,7 +211,7 @@ const FormEspace = ({setForm,value,row}) => {
 
                 />
             </FormControl>
-            <FormControl >
+            <FormControl>
                 <InputLabel htmlFor="nb-tables">Nb tables</InputLabel>
                 <Input
                     defaultValue={defaultValue_nb_tables_espace()}
@@ -218,7 +219,7 @@ const FormEspace = ({setForm,value,row}) => {
                     onChange={e => setValue_nb_tables_espace(e)}
                 />
             </FormControl>
-            <FormControl >
+            <FormControl>
                 <InputLabel htmlFor="prix-table">Prix table</InputLabel>
                 <Input
                     id="prix-table"

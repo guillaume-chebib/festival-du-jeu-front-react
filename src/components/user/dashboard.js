@@ -1,13 +1,12 @@
-import React, { useEffect, useState,useCallback} from 'react';
+import React, {useEffect, useState} from 'react';
 import Button from '@material-ui/core/Button'
-import  {useHistory} from "react-router-dom"
-import {requestToBack} from "../../utils/utils_functions";
+import {useHistory} from "react-router-dom"
 import {useAuthUser} from "react-auth-kit";
 
 
 const Dashboard = () => {
 
-    const [response,setResponse] = useState("")
+    const [response, setResponse] = useState("")
     const auth = useAuthUser()
     let isAdmin = auth().superuser
 
@@ -24,18 +23,19 @@ const Dashboard = () => {
             //     setResponse(body.message)
             // }
         }
+
         fetchData()
 
-    },[]);
+    }, []);
 
     return (
         <div className="App">
             <p>{response}</p>
-            {isAdmin === "true"? (
-                    <AdminButton/>
-                    ) : (
-                    <p>Test</p>
-                )}
+            {isAdmin === "true" ? (
+                <AdminButton/>
+            ) : (
+                <p>Test</p>
+            )}
         </div>
     );
 
@@ -43,9 +43,9 @@ const Dashboard = () => {
 
 const AdminButton = () => {
     const history = useHistory();
-    return(
+    return (
         <div>
-            <Button variant="contained" color="primary"  onClick={() => history.push('/festival')}>
+            <Button variant="contained" color="primary" onClick={() => history.push('/festival')}>
                 Les festivals
             </Button>
             <Button variant="contained" color="primary" onClick={() => history.push('/privateRoute')}>

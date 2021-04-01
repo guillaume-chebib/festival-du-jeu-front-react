@@ -1,4 +1,4 @@
-import {Switch, Route, Redirect} from "react-router-dom"
+import {Redirect, Route, Switch} from "react-router-dom"
 
 import Accueil from "./accueil";
 import React from "react";
@@ -8,7 +8,7 @@ import Contact from "./contact"
 import Connexion from "./connexion";
 import Organisateur from "./organisateur/organisateur"
 import AjoutOrganisateur from "./organisateur/ajoutOrganisateur"
-import { PrivateRoute } from 'react-auth-kit'
+import {PrivateRoute} from 'react-auth-kit'
 import Zones from "./public/zones/zone"
 import PrivateComponent from "./privateComponent";
 import Societe from "./societes/societe";
@@ -24,7 +24,6 @@ import RedirectReservation from "./reservations/redirectReservation";
 import RedirectFacturation from "./facturations/redirectFacturation";
 
 
-
 const Routes = () => (
     <Switch>
         <Route exact path="/" component={Accueil}/>
@@ -34,20 +33,21 @@ const Routes = () => (
         <PrivateRoute exact path="/contact" loginPath={'/login'} component={Contact}/>
         <PrivateRoute exact path="/jeu" loginPath={'/login'} component={Jeu}/>
         <PrivateRoute exact path="/festival/:id/exposants" loginPath={'/login'} component={SuiviExposants}/>
-        <PrivateRoute exact path="/festival/:id/reservation/:id_reservation/jeuxReserves" loginPath={'/login'} component={JeuxReserves}/>
+        <PrivateRoute exact path="/festival/:id/reservation/:id_reservation/jeuxReserves" loginPath={'/login'}
+                      component={JeuxReserves}/>
         <PrivateRoute exact path="/festival/:id/reservations" loginPath={'/login'} component={SuiviReservations}/>
         <PrivateRoute exact path="/reservation/:id" loginPath={'/login'} component={Reservation}/>
         <Route exact path="/login" component={Connexion}/>
         <PrivateRoute exact path="/organisateur" loginPath={'/login'} component={Organisateur}/>
         <PrivateRoute exact path="/organisateur/ajout" loginPath={'/login'} component={AjoutOrganisateur}/>
         <PrivateRoute component={PrivateComponent} path={'/privateRoute'} loginPath={'/login'} exact/>
-        <PrivateRoute exact path="/societe"  loginPath={'/login'} component={Societe}/>
+        <PrivateRoute exact path="/societe" loginPath={'/login'} component={Societe}/>
         <PrivateRoute loginPath={'/login'} exact path="/dashboard" component={Dashboard}/>
         <Route exact path="/public/zone" component={Zones}/>
         <Route exact path="/public/jeu" component={ListJeux}/>
         <Route exact path="/public/editeur" component={Editeurs}/>
         <Route path="*">
-                <Redirect to="/" />
+            <Redirect to="/"/>
         </Route>
     </Switch>
 )

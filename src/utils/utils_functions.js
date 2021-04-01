@@ -3,19 +3,19 @@ import React, {useEffect, useState} from "react";
 import {Redirect} from "react-router-dom";
 
 
-export function renameKey ( obj, oldKey, newKey ) { //permet de renommer les colonnes
+export function renameKey(obj, oldKey, newKey) { //permet de renommer les colonnes
     obj[newKey] = obj[oldKey];
     delete obj[oldKey];
 }
 
 
-export function requestGetToBack(data){
+export function requestGetToBack(data) {
 
 }
 
-export async function requestToBack(verbe,data,route,token){
+export async function requestToBack(verbe, data, route, token) {
 
-    if(verbe !== 'GET') {
+    if (verbe !== 'GET') {
 
         const response = await fetch(`https://festival-du-jeu-api.herokuapp.com${route}`, {
             method: verbe,
@@ -27,9 +27,8 @@ export async function requestToBack(verbe,data,route,token){
         });
 
         const body = await response.json()
-        return [body,response.status]
-    }
-    else{
+        return [body, response.status]
+    } else {
         const response = await fetch(`https://festival-du-jeu-api.herokuapp.com${route}`, {
             method: verbe,
             headers: {
@@ -39,7 +38,7 @@ export async function requestToBack(verbe,data,route,token){
         });
 
         const body = await response.json()
-        return [body,response.status]
+        return [body, response.status]
     }
 
 }
@@ -47,18 +46,18 @@ export async function requestToBack(verbe,data,route,token){
 export const IsAdmin = ({}) => {
     const signOut = useSignOut()
     const auth = useAuthUser()
-    const [status,setStatus] = useState("")
-    const [logoff,setLogoff] = useState("")
+    const [status, setStatus] = useState("")
+    const [logoff, setLogoff] = useState("")
 
     useEffect(() => {
         let isAdmin = auth().superuser
-        if(isAdmin === "false"){
-            setStatus(<Redirect to="/login" /> )
+        if (isAdmin === "false") {
+            setStatus(<Redirect to="/login"/>)
             setLogoff(signOut)
         }
     })
 
-    return(
+    return (
         <div>
             {status}
             {logoff}

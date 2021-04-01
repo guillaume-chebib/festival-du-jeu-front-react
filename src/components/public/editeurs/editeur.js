@@ -31,18 +31,17 @@ const useStyles = makeStyles((theme) => ({
 const Editeurs = () => {
     const classes = useStyles();
     const authHeader = useAuthHeader()
-    const [editeurs,setEditeurs] = useState([])
+    const [editeurs, setEditeurs] = useState([])
     const [trig, setTrig] = useState([])
 
     useEffect(() => {
         async function fetchData() {
-            const response = await requestToBack('GET',null,`/public/festival/editeur`,authHeader())
+            const response = await requestToBack('GET', null, `/public/festival/editeur`, authHeader())
 
             const editeurs = await response[0]
             if (response[1] !== 200) {
                 setEditeurs("Impossible de fetch")
-            }
-            else {
+            } else {
                 setEditeurs(editeurs)
             }
 
@@ -51,7 +50,7 @@ const Editeurs = () => {
 
         fetchData();
 
-    },[trig]);
+    }, [trig]);
 
 
     return (
@@ -59,7 +58,7 @@ const Editeurs = () => {
             <h1>Les jeux présents par éditeur</h1>
 
             <div style={{paddingTop: '2em'}}>
-                <div style={{ height: 400, width: '100%' }}>
+                <div style={{height: 400, width: '100%'}}>
                     <div className={classes.root}>
                         <Grid container spacing={2}>
                             {editeurs.map(editeur => {
@@ -74,7 +73,8 @@ const Editeurs = () => {
                                                 id="panel1a-header"
                                             >
                                                 <Typography className={classes.heading}>{nom_societe}</Typography>
-                                                <Typography className={classes.secondaryHeading}>{editeur.jeux.length} jeu(x)</Typography>
+                                                <Typography
+                                                    className={classes.secondaryHeading}>{editeur.jeux.length} jeu(x)</Typography>
                                             </AccordionSummary>
                                             <JeuxReservesDetail jeux={editeur.jeux}/>
                                         </Accordion>

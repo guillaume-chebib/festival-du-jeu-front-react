@@ -1,33 +1,18 @@
 import React, {useState} from "react";
 import {useAuthHeader} from "react-auth-kit";
 import Button from "@material-ui/core/Button";
-import {
-    Checkbox,
-    Dialog,
-    DialogTitle, FormControlLabel,
-    List,
-    ListItem,
-    ListItemAvatar,
-    ListItemText,
-    makeStyles
-} from "@material-ui/core";
+import {Dialog, DialogTitle, List, ListItem, ListItemAvatar, ListItemText} from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
 import PersonIcon from '@material-ui/icons/Person';
 import AddContact from "./addContact";
-import IconButton from "@material-ui/core/IconButton";
-import DeleteIcon from "@material-ui/icons/Delete";
-import AlertDialogDelete from "../../modals/AlertDialogDelete";
-import {requestToBack} from "../../../utils/utils_functions";
-import EditIcon from "@material-ui/icons/Edit";
 import EditContact from "./editContact";
-import {CheckBox} from "@material-ui/icons";
 
 
-const ListeContact = ({row,setTrig,isEdit}) => {
+const ListeContact = ({row, setTrig, isEdit}) => {
     // TODO Trigger a rajouté pour mettre a jour
     // TODO Message si il y a rien
     const [openListeContact, setListeContact] = useState(false);
-    const [societe,setSociete] = useState(row);
+    const [societe, setSociete] = useState(row);
 
     const authHeader = useAuthHeader()
 
@@ -53,11 +38,11 @@ const ListeContact = ({row,setTrig,isEdit}) => {
                     {societe.contacts.map((c) => (
                         <ListItem key={c.nom_contact}>
                             <ListItemAvatar>
-                                <Avatar >
-                                    <PersonIcon />
+                                <Avatar>
+                                    <PersonIcon/>
                                 </Avatar>
                             </ListItemAvatar>
-                            <ListItemText primary={c.nom_contact} secondary={c.prenom_contact} />
+                            <ListItemText primary={c.nom_contact} secondary={c.prenom_contact}/>
                             {/*<ListItemText primary={"Email"} secondary={c.email_contact} />*/}
                             {/*<ListItemText primary={"Fixe : " + c.telephone_fixe_contact} secondary={"Portable : "+ c.telephone_fixe_contact}/>*/}
                             {/*<ListItemText primary={"Fonction"} secondary={c.fonction_contact}/>*/}
