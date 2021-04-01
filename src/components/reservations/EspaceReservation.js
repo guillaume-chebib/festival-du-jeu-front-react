@@ -49,7 +49,7 @@ const EspaceReservation = ({setTrig,reservation}) => {
 
     const handleChange = async (reservation) => {
         let sommePrix = 0
-        espaces.map(e => sommePrix += calculPrix(e))
+        espaces.map(e => sommePrix += calculPrixRemise(e))
         reservation.prix_total_reservation = sommePrix + reservation.reduction_reservation
         const response = await requestToBack('PUT',reservation,`/reservation/${reservation.id_reservation}`,authHeader())
         const body = await response[0]
@@ -61,7 +61,12 @@ const EspaceReservation = ({setTrig,reservation}) => {
     };
 
     const calculPrix = (row) => {
-        return (row.nb_table_allocation_espace * row.prix_table_espace) - row.remise_allocation_espace
+        const prix_table = (row.nb_table_allocation_espace * row.prix_table_espace)
+        const prix_m2 = (row.m2_allocation_espace * row.prix_table_espace)
+        return  prix_table + prix_m2
+    }
+    const calculPrixRemise = (row) => {
+        return  calculPrix(row) - row.remise_allocation_espace
     }
 
     return (
@@ -105,7 +110,7 @@ const EspaceReservation = ({setTrig,reservation}) => {
 
                                 </TableCell>
                                 <TableCell>
-                                    {row.nb_table_allocation_espace * row.prix_table_espace}
+                                    {calculPrix(row)}
                                 </TableCell>
                                 <TableCell>
                                     <TextField
@@ -119,7 +124,7 @@ const EspaceReservation = ({setTrig,reservation}) => {
 
                                 </TableCell>
                                 <TableCell>
-                                    {calculPrix(row)}
+                                    {calculPrixRemise(row)}
                                 </TableCell>
                             </TableRow>
                         ))}
