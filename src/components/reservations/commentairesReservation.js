@@ -1,6 +1,5 @@
 import React, {useState} from "react";
-import {Checkbox, FormControlLabel, TextField} from "@material-ui/core";
-import Typography from "@material-ui/core/Typography";
+import {TextField} from "@material-ui/core";
 import {requestToBack} from "../../utils/utils_functions";
 import {useAuthHeader} from "react-auth-kit";
 import EditIcon from "@material-ui/icons/Edit";

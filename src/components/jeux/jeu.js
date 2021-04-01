@@ -1,7 +1,7 @@
-import React, { useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useHistory} from "react-router-dom";
 
-import {CellParams, DataGrid} from '@material-ui/data-grid';
+import {DataGrid} from '@material-ui/data-grid';
 import useStylesTableValueColor from "../table/styles";
 import {IsAdmin, renameKey, requestToBack} from "../../utils/utils_functions"
 import UpdateDeleteJeu from "./UpdateDeleteJeu";
@@ -12,9 +12,6 @@ import LinkIcon from '@material-ui/icons/Link';
 import {themeFestival} from "../styles/themes";
 import Fab from "@material-ui/core/Fab";
 import {ThemeProvider} from "@material-ui/core/styles";
-
-
-
 
 
 const Jeu = () => {

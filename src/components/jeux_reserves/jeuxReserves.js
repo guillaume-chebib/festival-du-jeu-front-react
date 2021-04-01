@@ -1,37 +1,17 @@
-import React, { useEffect, useState} from 'react';
-import {useHistory, useParams} from "react-router-dom";
+import React, {useEffect, useState} from 'react';
+import {useHistory} from "react-router-dom";
 
-import {CellParams, DataGrid} from '@material-ui/data-grid';
+import {DataGrid} from '@material-ui/data-grid';
 
 import useStylesTableValueColor from "../table/styles";
 import {IsAdmin, renameKey, requestToBack} from "../../utils/utils_functions"
 import {useAuthHeader} from 'react-auth-kit'
-import {
-    Checkbox,
-    Dialog,
-    DialogActions, DialogContent,
-    DialogTitle,
-    FormControlLabel,
-    InputLabel,
-    MenuItem,
-    Select
-} from "@material-ui/core";
-import Typography from "@material-ui/core/Typography";
-import FormControl from "@material-ui/core/FormControl";
+import {Checkbox, MenuItem} from "@material-ui/core";
 import CreateJeuReserve from "./createJeuReserve";
 import TextField from "@material-ui/core/TextField";
-import IconButton from "@material-ui/core/IconButton";
-import EditIcon from "@material-ui/icons/Edit";
-import ModalContact from "../suivi/suivi_exposants/modalContact";
-import Button from "@material-ui/core/Button";
 import UpdateZone from "./updateZone";
-import DeleteIcon from "@material-ui/icons/Delete";
-import AlertDialogDelete from "../modals/AlertDialogDelete";
 import CreateZone from "./createZone";
 import DeleteJeuReserve from "./deleteZoneReserve";
-
-
-
 
 
 const JeuxReserves = ({reservation}) => {

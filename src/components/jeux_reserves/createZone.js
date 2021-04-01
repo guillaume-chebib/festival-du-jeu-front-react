@@ -1,11 +1,8 @@
-import React, {useEffect, useState} from "react";
-import AlertDialogDelete from "../modals/AlertDialogDelete";
-import {UpdateDeleteButtons} from "../modals/UpdateDeleteButtons";
-import {renameKey, requestToBack} from "../../utils/utils_functions";
+import React, {useState} from "react";
+import {requestToBack} from "../../utils/utils_functions";
 import {useAuthHeader} from "react-auth-kit";
 import Alert from "@material-ui/lab/Alert";
 import Button from "@material-ui/core/Button";
-import ModalJeuReserve from "./modalJeuReserve";
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import DialogContent from "@material-ui/core/DialogContent";

@@ -1,7 +1,5 @@
 import React, {useState} from "react";
-import AlertDialogDelete from "../modals/AlertDialogDelete";
 import ModalJeu from "./ModalJeu";
-import {UpdateDeleteButtons} from "../modals/UpdateDeleteButtons";
 import {requestToBack} from "../../utils/utils_functions";
 import {useAuthHeader} from "react-auth-kit";
 import Alert from "@material-ui/lab/Alert";

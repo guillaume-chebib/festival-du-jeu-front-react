@@ -1,16 +1,15 @@
-import React, { useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import useStylesForm from "../styles/formStyle";
-import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import {useAuthHeader} from 'react-auth-kit'
-import {IsAdmin} from "../../utils/utils_functions";
+import {IsAdmin, requestToBack} from "../../utils/utils_functions";
 import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';import Container from '@material-ui/core/Container';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
 import Alert from "@material-ui/lab/Alert";
 import {useHistory} from "react-router-dom";
-import {requestToBack} from "../../utils/utils_functions";
 
 
 const AjoutOrganisateur = () => {

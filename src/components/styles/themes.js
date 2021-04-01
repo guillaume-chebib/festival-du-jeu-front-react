@@ -1,5 +1,5 @@
-import { createMuiTheme } from '@material-ui/core/styles';
-import { makeStyles } from '@material-ui/core/';
+import {createMuiTheme} from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/';
 
 
 export const useStylesThemeFestival = makeStyles(theme => ({

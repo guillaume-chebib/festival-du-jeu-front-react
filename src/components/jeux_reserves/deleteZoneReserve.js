@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import AlertDialogDelete from "../modals/AlertDialogDelete";
-import {UpdateDeleteButtons} from "../modals/UpdateDeleteButtons";
 import {requestToBack} from "../../utils/utils_functions";
 import {useAuthHeader} from "react-auth-kit";
 import DeleteIcon from "@material-ui/icons/Delete";

@@ -1,20 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import InputBase from '@material-ui/core/InputBase';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
-import DirectionsIcon from '@material-ui/icons/Directions';
-import useStylesTableValueColor from "../../table/styles";
+import {makeStyles} from '@material-ui/core/styles';
 import {useHistory} from "react-router-dom";
 import {useAuthHeader} from "react-auth-kit";
 import HelpOutlineRoundedIcon from '@material-ui/icons/HelpOutlineRounded';
 import {Checkbox, Tooltip} from "@material-ui/core";
-import UpdateDeleteJeu from "../../jeux/UpdateDeleteJeu";
 import {renameKey, requestToBack} from "../../../utils/utils_functions";
-import CreateJeu from "../../jeux/CreateJeu";
 import {DataGrid} from "@material-ui/data-grid";
 
 const useStyles = makeStyles((theme) => ({

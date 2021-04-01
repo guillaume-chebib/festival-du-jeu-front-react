@@ -1,25 +1,14 @@
-import React, { useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useHistory} from "react-router-dom";
 import {useAuthHeader} from 'react-auth-kit';
-import {CellParams, DataGrid} from '@material-ui/data-grid';
-import IconButton from '@material-ui/core/IconButton';
-import DeleteIcon from '@material-ui/icons/Delete';
+import {DataGrid} from '@material-ui/data-grid';
 import Switch from '@material-ui/core/Switch';
-import Dialog from '@material-ui/core/Dialog';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import Button from "@material-ui/core/Button";
 
 import {renameKey, requestToBack} from "../../utils/utils_functions"
 
 import useStylesTableValueColor from "../table/styles";
-import {CheckBox} from "@material-ui/icons";
 import UpdateDeleteSociete from "./updateDeleteSociete";
 import ListeContact from "../suivi/suivi_exposants/ListeContact";
-
-
 
 
 const Exposant = ({setTrig, trig}) => {

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import {Checkbox, FormControlLabel} from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import {requestToBack} from "../../utils/utils_functions";

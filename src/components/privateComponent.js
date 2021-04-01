@@ -1,5 +1,5 @@
 import React from 'react';
-import {useAuthUser,useAuthHeader} from 'react-auth-kit'
+import {useAuthHeader, useAuthUser} from 'react-auth-kit'
 
 
 const PrivateComponent = () => {

@@ -1,26 +1,11 @@
 import React, {useState} from "react";
 import {useAuthHeader} from "react-auth-kit";
 import Button from "@material-ui/core/Button";
-import {
-    Checkbox,
-    Dialog,
-    DialogTitle, FormControlLabel,
-    List,
-    ListItem,
-    ListItemAvatar,
-    ListItemText,
-    makeStyles
-} from "@material-ui/core";
+import {Dialog, DialogTitle, List, ListItem, ListItemAvatar, ListItemText} from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
 import PersonIcon from '@material-ui/icons/Person';
 import AddContact from "./addContact";
-import IconButton from "@material-ui/core/IconButton";
-import DeleteIcon from "@material-ui/icons/Delete";
-import AlertDialogDelete from "../../modals/AlertDialogDelete";
-import {requestToBack} from "../../../utils/utils_functions";
-import EditIcon from "@material-ui/icons/Edit";
 import EditContact from "./editContact";
-import {CheckBox} from "@material-ui/icons";
 
 
 const ListeContact = ({row,setTrig,isEdit}) => {

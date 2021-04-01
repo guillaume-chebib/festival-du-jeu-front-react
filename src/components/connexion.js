@@ -1,9 +1,9 @@
-import React, { useEffect, useState} from 'react';
-import { useSignIn,useAuthUser,useAuthHeader,useIsAuthenticated } from 'react-auth-kit'
+import React, {useState} from 'react';
+import {useSignIn} from 'react-auth-kit'
 import "../styles/App.scss"
 import jwt from 'jwt-decode'
 import {Redirect} from "react-router-dom";
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -13,7 +13,6 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Alert from '@material-ui/lab/Alert';
 import {requestToBack} from "../utils/utils_functions";
-
 
 
 const Connexion = () => {

@@ -1,12 +1,11 @@
-import React, { useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Button from "@material-ui/core/Button";
-import  {useHistory} from "react-router-dom"
-import {CellParams, DataGrid, GridApi} from '@material-ui/data-grid';
+import {useHistory} from "react-router-dom"
+import {DataGrid} from '@material-ui/data-grid';
 import {useAuthHeader} from 'react-auth-kit'
-import {useStylesThemeFestival,themeFestival} from "../styles/themes";
+import {useStylesThemeFestival} from "../styles/themes";
 import {UpdateDeleteOrganisateur} from "./updateDeleteOrganisateur";
-import {requestToBack} from "../../utils/utils_functions";
-import {IsAdmin} from "../../utils/utils_functions";
+import {IsAdmin, requestToBack} from "../../utils/utils_functions";
 
 const Organisateur = () => {
 

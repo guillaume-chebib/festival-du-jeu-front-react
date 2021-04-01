@@ -2,25 +2,10 @@ import React, {useState} from "react";
 import AddIcon from '@material-ui/icons/Add';
 import {useAuthHeader} from "react-auth-kit";
 import Alert from "@material-ui/lab/Alert";
-import Button from "@material-ui/core/Button";
-import {
-    Checkbox,
-    Dialog,
-    DialogTitle, Fade, FormControlLabel,
-    List,
-    ListItem,
-    ListItemAvatar,
-    ListItemText,
-    makeStyles, Paper,
-    TextField
-} from "@material-ui/core";
+import {Fade, ListItem, ListItemAvatar, ListItemText, Paper} from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
-import {blue} from "@material-ui/core/colors";
-import PersonIcon from '@material-ui/icons/Person';
-import Grid from "@material-ui/core/Grid";
 import {requestToBack} from "../../../utils/utils_functions";
 import ModalContact from "./modalContact";
-
 
 
 const AddContact = ({id_societe, setTrig, isEdit}) => {

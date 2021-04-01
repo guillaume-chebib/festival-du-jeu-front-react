@@ -1,30 +1,12 @@
 import React, {useState} from "react";
-import AddIcon from '@material-ui/icons/Add';
 import {useAuthHeader} from "react-auth-kit";
-import Alert from "@material-ui/lab/Alert";
-import Button from "@material-ui/core/Button";
-import {
-    Checkbox,
-    Dialog,
-    DialogTitle, Fade, FormControlLabel,
-    List,
-    ListItem,
-    ListItemAvatar,
-    ListItemText,
-    makeStyles, Paper,
-    TextField
-} from "@material-ui/core";
-import Avatar from "@material-ui/core/Avatar";
-import {blue} from "@material-ui/core/colors";
-import PersonIcon from '@material-ui/icons/Person';
-import Grid from "@material-ui/core/Grid";
+import {Dialog, DialogTitle} from "@material-ui/core";
 import {requestToBack} from "../../../utils/utils_functions";
 import ModalContact from "./modalContact";
 import IconButton from "@material-ui/core/IconButton";
 import EditIcon from "@material-ui/icons/Edit";
 import DeleteIcon from "@material-ui/icons/Delete";
 import AlertDialogDelete from "../../modals/AlertDialogDelete";
-
 
 
 const UpdateDeleteJeuReserve = ({row, setTrig}) => {

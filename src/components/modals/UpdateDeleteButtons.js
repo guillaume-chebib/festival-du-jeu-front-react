@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import {ThemeProvider} from "@material-ui/core/styles";
 import {themeFestival} from "../styles/themes";
 import Fab from "@material-ui/core/Fab";

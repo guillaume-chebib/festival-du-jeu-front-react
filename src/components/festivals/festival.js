@@ -1,9 +1,8 @@
-import React, { useEffect, useState} from 'react';
-import {TextField} from '@material-ui/core';
-import {Button} from "@material-ui/core";
-import { DataGrid, ColDef, ValueGetterParams, CellParams, GridApi } from '@material-ui/data-grid';
+import React, {useEffect, useState} from 'react';
+import {Button} from '@material-ui/core';
+import {DataGrid} from '@material-ui/data-grid';
 import clsx from 'clsx';
-import {makeStyles, ThemeProvider} from '@material-ui/core/styles';
+import {ThemeProvider} from '@material-ui/core/styles';
 import useStylesTableValueColor, {themeResponsive} from "../table/styles";
 import {useAuthHeader} from 'react-auth-kit'
 import Typography from "@material-ui/core/Typography";
@@ -13,7 +12,6 @@ import {requestToBack} from "../../utils/utils_functions";
 import {themeFestival} from "../styles/themes";
 import {AddFestivalModal} from "./addFestivalModal";
 import {UpdateFestival} from "./updateFestival";
-import RedirectReservation from "../reservations/redirectReservation";
 import {useHistory} from "react-router-dom";
 
 const Festival = () => {

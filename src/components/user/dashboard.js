@@ -1,7 +1,6 @@
-import React, { useEffect, useState,useCallback} from 'react';
+import React, {useEffect, useState} from 'react';
 import Button from '@material-ui/core/Button'
-import  {useHistory} from "react-router-dom"
-import {requestToBack} from "../../utils/utils_functions";
+import {useHistory} from "react-router-dom"
 import {useAuthUser} from "react-auth-kit";
 
 

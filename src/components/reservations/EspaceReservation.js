@@ -1,9 +1,7 @@
 import React, {useEffect, useState} from "react";
-import {renameKey, requestToBack} from "../../utils/utils_functions";
+import {requestToBack} from "../../utils/utils_functions";
 import {useAuthHeader} from "react-auth-kit";
-import {DataGrid} from "@material-ui/data-grid";
 import useStylesTableValueColor from "../table/styles";
-import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -12,7 +10,6 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import {TextField} from "@material-ui/core";
-
 
 
 const EspaceReservation = ({setTrig,reservation}) => {

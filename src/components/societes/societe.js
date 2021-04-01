@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
+import {makeStyles} from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -9,8 +9,6 @@ import Box from '@material-ui/core/Box';
 import Exposant from "./exposant";
 import Editeur from "./editeur";
 import EditeurExposant from "./editeur_exposant";
-import {TextField} from "@material-ui/core";
-import Grid from "@material-ui/core/Grid";
 import CreateSociete from "./createSociete";
 import {IsAdmin} from "../../utils/utils_functions";
 

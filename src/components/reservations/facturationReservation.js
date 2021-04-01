@@ -1,6 +1,6 @@
 import DateFactureReservation from "../suivi/suivi_reservations/DateFactureReservation";
 import React from "react";
-import {Checkbox, FormControlLabel} from "@material-ui/core";
+import {FormControlLabel} from "@material-ui/core";
 
 
 export const FacturationReservation = ({row, setTrig}) => {

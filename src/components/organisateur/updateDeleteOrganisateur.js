@@ -1,12 +1,9 @@
 import React, {useState} from "react";
-import IconButton from "@material-ui/core/IconButton";
-import DeleteIcon from "@material-ui/icons/Delete";
 import UpdateOrganisateurModal from "./updateOrganisateurModal";
 import {useAuthHeader} from 'react-auth-kit'
 import {requestToBack} from "../../utils/utils_functions";
 import {UpdateDeleteButtons} from "../modals/UpdateDeleteButtons";
 import AlertDialogDelete from "../modals/AlertDialogDelete";
-
 
 
 export const UpdateDeleteOrganisateur = ({row,setTrig}) => {

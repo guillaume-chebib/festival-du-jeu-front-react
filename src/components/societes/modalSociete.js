@@ -7,7 +7,7 @@ import TextField from "@material-ui/core/TextField";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
 import React, {useRef} from "react";
-import {Checkbox, Fade, FormControlLabel, makeStyles, Paper} from "@material-ui/core";
+import {Checkbox, Fade, FormControlLabel, makeStyles} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
     container: {

@@ -1,16 +1,11 @@
 import React, {useState} from "react";
-import IconButton from "@material-ui/core/IconButton";
-import DeleteIcon from "@material-ui/icons/Delete";
 import {useAuthHeader} from 'react-auth-kit'
 import {requestToBack} from "../../utils/utils_functions";
-import {UpdateDeleteButtons} from "../modals/UpdateDeleteButtons";
-import AlertDialogDelete from "../modals/AlertDialogDelete";
 import {themeFestival} from "../styles/themes";
 import Fab from "@material-ui/core/Fab";
 import EditIcon from "@material-ui/icons/Edit";
 import {ThemeProvider} from "@material-ui/core/styles";
 import {UpdateFestivalModal} from "./updateFestivalModal";
-
 
 
 export const UpdateFestival = ({row,setTrig}) => {

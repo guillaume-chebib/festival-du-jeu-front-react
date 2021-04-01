@@ -1,4 +1,4 @@
-import {Switch, Route, Redirect} from "react-router-dom"
+import {Redirect, Route, Switch} from "react-router-dom"
 
 import Accueil from "./accueil";
 import React from "react";
@@ -8,7 +8,7 @@ import Contact from "./contact"
 import Connexion from "./connexion";
 import Organisateur from "./organisateur/organisateur"
 import AjoutOrganisateur from "./organisateur/ajoutOrganisateur"
-import { PrivateRoute } from 'react-auth-kit'
+import {PrivateRoute} from 'react-auth-kit'
 import Zones from "./public/zones/zone"
 import PrivateComponent from "./privateComponent";
 import Societe from "./societes/societe";
@@ -21,7 +21,6 @@ import Reservation from "./reservations/reservation"
 import ListJeux from "./public/jeuxReserves/listJeux";
 import Editeurs from "./public/editeurs/editeur";
 import RedirectReservation from "./reservations/redirectReservation";
-
 
 
 const Routes = () => (

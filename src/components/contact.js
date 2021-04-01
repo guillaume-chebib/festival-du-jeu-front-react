@@ -1,6 +1,6 @@
-import React, { useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useAuthHeader} from 'react-auth-kit';
-import {IsAdmin, renameKey, requestToBack} from "../utils/utils_functions"
+import {IsAdmin, requestToBack} from "../utils/utils_functions"
 import TableContainer from "@material-ui/core/TableContainer";
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
