@@ -1,4 +1,4 @@
-import {Switch, Route} from "react-router-dom"
+import {Switch, Route, Redirect} from "react-router-dom"
 
 import Accueil from "./accueil";
 import React from "react";
@@ -42,6 +42,9 @@ const Routes = () => (
         <Route exact path="/public/zone" component={Zones}/>
         <Route exact path="/public/jeu" component={ListJeux}/>
         <Route exact path="/public/editeur" component={Editeurs}/>
+        <Route path="*">
+                <Redirect to="/" />
+        </Route>
     </Switch>
 )
 
