@@ -142,6 +142,7 @@ const SuiviReservations = ({id_festival}) => {
                     ]}
                               className={classes.root}
                               rows={reservations}
+                              loading={reservations.length === 0}
                               {...reservations} columns={columns} pageSize={5}/>
                 </div>
             </div>

@@ -85,6 +85,8 @@ const Exposant = ({setTrig, trig}) => {
                 ]}
                           className={classes.root}
                           rows={exposants}
+                          loading={exposants === 0}
+
                           {...exposants} columns={columns} pageSize={5}/>
             </div>
         </div>

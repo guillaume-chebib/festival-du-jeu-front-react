@@ -2,13 +2,15 @@ import React, {useEffect, useState} from 'react';
 import Button from '@material-ui/core/Button'
 import {useHistory} from "react-router-dom"
 import {useAuthUser} from "react-auth-kit";
+import {themeResponsive} from "../table/styles";
+import Typography from "@material-ui/core/Typography";
+import {ThemeProvider} from "@material-ui/core/styles";
 
 
 const Dashboard = () => {
 
     const [response, setResponse] = useState("")
     const auth = useAuthUser()
-    let isAdmin = auth().superuser
 
 
     useEffect(() => {
@@ -29,36 +31,16 @@ const Dashboard = () => {
     }, []);
 
     return (
-        <div className="App">
-            <p>{response}</p>
-            {isAdmin === "true" ? (
-                <AdminButton/>
-            ) : (
-                <p>Test</p>
-            )}
+        <div>
+            <ThemeProvider theme={themeResponsive}>
+                <Typography variant="h6" color="inherit">
+                    {`Bienvenue, votre statut superuser est: ${auth().superuser}`}
+                </Typography>
+            </ThemeProvider>
+
         </div>
     );
 
 }
 
-const AdminButton = () => {
-    const history = useHistory();
-    return (
-        <div>
-            <Button variant="contained" color="primary" onClick={() => history.push('/festival')}>
-                Les festivals
-            </Button>
-            <Button variant="contained" color="primary" onClick={() => history.push('/privateRoute')}>
-                Page protegée
-            </Button>
-            <Button variant="contained" color="primary" onClick={() => history.push('/organisateur')}>
-                Gérer les organisateurs
-            </Button>
-            <Button variant="contained" color="primary" onClick={() => history.push('/jeu')}>
-                Jeux
-            </Button>
-        </div>
-    )
-
-}
 export default Dashboard;

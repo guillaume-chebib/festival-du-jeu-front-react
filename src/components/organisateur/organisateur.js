@@ -79,6 +79,8 @@ const Organisateur = () => {
                         },
                     ]}
                               rows={organisateurs}
+                              loading={organisateurs.length === 0}
+
                               {...organisateurs} columns={columns} pageSize={5}/>
 
                 </div>

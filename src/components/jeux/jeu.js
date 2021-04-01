@@ -101,7 +101,6 @@ const Jeu = () => {
 
     return (
         <div>
-            <IsAdmin/>
             <div>
                 <h1>
                     Liste des jeux
@@ -122,6 +121,8 @@ const Jeu = () => {
                     ]}
                               className={classes.root}
                               rows={jeux}
+                              loading={jeux.length === 0}
+
                               {...jeux} columns={columns} pageSize={5}/>
                 </div>
             </div>
