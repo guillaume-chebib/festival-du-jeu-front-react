@@ -133,6 +133,22 @@ export const publicListItems = (
     </div>
 );
 
+export const OrgaListItems = () => {
+
+    return(
+        <List>
+            <ListItem button component={Link} to="/jeu">
+                <ListItemIcon>
+                    <VideogameAssetIcon/>
+                </ListItemIcon>
+                <ListItemText primary="Jeux"/>
+            </ListItem>
+        </List>
+    )
+}
+
+
+
 const drawerWidth = 240;
 
 export const useStyles1 = makeStyles((theme) => ({

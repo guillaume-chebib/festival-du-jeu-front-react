@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {useAuthHeader} from 'react-auth-kit'
-import {requestToBack} from "../../utils/utils_functions";
+import {IsAdmin, requestToBack} from "../../utils/utils_functions";
 import SuiviReservations from "../suivi/suivi_reservations/suivi_reservations";
 
 const RedirectReservation = () => {
@@ -31,6 +31,7 @@ const RedirectReservation = () => {
 
     return (
         <div>
+            <IsAdmin/>
             {festival &&
             <SuiviReservations id_festival={festival.id_festival}/>
             }

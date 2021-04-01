@@ -21,6 +21,7 @@ import Reservation from "./reservations/reservation"
 import ListJeux from "./public/jeuxReserves/listJeux";
 import Editeurs from "./public/editeurs/editeur";
 import RedirectReservation from "./reservations/redirectReservation";
+import RedirectFacturation from "./facturations/redirectFacturation";
 
 
 const Routes = () => (
@@ -28,6 +29,7 @@ const Routes = () => (
         <Route exact path="/" component={Accueil}/>
         <PrivateRoute exact path="/festival" loginPath={'/login'} component={Festival}/>
         <PrivateRoute exact path="/reservation" loginPath={'/login'} component={RedirectReservation}/>
+        <PrivateRoute exact path="/facturation" loginPath={'/login'} component={RedirectFacturation}/>
         <PrivateRoute exact path="/contact" loginPath={'/login'} component={Contact}/>
         <PrivateRoute exact path="/jeu" loginPath={'/login'} component={Jeu}/>
         <PrivateRoute exact path="/festival/:id/exposants" loginPath={'/login'} component={SuiviExposants}/>

@@ -1,7 +1,7 @@
 import React from 'react';
 import Routes from "./components/routes";
 import {BrowserRouter as Router, Link} from "react-router-dom";
-import {AuthProvider, useIsAuthenticated, useSignOut} from 'react-auth-kit'
+import {AuthProvider, useAuthUser, useIsAuthenticated, useSignOut} from 'react-auth-kit'
 import CssBaseline from "@material-ui/core/CssBaseline";
 import AppBar from "@material-ui/core/AppBar";
 import clsx from "clsx";
@@ -17,7 +17,7 @@ import Drawer from "@material-ui/core/Drawer";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import Divider from "@material-ui/core/Divider";
 import List from "@material-ui/core/List";
-import {MainListItems, publicListItems, useStyles1} from "./components/styles/navbarStyle";
+import {MainListItems,publicListItems,useStyles1,OrgaListItems} from "./components/styles/navbarStyle";
 import Container from "@material-ui/core/Container";
 import StickyFooter from "./components/styles/footer";
 import {themeResponsive} from "./components/table/styles";
@@ -45,6 +45,8 @@ const AppNav = () => {
 
     const isAuthenticated = useIsAuthenticated()
     const signOut = useSignOut()
+    const auth = useAuthUser()
+
 
     const classes = useStyles1();
     const [open, setOpen] = React.useState(false);
@@ -70,7 +72,7 @@ const AppNav = () => {
                         >
                             <MenuIcon/>
                         </IconButton>
-                        <img src="images/logo_seul_festival.png" alt="logo" className={classes.logo}/>
+                        <img src="/images/logo_seul_festival.png" alt="logo" className={classes.logo} />
 
                         <ThemeProvider theme={themeResponsive}>
                             <Typography variant="caption" color="inherit" noWrap className={classes.title}>
@@ -118,8 +120,10 @@ const AppNav = () => {
                     {isAuthenticated() &&
                     <Divider/>
                     }
-                    {isAuthenticated() &&
-                    <MainListItems/>
+                    {isAuthenticated() && (
+                        auth().superuser==="true" ?
+                        <MainListItems/>:
+                        <OrgaListItems/>)
                     }
                     <Divider/>
                     <List>{publicListItems}</List>

@@ -101,7 +101,6 @@ const Jeu = () => {
 
     return (
         <div>
-            <IsAdmin/>
             <div>
                 <h1>
                     Liste des jeux
