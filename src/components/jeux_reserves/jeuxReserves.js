@@ -11,7 +11,7 @@ import CreateJeuReserve from "./createJeuReserve";
 import TextField from "@material-ui/core/TextField";
 import UpdateZone from "./updateZone";
 import CreateZone from "./createZone";
-import DeleteJeuReserve from "./deleteZoneReserve";
+import DeleteJeuReserve from "./DeleteJeuReserve";
 
 
 const JeuxReserves = ({reservation}) => {

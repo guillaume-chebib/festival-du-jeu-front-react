@@ -20,7 +20,7 @@ const DeleteJeuReserve = ({row, setTrig}) => {
     };
 
     const handleDelete = async () => {
-        const response = await requestToBack('DELETE', row, `/jeu/${row.id}`, authHeader())
+        const response = await requestToBack('DELETE', row, `/jeuReserve/${row.id_jeu}/${row.id_reservation_jeu_reserve}`, authHeader())
         const body = await response[0]
         if (response[1] !== 200) {
             console.log("erreur serveur")
