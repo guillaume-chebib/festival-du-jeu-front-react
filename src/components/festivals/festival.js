@@ -275,6 +275,7 @@ const Festivals = ({body}) => {
 
                     className={classes.root}
                     rows={festivals}
+                    loading={festivals.length === 0}
                     {...festivals} columns={columns} pageSize={4}/>
 
             </div>

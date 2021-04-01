@@ -103,6 +103,8 @@ export default function ListJeux() {
                         },
                     ]}
                               rows={jeux}
+                              loading={jeux.length === 0}
+
                               {...jeux} columns={columns} pageSize={15}/>
                 </div>
             </div>

@@ -100,6 +100,8 @@ const Editeur = ({setTrig, trig}) => {
                 ]}
                           className={classes.root}
                           rows={editeurs}
+                          loading={editeurs.length === 0}
+
                           {...editeurs} columns={columns} pageSize={5}/>
             </div>
         </div>
