@@ -20,6 +20,7 @@ import JeuxReserves from "./jeux_reserves/jeuxReserves";
 import Reservation from "./reservations/reservation"
 import ListJeux from "./public/jeuxReserves/listJeux";
 import Editeurs from "./public/editeurs/editeur";
+import RedirectReservation from "./reservations/redirectReservation";
 
 
 
@@ -27,6 +28,7 @@ const Routes = () => (
     <Switch>
         <Route exact path="/" component={Accueil}/>
         <PrivateRoute exact path="/festival" loginPath={'/login'} component={Festival}/>
+        <PrivateRoute exact path="/reservation" loginPath={'/login'} component={RedirectReservation}/>
         <PrivateRoute exact path="/contact" loginPath={'/login'} component={Contact}/>
         <PrivateRoute exact path="/jeu" loginPath={'/login'} component={Jeu}/>
         <PrivateRoute exact path="/festival/:id/exposants" loginPath={'/login'} component={SuiviExposants}/>

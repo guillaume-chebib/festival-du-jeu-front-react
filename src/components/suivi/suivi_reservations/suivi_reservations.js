@@ -10,9 +10,8 @@ import {TextField} from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import {EtatReservation} from "../../reservations/EtatReservation";
 
-const SuiviReservations = () => {
-    let {id} = useParams();
-
+const SuiviReservations = ({id_festival}) => {
+    const {id} = useParams()
 
     const classes = useStylesTableValueColor();
 
@@ -107,7 +106,13 @@ const SuiviReservations = () => {
     useEffect(() => {
 
         async function fetchData() {
-            const responseReservation = await requestToBack('GET',null,`/festival/${id}/reservation`,authHeader())
+            let responseReservation;
+            if(id === undefined){
+                responseReservation = await requestToBack('GET',null,`/festival/${id_festival}/reservation`,authHeader())
+            } else {
+                responseReservation = await requestToBack('GET',null,`/festival/${id}/reservation`,authHeader())
+            }
+
 
             const bodyReservation = await responseReservation[0]
             const listesReservations = bodyReservation.message

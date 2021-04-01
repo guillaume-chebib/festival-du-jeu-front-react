@@ -72,6 +72,7 @@ const Reservation = () => {
 
             }
 
+            console.log("RESER",reserv)
 
         }
 

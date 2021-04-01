@@ -13,6 +13,8 @@ import {requestToBack} from "../../utils/utils_functions";
 import {themeFestival} from "../styles/themes";
 import {AddFestivalModal} from "./addFestivalModal";
 import {UpdateFestival} from "./updateFestival";
+import RedirectReservation from "../reservations/redirectReservation";
+import {useHistory} from "react-router-dom";
 
 const Festival = () => {
 
@@ -57,6 +59,7 @@ const Festival = () => {
 const Festivals = ({body}) => {
     const classes = useStylesTableValueColor();
 
+    const history = useHistory();
     const [festivals,setFestivals] = useState([]) //contient tous les festivals
     const [value, setValue] = useState(""); //contient le festival courant actif
     const authHeader = useAuthHeader()
@@ -186,6 +189,26 @@ const Festivals = ({body}) => {
             renderCell: (params) => {
 
                 return  <UpdateFestival row={params.row} setTrig={setTrig}/>
+
+            }
+        },
+        {
+            field: "Reservation",
+            headerName: "",
+            sortable: false,
+            flex:0.6,
+            disableClickEventBubbling: true,
+            renderCell: (params) => {
+
+                return  <Button
+                        onClick={event => {
+                            history.push("/festival/"+ params.row.id+"/reservations");
+                        }}
+                        color="primary"
+                        variant="contained"
+                >
+                    Reservations
+                </Button>
 
             }
         }
