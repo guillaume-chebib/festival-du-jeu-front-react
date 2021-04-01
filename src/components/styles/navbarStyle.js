@@ -83,7 +83,7 @@ export const useStyles1 = makeStyles((theme) => ({
     },
     logo: {
         maxWidth: 45,
-        marginRight : 30
+        marginRight : 10
     },
     toolbar: {
         paddingRight: 24, // keep right padding when drawer closed

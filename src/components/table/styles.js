@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
+import { createMuiTheme, responsiveFontSizes } from '@material-ui/core/styles';
 
 const useStylesTableValueColor = makeStyles({
     root: {
@@ -20,4 +21,5 @@ const useStylesTableValueColor = makeStyles({
     },
 });
 
+export let themeResponsive = responsiveFontSizes(createMuiTheme());
 export default useStylesTableValueColor
