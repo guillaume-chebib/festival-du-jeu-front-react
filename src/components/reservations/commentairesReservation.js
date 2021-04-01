@@ -52,6 +52,7 @@ export const CommentaireReservation = ({row, setTrig}) => {
                 id={"commentaire"}
                 value={newComment}
                 fullWidth
+                placeholder={"Entrer un commentaire"}
                 disabled={!isEdit}
                 onChange={e => {
                     setNewComment(e.target.value)
