@@ -10,6 +10,7 @@ import ListeContact from "./ListeContact";
 import DateContact from "./DateContact";
 import StatutPriseContact from "./StatutPriseContact";
 import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 
 
 const SuiviExposants = () => {
@@ -32,7 +33,7 @@ const SuiviExposants = () => {
 
 
     const columns = [
-        {field: 'id', headerName: 'ID', hide: false},
+        {field: 'id', headerName: 'ID', hide: true},
         {field: 'nom_societe', headerName: 'Nom de la société', flex: 1, type: 'string'},
         {
             field: 'premier_prise_contact', headerName: 'Première prise de contact', flex: 1, type: 'date',
@@ -78,6 +79,8 @@ const SuiviExposants = () => {
             field: 'Reservation', headerName: 'Reservation', flex: 1,
             renderCell: (params) => {
                 const reserv = existeReservation(params.row.id)
+                const val = params.row.statut_prise_contact
+                const non_disable = !(val === 'Présence confirmée' || val === 'Présent : Liste jeux demandée' || val === 'Présent : Liste jeux reçue')
                 if (reserv.length !== 0) { // S'il il y a une reservation pour cette prise de contact
                     return (
                         <Button
@@ -94,6 +97,7 @@ const SuiviExposants = () => {
                 } else {
                     return (
                         <Button
+                            disabled={non_disable}
                             onClick={async (e) => {
                                 const reservation = {
                                     id_festival: id,
@@ -123,7 +127,7 @@ const SuiviExposants = () => {
                             color="primary"
                             variant="contained"
                         >
-                            Création reservation
+                            <Typography variant="caption">Création reservation</Typography>
                         </Button>
                     )
                 }
