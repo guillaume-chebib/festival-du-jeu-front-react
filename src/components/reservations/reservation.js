@@ -27,7 +27,6 @@ const Reservation = () => {
 
     const [reservation, setReservation] = useState()
     const [statuts, setStatuts] = useState([])
-
     const [trig, setTrig] = useState([])
 
 
@@ -47,7 +46,6 @@ const Reservation = () => {
 
             reserv.id = reserv.id_reservation
             delete reserv.id_reservation
-            console.log(reserv  )
             if (responseReservation[1] !== 200) {
                 console.log(responseReservation[1])
             } else {
