@@ -244,7 +244,7 @@ export default function ModalJeuReserve({open, zones, titre, row, setRow, jeux, 
                             />
                             <Fade in={row.a_renvoyer_jeu_reserve}>
                                 <Grid container spacing={2}>
-                                    <Grid item xs={12} sm={3}>
+                                    <Grid item xs={12} sm={6}>
                                         <TextField
                                             variant="outlined"
                                             defaultValue={row.montant_renvoi_jeu_reserve}
@@ -258,7 +258,7 @@ export default function ModalJeuReserve({open, zones, titre, row, setRow, jeux, 
                                             autoComplete="montant_renvoi_jeu_reserve"
                                             onChange={e => setRow(prevState => ({
                                                 ...prevState,
-                                                nb_table_jeu_reserve: e.target.value
+                                                montant_renvoi_jeu_reserve: e.target.value
                                             }))}
                                         />
                                     </Grid>
