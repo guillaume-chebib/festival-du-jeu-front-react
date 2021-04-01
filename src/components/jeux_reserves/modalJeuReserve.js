@@ -15,10 +15,11 @@ import {Checkbox, Fade, FormControlLabel, InputLabel, makeStyles, MenuItem, Sele
 import {useAuthHeader} from "react-auth-kit";
 import FormControl from "@material-ui/core/FormControl";
 import Typography from "@material-ui/core/Typography";
+import {Autocomplete} from "@material-ui/lab";
 
 export default function ModalJeuReserve({open,zones,titre,row,setRow,jeux,onUpdate,onClose}) {
 
-    console.log("JEUX "+jeux)
+    console.log("JEUX "+jeux.map((j) => console.log(j)))
     const authHeader = useAuthHeader()
     const [jeu, setJeu] = useState()
     const [zone, setZone] = useState()
@@ -36,7 +37,7 @@ export default function ModalJeuReserve({open,zones,titre,row,setRow,jeux,onUpda
 
     const classes = useStyles();
     useEffect(() => {
-        console.log(zones)
+        //console.log(zones)
     })
 
 
@@ -48,11 +49,23 @@ export default function ModalJeuReserve({open,zones,titre,row,setRow,jeux,onUpda
 
     };
 
-
+    let json = []
+    jeux.map((j) => {
+        json = json.concat(
+            {
+                "id_jeu" : j.id_jeu,
+                "titre_jeu" : j.titre_jeu
+            })
+    })
 
     useEffect(() => {
-
-
+        // let json = []
+        // jeux.map((j)=> {
+        //     console.log(JSON.stringify(j))
+        //     json = json.push(JSON.stringify(j))
+        // })
+        // console.log("OUI")
+        // console.log(json)
     },[]);
 
 
@@ -71,6 +84,13 @@ export default function ModalJeuReserve({open,zones,titre,row,setRow,jeux,onUpda
                     </DialogContentText>
                     <Grid container spacing={2}>
                         <Grid item xs={12} >
+                            {/*<Autocomplete*/}
+                            {/*    disablePortal*/}
+                            {/*    id="combo-box-demo"*/}
+                            {/*    options={json}*/}
+                            {/*    style={{ width: 300 }}*/}
+                            {/*    renderInput={(params) => <TextField {...params} label="Jeux" />}*/}
+                            {/*/>*/}
                             <TextField
                                 id="outlined-select-currency"
                                 select

@@ -42,6 +42,7 @@ const JeuxReserves = ({reservation}) => {
     const [jeux,setJeux] = useState([])
     const [jeu, setJeu] = useState()
     const [jeuxEditeur,setJeuxEditeur] = useState([])
+    const [allJeux,setAllJeux] = useState([])
     const [zones,setZones] = useState([])
     const [zone, setZone] = useState()
     const [trig,setTrig] = useState([])
@@ -229,11 +230,12 @@ const JeuxReserves = ({reservation}) => {
     useEffect(() => {
 
         async function fetchData() {
-            console.log("idFest "+reservation.id_festival_reservation)
-            const [responseJeu, responseZone, responseJeuxEditeur] = await Promise.all([
+            console.log("idFEst ",reservation)
+            const [responseJeu, responseZone, responseJeuxEditeur, responseAllJeux] = await Promise.all([
                 await requestToBack('GET',null,`/reservation/${reservation.id}/jeuxReserves`,authHeader()),
-                await requestToBack('GET',null,`/festival/${reservation.id_festival_reservation}/zone`,authHeader()),
-                await requestToBack('GET',null,`/jeu/editeur/${reservation.id_societe_reservation}`,authHeader()),
+                await requestToBack('GET',null,`/festival/${reservation.id_festival}/zone`,authHeader()),
+                await requestToBack('GET',null,`/jeu/editeur/${reservation.id_societe}`,authHeader()),
+                await requestToBack('GET',null,`/jeu`,authHeader()),
             ]);
             const bodyJeu = await responseJeu[0]
             const jeux = bodyJeu.message
@@ -265,7 +267,15 @@ const JeuxReserves = ({reservation}) => {
                 setJeuxEditeur(list_jeux)
             }
 
-            console.log("EDITEUR "+list_jeux)
+            const bodyAllJeux = await responseAllJeux[0]
+            const all_jeux = bodyAllJeux.message
+            if (responseAllJeux[1] !== 200) {
+                console.log(responseAllJeux[1])
+            }
+            else {
+                setAllJeux(all_jeux)
+            }
+
 
         }
 
@@ -273,13 +283,20 @@ const JeuxReserves = ({reservation}) => {
 
     },[trig]);
 
+    let create
+    if(reservation.est_editeur_societe){
+        create = <CreateJeuReserve setTrig={setTrig} zones = {zones} jeux={jeuxEditeur} id_reservation={reservation.id} id_societe={reservation.id_societe_reservation}/>
+    } else {
+        create = <CreateJeuReserve setTrig={setTrig} zones = {zones} jeux={allJeux} id_reservation={reservation.id} id_societe={reservation.id_societe_reservation}/>
+    }
+
     return (
         <div style={{width: '100%'}}>
             <div>
                 <h1>
                     Liste des jeux réservés
                 </h1>
-                <CreateJeuReserve setTrig={setTrig} zones = {zones} jeux={jeuxEditeur} id_reservation={reservation.id} id_societe={reservation.id_societe_reservation}/>
+                {create}
                 <CreateZone setTrig={setTrig} id_festival={reservation.id_festival_reservation}/>
             </div>
 
