@@ -50,7 +50,7 @@ const Facturation = ({id_festival}) => {
 
     let pourcentPaye;
     if(CAReel !== undefined && CAReel !==null && CAPrevu!== undefined && CAPrevu !== null){
-        pourcentPaye = (CAReel.ca_reel/CAPrevu.ca_prevu)*100
+        pourcentPaye = (CAReel/CAPrevu)*100
     } else {
         pourcentPaye = 0
     }
