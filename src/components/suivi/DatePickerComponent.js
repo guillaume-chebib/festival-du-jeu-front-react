@@ -20,7 +20,7 @@ const DatePickerComponent = ({val,id,disabled,handleDateChange}) => {
                     margin="normal"
                     id={name_id}
                     disabled={disabled}
-                    label="Date picker inline"
+                    label="Date"
                     value={val}
                     InputProps={{
                         disableUnderline: true,

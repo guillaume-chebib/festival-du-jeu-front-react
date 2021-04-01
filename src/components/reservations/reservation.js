@@ -16,6 +16,7 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import {Comment} from "@material-ui/icons";
 import {CommentaireReservation} from "./commentairesReservation";
 import JeuxReserves from "../jeux_reserves/jeuxReserves";
+import {FacturationReservation} from "./facturationReservation";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -143,6 +144,15 @@ const Reservation = () => {
                         </AccordionSummary>
                         <AccordionDetails>
                             <CommentaireReservation row={reservation} setTrig={setTrig}/>
+                        </AccordionDetails>
+                    </Accordion>
+
+                    <Accordion>
+                        <AccordionSummary>
+                            <Typography className={classes.heading}>Facturation</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                            <FacturationReservation row={reservation} setTrig={setTrig}/>
                         </AccordionDetails>
                     </Accordion>
                 </div>
