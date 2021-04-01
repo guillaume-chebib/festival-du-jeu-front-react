@@ -45,7 +45,6 @@ const Festival = () => {
     };
     return(
         <div>
-            <h1>Test</h1>
             <Button type="submit" variant="contained" color="secondary" onClick={onClickOpenAddFestival}> Ajouter un festival</Button>
             <AddFestivalModal titre="Ajouter un festival" setRow={setFestival} onClose={onCloseAddFestival} onAdd={handleSubmit} open={openAddFestival}/>
             <Festivals body={reponse}/>
