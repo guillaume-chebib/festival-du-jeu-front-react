@@ -8,7 +8,7 @@ import {useAuthHeader} from 'react-auth-kit'
 import Typography from "@material-ui/core/Typography";
 
 import '../../styles/App.scss';
-import {requestToBack} from "../../utils/utils_functions";
+import {IsAdmin, requestToBack} from "../../utils/utils_functions";
 import {themeFestival} from "../styles/themes";
 import {AddFestivalModal} from "./addFestivalModal";
 import {UpdateFestival} from "./updateFestival";
@@ -44,6 +44,7 @@ const Festival = () => {
     };
     return (
         <div>
+            <IsAdmin/>
             <Button type="submit" variant="contained" color="secondary" onClick={onClickOpenAddFestival}> Ajouter un
                 festival</Button>
             <AddFestivalModal titre="Ajouter un festival" setRow={setFestival} onClose={onCloseAddFestival}

@@ -62,7 +62,7 @@ const ProductValues = (props) => {
                                 Sortez jouer !
                             </Typography>
                             <Typography variant="h5" className={classes.text}>
-                                Retrouvez les plusieurs dizaines de jeux présents au festival
+                                Retrouvez les dizaines de jeux présents au festival
                                 en cliquant sur la partie "jeux du festival"
                             </Typography>
                         </div>
