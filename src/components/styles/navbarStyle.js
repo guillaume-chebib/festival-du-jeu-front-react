@@ -67,12 +67,6 @@ export const MainListItems = () => {
                 </ListItemIcon>
                 <ListItemText primary="Jeux"/>
             </ListItem>
-            <ListItem button component={Link} to="/reservation">
-                <ListItemIcon>
-                    <ShoppingCartIcon/>
-                </ListItemIcon>
-                <ListItemText primary="Reservations"/>
-            </ListItem>
             <ListItem button component={Link} to="/societe">
                 <ListItemIcon>
                     <BusinessIcon/>

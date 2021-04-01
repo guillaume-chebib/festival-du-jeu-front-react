@@ -40,7 +40,7 @@ export default function StickyFooter() {
             <CssBaseline/>
             <footer className={classes.footer}>
                 <Container maxWidth="sm">
-                    <Typography variant="body1">Réalisé avec amour (ou pas) par Remy, Solene et Guillaume</Typography>
+                    <Typography variant="body1">Réalisé avec amour par Remy, Solene et Guillaume !</Typography>
                     <Copyright/>
                 </Container>
             </footer>
