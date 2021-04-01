@@ -19,7 +19,7 @@ import List from '@material-ui/core/List';
 import {requestToBack} from "../../utils/utils_functions";
 import {useAuthHeader} from "react-auth-kit";
 import GroupIcon from '@material-ui/icons/Group';
-
+import EuroSymbolIcon from '@material-ui/icons/EuroSymbol';
 
 export const MainListItems = () => {
 
@@ -80,6 +80,12 @@ export const MainListItems = () => {
                 <ListItemText primary="Societes"/>
             </ListItem>
 
+            <ListItem button component={Link} to="/facturation">
+                <ListItemIcon>
+                    <EuroSymbolIcon/>
+                </ListItemIcon>
+                <ListItemText primary="Facturation"/>
+            </ListItem>
             <ListItem button onClick={handleClick}>
                 <ListItemIcon>
                     <ImportContactsIcon/>

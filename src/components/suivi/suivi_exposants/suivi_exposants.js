@@ -199,6 +199,7 @@ const SuiviExposants = () => {
                             },
                         ]}
                                   className={classes.root}
+                                  loading={editeurs.length === 0}
                                   rows={editeurs}
                                   {...editeurs} columns={columns} pageSize={5}/>
                     </div>
