@@ -19,6 +19,10 @@ import Divider from "@material-ui/core/Divider";
 import List from "@material-ui/core/List";
 import {mainListItems,publicListItems,useStyles1} from "./components/styles/navbarStyle";
 import Container from "@material-ui/core/Container";
+import Footer from "./components/styles/footer";
+import AppFooter from "./components/styles/footer";
+import {themeResponsive} from "./components/table/styles";
+import {ThemeProvider} from "@material-ui/core/styles";
 const App = () => {
 
   return (
@@ -68,9 +72,12 @@ const AppNav = () => {
                         </IconButton>
                         <img src="../images/logo_seul_festival.png" alt="logo" className={classes.logo} />
 
-                        <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-                            Festival du jeu
-                        </Typography>
+                        <ThemeProvider theme={themeResponsive}>
+                            <Typography variant="h6" color="inherit" noWrap className={classes.title}>
+                                Festival du jeu
+                            </Typography>
+                        </ThemeProvider>
+
 
                         <IconButton name="home" color="inherit" component={ Link } to="/">
                             <HomeIcon fontSize={"large"} />

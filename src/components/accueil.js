@@ -1,71 +1,73 @@
-import React, { useEffect, useState,useCallback} from 'react';
-import Button from '@material-ui/core/Button'
-import  {useHistory} from "react-router-dom"
-import {requestToBack} from "../utils/utils_functions";
-import Carousel from 'react-material-ui-carousel'
-import {Paper} from "@material-ui/core";
-import Container from '@material-ui/core/Container';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { makeStyles } from '@material-ui/core/styles';
+import Paper from '@material-ui/core/Paper';
+import Typography from '@material-ui/core/Typography';
+import Grid from '@material-ui/core/Grid';
+import Link from '@material-ui/core/Link';
+import {themeResponsive} from "./table/styles";
+import {ThemeProvider} from '@material-ui/core/styles'
 
-const Accueil = () => {
 
-    var items = [
-        {
-            name: "Random Name #1",
-            description: "Probably the most random thing you have ever seen!"
+const useStyles = makeStyles((theme) => ({
+    mainFeaturedPost: {
+        position: 'relative',
+        backgroundColor: theme.palette.grey[800],
+        color: theme.palette.common.white,
+        marginBottom: theme.spacing(4),
+        backgroundImage: 'url(https://source.unsplash.com/random)',
+        backgroundSize: 'cover',
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+    },
+    overlay: {
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        right: 0,
+        left: 0,
+        backgroundColor: 'rgba(0,0,0,.3)',
+    },
+    mainFeaturedPostContent: {
+        position: 'relative',
+        padding: theme.spacing(3),
+        [theme.breakpoints.up('md')]: {
+            padding: theme.spacing(6),
+            paddingRight: 0,
         },
-        {
-            name: "Random Name #2",
-            description: "Hello World!"
-        }
-    ]
+    },
+}));
 
-    const [response,setResponse] = useState("")
+export default function Accueil() {
+    const classes = useStyles();
 
-    useEffect(() => {
-        async function fetchData() {
-            const response = await requestToBack('GET',null,`/home`,null)
 
-            const body = await response[0]
-            if (response[1] !== 200) {
-                setResponse("Impossible de fetch")
-            }
-            else {
-                setResponse(body.message)
-            }
-        }
-        fetchData()
-
-    },[]);
-
-    const history = useHistory();
+    const post = {
+        title: 'Festival du jeu',
+        description:
+            "Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.",
+        image: 'https://source.unsplash.com/random',
+        imgText: 'main image description',
+    };
 
     return (
-
-        <div className="App">
-            <Container maxWidth="lg">
-                <Carousel>
-                    {
-                        items.map( (item, i) => <Item key={i} item={item} /> )
-                    }
-                </Carousel>
-                <p>{response}</p>
-            </Container>
-
-        </div>
-    );
-
-}
-const Item = ({item}) =>
-{
-    return (
-        <Paper>
-            <h2>{item.name}</h2>
-            <p>{item.description}</p>
-
-            <Button className="CheckButton">
-                Check it out!
-            </Button>
+        <>
+        <Paper className={classes.mainFeaturedPost} style={{ backgroundImage: `url(${post.image})` }}>
+            {<img style={{ display: 'none' }} src={post.image} alt={post.imageText} />}
+            <div className={classes.overlay} />
+            <Grid container>
+                <Grid item md={6}>
+                    <div className={classes.mainFeaturedPostContent}>
+                        <Typography component="h1" variant="h3" color="inherit" gutterBottom>
+                            {post.title}
+                        </Typography>
+                        <Typography variant="h5" color="inherit" paragraph>
+                            {post.description}
+                        </Typography>
+                    </div>
+                </Grid>
+            </Grid>
         </Paper>
-    )
+        </>
+    );
 }
-export default Accueil;
