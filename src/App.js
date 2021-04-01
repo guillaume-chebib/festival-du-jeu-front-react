@@ -17,12 +17,13 @@ import Drawer from "@material-ui/core/Drawer";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import Divider from "@material-ui/core/Divider";
 import List from "@material-ui/core/List";
-import {mainListItems,publicListItems,useStyles1} from "./components/styles/navbarStyle";
+import {MainListItems,publicListItems,useStyles1} from "./components/styles/navbarStyle";
 import Container from "@material-ui/core/Container";
 import Footer from "./components/styles/footer";
 import AppFooter from "./components/styles/footer";
 import {themeResponsive} from "./components/table/styles";
 import {ThemeProvider} from "@material-ui/core/styles";
+import StickyFooter from "./components/styles/footer";
 const App = () => {
 
   return (
@@ -47,7 +48,7 @@ const AppNav = () => {
     const signOut = useSignOut()
 
     const classes = useStyles1();
-    const [open, setOpen] = React.useState(true);
+    const [open, setOpen] = React.useState(false);
     const handleDrawerOpen = () => {
         setOpen(true);
     };
@@ -119,7 +120,7 @@ const AppNav = () => {
                     <Divider/>
                     }
                     {isAuthenticated() &&
-                        <List>{mainListItems}</List>
+                        <MainListItems/>
                     }
                     <Divider/>
                     <List>{publicListItems}</List>
@@ -129,7 +130,9 @@ const AppNav = () => {
                     <Container maxWidth="lg" className={classes.container}>
                         <Routes/>
                     </Container>
+                    <StickyFooter/>
                 </main>
+
             </div>
         </Router>
     )
