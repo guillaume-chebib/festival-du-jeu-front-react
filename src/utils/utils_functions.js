@@ -17,7 +17,7 @@ export async function requestToBack(verbe, data, route, token) {
 
     if (verbe !== 'GET') {
 
-        const response = await fetch(`https://festival-du-jeu-api.herokuapp.com${route}`, {
+        const response = await fetch(route, {
             method: verbe,
             headers: {
                 'Content-Type': 'application/json',
@@ -29,7 +29,7 @@ export async function requestToBack(verbe, data, route, token) {
         const body = await response.json()
         return [body, response.status]
     } else {
-        const response = await fetch(`https://festival-du-jeu-api.herokuapp.com${route}`, {
+        const response = await fetch(route, {
             method: verbe,
             headers: {
                 'Content-Type': 'application/json',
