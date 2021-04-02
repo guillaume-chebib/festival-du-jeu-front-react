@@ -1,3 +1,16 @@
+# Festival du jeu (Front)
+
+Pour lancer le projet sur votre machine (localhost) vous devrez :
+
+- vous munir des identifiants de connexion à la base de données
+- lancer la commande `npm install`
+- puis `npm run devso`
+
+Sinon vous aurez directement accès au site en production sur l'adresse : [festival-du-jeu.com](https://festival-du-jeu.herokuapp.com/)
+
+
+**----------------HERE IS THE OFFICIAL CREATE REACT APP DOCUMENTATION TO START THE PROJECT------------------
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
