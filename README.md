@@ -13,7 +13,7 @@ Pour lancer le projet sur votre machine (localhost) vous devrez :
 - `git clone` le projet sur votre ordinateur dans le même dossier parent que le back
 - `cd festival-du-jeu-front-react`
 - lancer la commande `npm install`
-- puis placer vous dans le back et lancer la commande `npm run devso`
+- puis placer vous  à la racine de `festival-du-jeu-back-node`et lancer la commande `npm run devso`
 
 Si vous le souhaitez, vous pouvez directement avoir accès au site en production sur l'adresse : [festival-du-jeu.com](https://festival-du-jeu.herokuapp.com/)
 
