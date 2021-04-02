@@ -9,7 +9,7 @@ Pour lancer le projet sur votre machine (localhost) vous devrez :
 Sinon vous aurez directement accès au site en production sur l'adresse : [festival-du-jeu.com](https://festival-du-jeu.herokuapp.com/)
 
 
-**----------------HERE IS THE OFFICIAL CREATE REACT APP DOCUMENTATION TO START THE PROJECT------------------
+### == HERE IS THE OFFICIAL CREATE REACT APP DOCUMENTATION TO START THE PROJECT ==
 
 # Getting Started with Create React App
 
