@@ -1,12 +1,21 @@
 # Festival du jeu (Front)
 
+Il est important que le projet respecte l'architecture suivante :
+
+```
+Nom dossier >
+      festival-du-jeu-back-node
+      festival-du-jeu-front-react
+```
+      
 Pour lancer le projet sur votre machine (localhost) vous devrez :
 
-- vous munir des identifiants de connexion à la base de données
+- `git clone` le projet sur votre ordinateur dans le même dossier parent que le back
+- `cd festival-du-jeu-front-react`
 - lancer la commande `npm install`
-- puis `npm run devso`
+- puis placer vous dans le back et lancer la commande `npm run devso`
 
-Sinon vous aurez directement accès au site en production sur l'adresse : [festival-du-jeu.com](https://festival-du-jeu.herokuapp.com/)
+Si vous le souhaitez, vous pouvez directement avoir accès au site en production sur l'adresse : [festival-du-jeu.com](https://festival-du-jeu.herokuapp.com/)
 
 
 ### == HERE IS THE OFFICIAL CREATE REACT APP DOCUMENTATION TO START THE PROJECT ==
